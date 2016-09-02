@@ -1,5 +1,3 @@
-import driver from './Drivers';
-
 export default (sequelize, DataType) => {
 
   const Vehicles = sequelize.define('Vehicles', {
@@ -59,13 +57,11 @@ export default (sequelize, DataType) => {
     },
     driver_id: {
       type:DataType.INTEGER,
-      references: {
-          model: motorista,
-          key: 'id',
+      allowNull:false,
+      validate:{
+        notEmpty:true
       }
-  }
+    }
   });
-  const motorista = sequelize.import('./Drivers');
-  Vehicles.belongsTo(motorista, {foreignKey: 'driver_id'});
   return Vehicles;
 }

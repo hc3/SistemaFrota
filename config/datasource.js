@@ -9,6 +9,7 @@ const loadModels = (sequelize) => {
     let models = [];
     fs.readdirSync(dir).forEach(file => {
       console.log("File: ",file);
+      console.log("Diretório:",dir);
       const modelDir = path.join(dir,file);
       console.log("ModelDir: ",modelDir);
       const model = sequelize.import(modelDir);
