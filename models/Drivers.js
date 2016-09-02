@@ -1,4 +1,5 @@
 export default (sequelize,DataType) => {
+
   const Drivers = sequelize.define('Drivers',{
     id:{
       type:DataType.INTEGER,
@@ -27,6 +28,5 @@ export default (sequelize,DataType) => {
       }
     }
   });
-
   return Drivers;
 }

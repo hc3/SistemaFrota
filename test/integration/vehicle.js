@@ -2,6 +2,13 @@ describe('Routes vehicles', () => {
 
   const Vehicles = app.datasource.models.Vehicles;
 
+  const defaultDriver = {
+    id:1,
+    cod:800,
+    name:'test driver',
+    phone:99801147
+  }
+
   const defaultVehicle = {
     id:1,
     placa:'TXT-8890',
@@ -11,9 +18,11 @@ describe('Routes vehicles', () => {
     km_inicial:250,
     km_atual:250,
     km_rodado:0,
+    driver_id:defaultDriver.id
   };
 
   beforeEach(done => {
+    console.log("Corpo do beforeEach",defaultVehicle);
     Vehicles
       .destroy({where:{}})
       .then(() => Vehicles.create(defaultVehicle))
@@ -27,6 +36,7 @@ describe('Routes vehicles', () => {
       request
         .get('/vehicles')
         .end((err,res) => {
+          console.log("corpo da resposta",res.body[0]);
           expect(res.body[0].id).to.be.eql(defaultVehicle.id);
           expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
           expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
@@ -51,6 +61,7 @@ describe('Routes vehicles', () => {
         km_inicial:250,
         km_atual:250,
         km_rodado:0,
+        driver_id:1
       };
       request
         .post('/vehicles')
@@ -98,6 +109,7 @@ describe('Routes vehicles', () => {
         km_inicial:250,
         km_atual:250,
         km_rodado:0,
+        driver_id:1
       };
       request
         .put('/vehicles/1')
