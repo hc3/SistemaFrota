@@ -18,6 +18,13 @@ export default (sequelize,DataType) => {
       validate:{
         notEmpty:true
       }
+    },
+    vida: {
+      type:DataType.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:true
+      }
     }
   });
   return Tires;
