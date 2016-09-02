@@ -2,12 +2,13 @@ import callback from '../utils/callbackCtrl';
 
 class VehicleController {
 
-  constructor(Vehicle) {
+  constructor(Vehicle,Driver) {
     this.Vehicle = Vehicle;
+    this.Driver = Driver;
   };
 
   listAll() {
-    return this.Vehicle.findAll({})
+    return this.Vehicle.findAll({where:{},include:[this.Driver]})
       .then(result => callback.defaultResponse(result))
       .catch(() => callback.errorResponse(error.message));
   };

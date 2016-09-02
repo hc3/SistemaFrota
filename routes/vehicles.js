@@ -2,7 +2,9 @@ import VehicleController from '../controllers/vehicles';
 
 export default (app) => {
 
-  const vehicleController = new VehicleController(app.datasource.models.Vehicles);
+  const veiculo = app.datasource.models.Vehicles;
+  const driver = app.datasource.models.Drivers;
+  const vehicleController = new VehicleController(veiculo,driver);
 
   app.route('/vehicles')
     .get((req,res) =>{
