@@ -1,3 +1,5 @@
+import Vehicle from './Vehicles';
+
 export default (sequelize,DataType) => {
   const Tires = sequelize.define('Tires',{
     id:{
@@ -25,7 +27,23 @@ export default (sequelize,DataType) => {
       validate:{
         notEmpty:true
       }
+    },
+    sulco: {
+      type:DataType.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:true
+      }
+    },
+    recap: {
+      type:DataType.STRING,
+      allowNull:false,
+      validate:{
+        notEmpty:true
+      }
     }
   });
+  Tires.belongsTo(sequelize.import('./Vehicles'),{foreignKey: 'vehicle_id', targetKey: 'id'});
+  //Tires.hasOne(sequelize.import('./Vehicles'));
   return Tires;
 }

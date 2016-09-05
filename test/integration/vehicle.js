@@ -1,12 +1,20 @@
 describe('Routes vehicles', () => {
 
   const Vehicles = app.datasource.models.Vehicles;
+  const Drivers = app.datasource.models.Drivers;
 
   const defaultDriver = {
     id:1,
     cod:800,
-    name:'test driver',
-    phone:99801147
+    name:'ASTROGILDO',
+    phone:91158875
+  }
+
+  const defaultDriver2 = {
+    id:2,
+    cod:801,
+    name:'NISTRONEZIO',
+    phone:88586985
   }
 
   const defaultVehicle = {
@@ -15,14 +23,16 @@ describe('Routes vehicles', () => {
     modelo:'FORD CARGO 1723',
     marca:'FORD',
     eixos:4,
-    km_inicial:250,
-    km_atual:250,
     km_rodado:0,
     driver_id:defaultDriver.id
   };
 
   beforeEach(done => {
-    console.log("Corpo do beforeEach",defaultVehicle);
+    Drivers
+      .destroy({where:{}})
+      .then(() => Drivers.create(defaultDriver))
+      .then(() => Drivers.create(defaultDriver2));
+
     Vehicles
       .destroy({where:{}})
       .then(() => Vehicles.create(defaultVehicle))
@@ -36,15 +46,13 @@ describe('Routes vehicles', () => {
       request
         .get('/vehicles')
         .end((err,res) => {
-          console.log("corpo da resposta",res.body[0]);
           expect(res.body[0].id).to.be.eql(defaultVehicle.id);
           expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
           expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
           expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
           expect(res.body[0].eixos).to.be.eql(defaultVehicle.eixos);
-          expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
-          expect(res.body[0].km_atual).to.be.eql(defaultVehicle.km_atual);
           expect(res.body[0].km_rodado).to.be.eql(defaultVehicle.km_rodado);
+          expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
           done(err);
         });
     });
@@ -58,10 +66,8 @@ describe('Routes vehicles', () => {
         modelo:'FORD CARGO 1723',
         marca:'FORD',
         eixos:4,
-        km_inicial:250,
-        km_atual:250,
         km_rodado:0,
-        driver_id:1
+        driver_id:2
       };
       request
         .post('/vehicles')
@@ -72,9 +78,8 @@ describe('Routes vehicles', () => {
           expect(res.body.modelo).to.be.eql(newVehicle.modelo);
           expect(res.body.marca).to.be.eql(newVehicle.marca);
           expect(res.body.eixos).to.be.eql(newVehicle.eixos);
-          expect(res.body.km_inicial).to.be.eql(newVehicle.km_inicial);
-          expect(res.body.km_atual).to.be.eql(newVehicle.km_atual);
           expect(res.body.km_rodado).to.be.eql(newVehicle.km_rodado);
+          expect(res.body.driver_id).to.be.eql(newVehicle.driver_id);
           done(err);
         });
     });
@@ -90,9 +95,8 @@ describe('Routes vehicles', () => {
           expect(res.body.modelo).to.be.eql(defaultVehicle.modelo);
           expect(res.body.marca).to.be.eql(defaultVehicle.marca);
           expect(res.body.eixos).to.be.eql(defaultVehicle.eixos);
-          expect(res.body.km_inicial).to.be.eql(defaultVehicle.km_inicial);
-          expect(res.body.km_atual).to.be.eql(defaultVehicle.km_atual);
           expect(res.body.km_rodado).to.be.eql(defaultVehicle.km_rodado);
+          expect(res.body.driver_id).to.be.eql(defaultVehicle.driver_id);
           done(err);
         });
     });
@@ -106,8 +110,6 @@ describe('Routes vehicles', () => {
         modelo:'UPDATED FORD CARGO 1723',
         marca:'UPDATED FORD',
         eixos:4,
-        km_inicial:250,
-        km_atual:250,
         km_rodado:0,
         driver_id:1
       };
@@ -131,4 +133,5 @@ describe('Routes vehicles', () => {
         });
     });
   });
+
 })

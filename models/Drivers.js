@@ -28,6 +28,5 @@ export default (sequelize,DataType) => {
       }
     }
   });
-  Drivers.hasOne(sequelize.import('./Vehicles'),{foreignKey: 'driver_id'});
   return Drivers;
 }

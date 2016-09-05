@@ -34,28 +34,7 @@ export default (sequelize, DataType) => {
         notEmpty:true
       }
     },
-    km_inicial:{
-      type:DataType.INTEGER,
-      allowNull:false,
-      validate:{
-        notEmpty:true
-      }
-    },
-    km_atual:{
-      type:DataType.INTEGER,
-      allowNull:false,
-      validate:{
-        notEmpty:true
-      }
-    },
     km_rodado:{
-      type:DataType.INTEGER,
-      allowNull:false,
-      validate:{
-        notEmpty:true
-      }
-    },
-    driver_id: {
       type:DataType.INTEGER,
       allowNull:false,
       validate:{
@@ -63,5 +42,13 @@ export default (sequelize, DataType) => {
       }
     }
   });
+  Vehicles.belongsTo(sequelize.import('./Drivers'),
+  {
+    foreignKey: 'driver_id',
+    targetKey: 'id',
+    allowNull:true,
+    unique:false
+  });
+  //Vehicles.hasMany(sequelize.import('./Tires'),{foreignKey: 'vehicle_id'});
   return Vehicles;
 }
