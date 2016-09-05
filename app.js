@@ -4,6 +4,7 @@ import config from './config/config';
 import datasource from './config/datasource';
 import driversRouter from './routes/drivers';
 import vehiclesRouter from './routes/vehicles';
+import tiresRouter from './routes/tires';
 
 const app = express();
 app.config = config;
@@ -12,6 +13,7 @@ app.set('port',7000);
 app.use(bodyParser.json());
 driversRouter(app);
 vehiclesRouter(app);
+tiresRouter(app);
 
 
 export default app;

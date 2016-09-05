@@ -36,7 +36,14 @@ export default (sequelize,DataType) => {
       }
     },
     recap: {
-      type:DataType.STRING,
+      type:DataType.BOOLEAN,
+      allowNull:false,
+      validate:{
+        notEmpty:true
+      }
+    },
+    trash: {
+      type:DataType.BOOLEAN,
       allowNull:false,
       validate:{
         notEmpty:true
