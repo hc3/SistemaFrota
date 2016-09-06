@@ -9,8 +9,11 @@ import tiresRouter from './routes/tires';
 const app = express();
 app.config = config;
 app.datasource = datasource(app);
+
 app.set('port',7000);
+app.use(express.static(__dirname + '../../src/client'));
 app.use(bodyParser.json());
+
 driversRouter(app);
 vehiclesRouter(app);
 tiresRouter(app);
