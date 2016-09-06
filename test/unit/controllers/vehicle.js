@@ -1,6 +1,6 @@
 import VehiclesController from '../../../controllers/vehicles';
 
-describe('Controllers: vehicles', () => {
+describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
 
   describe('GET all vehicles listAll()', () => {
     it('should return a list of vehicles', () => {

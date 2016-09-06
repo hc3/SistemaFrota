@@ -1,6 +1,6 @@
 import TiresController from '../../../controllers/tires';
 
-describe('Controllers: tires', () => {
+describe('# TEST UNIT CONTROLLER # Controllers: tires', () => {
 
   describe('GET all tires listAll()', () => {
     it('should return a list of tires', () => {
@@ -10,12 +10,13 @@ describe('Controllers: tires', () => {
 
       const expetectedResponse = [{
         id:1,
-        placa:'TXT-8890',
-        modelo:'FORD CARGO 1723',
-        marca:'FORD',
-        eixos:4,
-        km_rodado:0,
-        driver_id:1,
+        cod:10,
+        marca:'PIRELLI',
+        vida:1,
+        sulco:1,
+        recap:false,
+        trash:false,
+        vehicle_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
@@ -36,12 +37,13 @@ describe('Controllers: tires', () => {
 
       const expetectedResponse = [{
         id:1,
-        placa:'TXT-8890',
-        modelo:'FORD CARGO 1723',
-        marca:'FORD',
-        eixos:4,
-        km_rodado:0,
-        driver_id:1,
+        cod:10,
+        marca:'PIRELLI',
+        vida:1,
+        sulco:1,
+        recap:false,
+        trash:false,
+        vehicle_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
@@ -61,22 +63,23 @@ describe('Controllers: tires', () => {
       };
 
       const requestBody = {
-        placa:'CRT-8890',
-        modelo:'CREATED VEHICLE',
-        marca:'CREATED FORD',
-        eixos:4,
-        km_rodado:0,
-        driver_id:1,
+        cod:11,
+        marca:'NEW PIRELLI',
+        vida:2,
+        sulco:11,
+        recap:false,
+        trash:false,
+        vehicle_id:1
       };
 
       const expetectedResponse = [{
-        id:1,
-        placa:'TXT-8890',
-        modelo:'FORD CARGO 1723',
-        marca:'FORD',
-        eixos:4,
-        km_rodado:0,
-        driver_id:1,
+        cod:11,
+        marca:'NEW PIRELLI',
+        vida:2,
+        sulco:11,
+        recap:false,
+        trash:false,
+        vehicle_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
@@ -100,19 +103,24 @@ describe('Controllers: tires', () => {
 
       const requestBody = {
         id:1,
-        placa:'UPD-8890',
-        modelo:'UPDATED VEHICLE',
-        marca:'UPDATED FORD',
+        cod:11,
+        marca:'UPDATED PIRELLI',
+        vida:2,
+        sulco:11,
+        recap:false,
+        trash:false,
+        vehicle_id:1
       };
 
       const expetectedResponse = [{
         id:1,
-        placa:'TXT-8890',
-        modelo:'FORD CARGO 1723',
-        marca:'FORD',
-        eixos:4,
-        km_rodado:0,
-        driver_id:1,
+        cod:11,
+        marca:'UPDATED PIRELLI',
+        vida:2,
+        sulco:11,
+        recap:false,
+        trash:false,
+        vehicle_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
