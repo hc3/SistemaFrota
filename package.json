@@ -6,9 +6,9 @@
   "scripts": {
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
     "start": "babel-node index.js",
-    "test-integration": "mocha --opts test/integration/mocha.opts test/integration/*.js",
-    "test-unit": "mocha --opts test/unit/mocha.opts test/unit/**/*.js",
-    "test-contract": "mocha --opts test/contract/mocha.opts test/contract/contracts/*.js"
+    "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/*.js",
+    "test-unit": "mocha --opts src/server/test/unit/mocha.opts src/server/test/unit/**/*.js",
+    "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js"
   },
   "repository": {
     "type": "git",
