@@ -1,7 +1,19 @@
 new Vue({
   el: '#app',
-  data: {
-    message: 'Hello Vue.js!',
-    driver:{}
+  methods:{
+    exibeConsole () {
+
+    },
+    func2 () {
+
+    }
+  },
+  data:function() {
+    return {
+      driver: {
+        nome:'',
+  
+      }
+    }
   }
 })

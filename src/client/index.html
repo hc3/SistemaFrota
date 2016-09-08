@@ -10,14 +10,14 @@
     <div class="container">
       <!-- FORM CADASTRO MOTORISTAS -->
       <h1>Cadastro de Motoristas</h1>
+      {{driver}}
       <div class="form-horizontal">
         <div class="row">
-
           <div class="col-md-12">
             <div class="form-group">
               <label for="" class="col-sm-2 control-label">Nome: </label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" data-v-model="driver.nome">
+                <input type="text" class="form-control" v-model="driver.nome">
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label for="" class="col-sm-2 control-label">Código: </label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" data-v-model="driver.codigo">
+                <input type="text" class="form-control" v-model="driver.codigo">
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@
             <div class="form-group">
               <label for="" class="col-sm-2 control-label">Telefone: </label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" data-v-model="driver.telefone">
+                <input type="text" class="form-control" v-model="driver.telefone">
                 </div>
             </div>
           </div>
