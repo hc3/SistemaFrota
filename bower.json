@@ -23,5 +23,10 @@
     "src/client",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "vue": "^1.0.26"
+  }
 }

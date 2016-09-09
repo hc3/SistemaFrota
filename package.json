@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
-    "start": "babel-node src/server/index.js",
+    "start": "nodemon --exec babel-node src/server/index.js",
     "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/*.js",
     "test-unit": "mocha --opts src/server/test/unit/mocha.opts src/server/test/unit/**/*.js",
     "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js"
