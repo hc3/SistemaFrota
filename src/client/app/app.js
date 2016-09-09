@@ -1,19 +1,33 @@
 new Vue({
   el: '#app',
-  methods:{
-    exibeConsole () {
 
-    },
-    func2 () {
-
+  data: {
+    drivers:[],
+    driver:{
+      nome:'',
+      codigo:'',
+      telefone:''
     }
   },
-  data:function() {
-    return {
-      driver: {
-        nome:'',
-  
-      }
+
+  methods: {
+
+    loadDrivers: function(event) {
+
+    },
+    addDriver: function(event) {
+      this.drivers.push({
+        nome:this.driver.nome,
+        codigo:this.driver.codigo,
+        telefone:this.driver.telefone
+      });
+      console.log('Drivers: ',this.drivers);
+    },
+    removeDriver: function(event) {
+
+    },
+    updateDriver: function(event) {
+
     }
   }
-})
+});
