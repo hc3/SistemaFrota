@@ -3,7 +3,17 @@ import VehicleController from '../controllers/vehicles';
 export default (app) => {
 
   const veiculo = app.datasource.models.Vehicles;
+  const driver = app.datasource.models.Drivers;
   const vehicleController = new VehicleController(veiculo);
+
+  app.route('/vehiclesJoin')
+    .get((req,res) => {
+      vehicleController.listAllWithJoin(driver)
+        .then(response => {
+          res.status(response.statusCode)
+          res.json(response.data);
+        });
+    })
 
   app.route('/vehicles')
     .get((req,res) =>{

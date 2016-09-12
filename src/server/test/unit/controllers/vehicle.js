@@ -28,6 +28,41 @@ describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
     });
   });
 
+  describe('GET all populated vehicles listAllWithJoin()', () => {
+    it('should return a list populated of vehicles', () => {
+      const Drivers = app.datasource.models.Drivers;
+      const Vehicle = {
+        findAll: td.function(),
+      };
+
+      const expetectedResponse = [{
+        id:1,
+        placa:'TXT-8890',
+        modelo:'FORD CARGO 1723',
+        marca:'FORD',
+        eixos:4,
+        km_rodado:0,
+        driver_id:1,
+        created_at: '2016-08-06T23:55:36.692Z',
+        updated_at: '2016-08-06T23:55:36.692Z',
+        Driver: {
+          id:1,
+          cod:800,
+          name:'ASTROGILDO',
+          phone:91158875,
+          created_at: '2016-09-12T12:22:30.848Z',
+          updated_at: '2016-09-12T12:22:30.848Z'
+        }
+      }];
+
+      td.when(Vehicle.findAll({include: [{model: Drivers}]})).thenResolve(expetectedResponse);
+
+      const vehiclesController = new VehiclesController(Vehicle);
+      return vehiclesController.listAllWithJoin(Drivers)
+        .then(response => expect(response.data).to.be.eql(expetectedResponse));
+    });
+  });
+
   describe('GET a driver getById()', () => {
     it('should return a driver',() => {
       const Vehicle = {

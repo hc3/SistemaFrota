@@ -12,6 +12,14 @@ class VehicleController {
       .catch(() => callback.errorResponse(error.message));
   };
 
+  listAllWithJoin(driver) {
+    return this.Vehicle.findAll({
+      include: [{model: driver}]
+    })
+    .then(result => callback.defaultResponse(result))
+    .catch(() => callback.errorResponse(error.message));
+  }
+
   getById(params) {
     return this.Vehicle.findOne({where:params})
       .then(result => callback.defaultResponse(result))

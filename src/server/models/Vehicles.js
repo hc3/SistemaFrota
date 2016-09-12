@@ -42,7 +42,8 @@ export default (sequelize, DataType) => {
       }
     }
   });
-  Vehicles.belongsTo(sequelize.import('./Drivers'),
+  const Driver = sequelize.import('./Drivers');
+  Vehicles.belongsTo(Driver ,
   {
     foreignKey: 'driver_id',
     targetKey: 'id',

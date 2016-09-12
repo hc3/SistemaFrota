@@ -8,7 +8,8 @@
     "start": "nodemon --exec babel-node src/server/index.js",
     "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/*.js",
     "test-unit": "mocha --opts src/server/test/unit/mocha.opts src/server/test/unit/**/*.js",
-    "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js"
+    "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js",
+    "vue": "vue"
   },
   "repository": {
     "type": "git",
@@ -44,7 +45,8 @@
     "mocha": "^3.0.2",
     "phantomjs": "^2.1.7",
     "supertest": "^2.0.0",
-    "testdouble": "^1.6.1"
+    "testdouble": "^1.6.1",
+    "vue-cli": "^2.3.1"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

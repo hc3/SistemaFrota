@@ -50,7 +50,11 @@ export default (sequelize,DataType) => {
       }
     }
   });
-  Tires.belongsTo(sequelize.import('./Vehicles'),{foreignKey: 'vehicle_id', targetKey: 'id'});
+  Tires.belongsTo(sequelize.import('./Vehicles'),
+  {
+    foreignKey: 'vehicle_id',
+    targetKey: 'id'
+  });
   //Tires.hasOne(sequelize.import('./Vehicles'));
   return Tires;
 }

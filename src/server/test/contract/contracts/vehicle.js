@@ -59,6 +59,38 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
     });
   });
 
+  describe('Route GET /vehiclesJoin', () => {
+    it('should return a list populated of vehicles', done => {
+      const vehiclesList = Joi.array().items(Joi.object().keys({
+        id:Joi.number(),
+        placa:Joi.string(),
+        modelo:Joi.string(),
+        marca:Joi.string(),
+        eixos:Joi.number(),
+        km_rodado:Joi.number(),
+        driver_id:Joi.number(),
+        created_at: Joi.date().iso(),
+        updated_at: Joi.date().iso(),
+        Driver: {
+          id:Joi.number(),
+          cod:Joi.number(),
+          name:Joi.string(),
+          phone:Joi.number(),
+          created_at: Joi.string(),
+          updated_at: Joi.string()
+        }
+      }));
+
+      request
+        .get('/vehiclesJoin')
+        .end((err, res) => {
+          joiAssert(res.body, vehiclesList);
+          done(err);
+        });
+    });
+  });
+
+
   describe('Route GET /vehicles/{id}', () => {
     it('should return a vehicles', done => {
       const vehicles = Joi.object().keys({

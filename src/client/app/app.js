@@ -15,7 +15,7 @@ new Vue({
     loadDrivers: function(event) {
 
     },
-    addDriver: function(event) {
+    addDriver() {
       this.drivers.push({
         nome:this.driver.nome,
         codigo:this.driver.codigo,

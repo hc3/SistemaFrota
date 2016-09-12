@@ -58,6 +58,28 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     });
   });
 
+  describe('Route get /vehiclesJoin', () => {
+    it('should return a list of vehicles', done => {
+      request
+        .get('/vehiclesJoin')
+        .end((err,res) => {
+          expect(res.body[0].id).to.be.eql(defaultVehicle.id);
+          expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
+          expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
+          expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
+          expect(res.body[0].eixos).to.be.eql(defaultVehicle.eixos);
+          expect(res.body[0].km_rodado).to.be.eql(defaultVehicle.km_rodado);
+          expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
+          expect(res.body[0].Driver.id).to.be.eql(defaultDriver.id);
+          expect(res.body[0].Driver.cod).to.be.eql(defaultDriver.cod);
+          expect(res.body[0].Driver.name).to.be.eql(defaultDriver.name);
+          expect(res.body[0].Driver.phone).to.be.eql(defaultDriver.phone);
+          done(err);
+        });
+    });
+  });
+
+
   describe('Route PUT /vehicles', () => {
     it('should create a vehicle', done => {
       const newVehicle = {
