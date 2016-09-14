@@ -526,43 +526,37 @@ var COLUMN_DEFAULTS = {
 };
 
 var LOCALES = {};
-LOCALES['en-US'] = LOCALES.en = {
-    formatLoadingMessage: function () {
-        return 'Loading, please wait...';
-    },
-    formatRecordsPerPage: function (pageNumber) {
-        return sprintf('%s rows per page', pageNumber);
-    },
-    formatShowingRows: function (pageFrom, pageTo, totalRows) {
-        return sprintf('Showing %s to %s of %s rows', pageFrom, pageTo, totalRows);
-    },
-    formatDetailPagination: function (totalRows) {
-        return sprintf('Showing %s rows', totalRows);
-    },
-    formatSearch: function () {
-        return 'Search';
-    },
-    formatNoMatches: function () {
-        return 'No matching records found';
-    },
-    formatPaginationSwitch: function () {
-        return 'Hide/Show pagination';
-    },
-    formatRefresh: function () {
-        return 'Refresh';
-    },
-    formatToggle: function () {
-        return 'Toggle';
-    },
-    formatColumns: function () {
-        return 'Columns';
-    },
-    formatAllRows: function () {
-        return 'All';
-    }
+LOCALES['pt-BR'] = LOCALES.pt = {
+  formatLoadingMessage: function () {
+      return 'Carregando, aguarde...';
+  },
+  formatRecordsPerPage: function (pageNumber) {
+      return pageNumber + ' registros por página';
+  },
+  formatShowingRows: function (pageFrom, pageTo, totalRows) {
+      return 'Exibindo ' + pageFrom + ' até ' + pageTo + ' de ' + totalRows + ' linhas';
+  },
+  formatSearch: function () {
+      return 'Pesquisar';
+  },
+  formatRefresh: function () {
+      return 'Recarregar';
+  },
+  formatToggle: function () {
+      return 'Alternar';
+  },
+  formatColumns: function () {
+      return 'Colunas';
+  },
+  formatPaginationSwitch: function () {
+      return 'Ocultar/Exibir paginação';
+  },
+  formatNoMatches: function () {
+      return 'Nenhum registro encontrado';
+  }
 };
 
-$.extend(DEFAULTS, LOCALES['en-US']);
+$.extend(DEFAULTS, LOCALES['pt-BR']);
 
 var BootstrapTable = {
     props: {
