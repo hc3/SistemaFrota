@@ -1,4 +1,5 @@
 import callback from '../utils/callbackCtrl';
+import httpStatus from 'http-status';
 
 class TiresController {
 
@@ -20,20 +21,20 @@ class TiresController {
 
   create(data) {
     return this.Tires.create(data)
-      .then(result => callback.defaultResponse(result,201))
-      .catch(() => callback.errorResponse(error.message,422));
+      .then(result => callback.defaultResponse(result,httpStatus.CREATED))
+      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   }
 
   update(data,params) {
     return this.Tires.update(data,{where:params})
       .then(result => callback.defaultResponse(result))
-      .catch(() => callback.errorResponse(error.message,422));
+      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   }
 
   remove(params) {
     return this.Tires.destroy({where:params})
-      .then(result => callback.defaultResponse(result,204))
-      .catch(() => callback.errorResponse(error.message,422));
+      .then(result => callback.defaultResponse(result,httpStatus.NO_CONTENT))
+      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   }
 
 }

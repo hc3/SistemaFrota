@@ -1,0 +1,32 @@
+{
+  "name": "sistemafrota",
+  "description": "sistema para controle de frota",
+  "main": "app.js",
+  "authors": [
+    "hc3"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "nodejs",
+    "vuejs",
+    "sqlite3",
+    "sequelize",
+    "webschool",
+    "bemean",
+    "mean"
+  ],
+  "homepage": "https://github.com/hc3/SistemaFrota",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/client",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "vue": "^1.0.26"
+  }
+}

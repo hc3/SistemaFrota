@@ -1,4 +1,5 @@
 import callback from '../utils/callbackCtrl';
+import httpStatus from 'http-status';
 
 class VehicleController {
 
@@ -28,20 +29,20 @@ class VehicleController {
 
   create(data) {
     return this.Vehicle.create(data)
-      .then(result => callback.defaultResponse(result,201))
-      .catch(() => callback.errorResponse(error.message,422));
+      .then(result => callback.defaultResponse(result,httpStatus.CREATED))
+      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   };
 
   update(data,params) {
     return this.Vehicle.update(data,{where:params})
       .then(result => callback.defaultResponse(result))
-      .catch(() => callback.errorResponse(error.message,522));
+      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   };
 
   remove(params) {
     return this.Vehicle.destroy({where:params})
-      .then(result => callback.defaultResponse(result,204))
-      .catch(() => callback.errorResponse(error.message,422));
+      .then(result => callback.defaultResponse(result,httpStatus.NO_CONTENT))
+      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   };
 }
 

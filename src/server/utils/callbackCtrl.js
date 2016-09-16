@@ -1,11 +1,14 @@
+import httpStatus from 'http-status';
+
+
 const callback = (() => {
 
-  const defaultResponse = (data, statusCode = 200) => ({
+  const defaultResponse = (data, statusCode = httpStatus.OK) => ({
     data,
     statusCode
   });
 
-  const errorResponse = (message, statusCode = 400) => ({
+  const errorResponse = (message, statusCode = httpStatus.BAD_REQUEST) => ({
     error:message
   },statusCode);
 

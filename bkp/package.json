@@ -4,8 +4,6 @@
   "description": "sistema para controle de frota",
   "main": "app.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
     "start": "nodemon --exec babel-node src/server/index.js",
     "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/*.js",
@@ -32,23 +30,7 @@
     "url": "https://github.com/hc3/SistemaFrota/issues"
   },
   "homepage": "https://github.com/hc3/SistemaFrota#readme",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "http-status": "^0.2.3",
-    "sequelize": "^3.24.1",
-    "sqlite3": "^3.1.4",
-    "vue": "^2.0.0-rc.1"
-  },
   "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
-    "cross-env": "^1.0.6",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.8.4",
-    "vue-loader": "^9.2.2",
-    "webpack": "^2.1.0-beta.20",
-    "webpack-dev-server": "^2.1.0-beta.0",
     "babel-cli": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-watch": "^2.0.2",
@@ -65,5 +47,11 @@
     "supertest": "^2.0.0",
     "testdouble": "^1.6.1",
     "vue-cli": "^2.3.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "sequelize": "^3.24.1",
+    "sqlite3": "^3.1.4"
   }
 }
