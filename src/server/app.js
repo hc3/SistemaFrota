@@ -5,6 +5,7 @@ import datasource from './config/datasource';
 import driversRouter from './routes/drivers';
 import vehiclesRouter from './routes/vehicles';
 import tiresRouter from './routes/tires';
+import usersRoutes from './routes/users';
 import path from 'path';
 
 const app = express();
@@ -14,7 +15,7 @@ app.datasource = datasource(app);
 app.set('port',7000);
 app.use(express.static(path.join(__dirname , '../client/')));
 app.use(bodyParser.json());
-//app.use(express.logger());
+
 
 app.get('/',function(req,res) {
   res.sendFile(path.join(__dirname , '../client/index.html'));
@@ -23,6 +24,7 @@ app.get('/',function(req,res) {
 driversRouter(app);
 vehiclesRouter(app);
 tiresRouter(app);
+usersRoutes(app);
 
 
 export default app;

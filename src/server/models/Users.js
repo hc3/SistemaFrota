@@ -7,39 +7,39 @@ export default (sequelize, DataType) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    nome: {
+    name: {
       type: DataType.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     email: {
       type: DataType.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     password: {
       type: DataType.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
+
+  },
     {
       hooks: {
         beforeCreate: user => {
-          const salt = bcrypt.genSaltSync();
-          user.set('password', bcrypt.hashSync(user.password, salt));
-        }
+          const salt = bcrypt.genSaltSync(); // GERA O SALT
+          user.set('password', bcrypt.hashSync(user.password, salt)); // SETA NOVA SENHA 
+        },
       },
       classMethods: {
         isPassword: (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword),
-      }
-    }
-  });
-  
+      },
+    });
   return Users;
-}
+};
