@@ -5,14 +5,14 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# Instala todas as dependências do package.json
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# Roda todos os testes [ INTEGRATION / CONTRACT / UNIT ]
+npm run test
 
-# build for production with minification
-npm run build
+# Inicia a aplicação
+npm start
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+esse código foi baseado na série aulas do [Waldemar](https://github.com/waldemarnt/building-testable-nodejs-api), se vocês não conhecem vale MUITO a pena assistir.
