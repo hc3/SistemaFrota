@@ -5,6 +5,7 @@ export default (app) => {
   const tiresController = new TiresController(app.datasource.models.Tires);
 
   app.route('/tires')
+  .all(app.auth.authenticate())  
     .get((req,res) => {
       tiresController.listAll()
         .then(response => {
@@ -21,6 +22,7 @@ export default (app) => {
     });
 
   app.route('/tires/:id')
+  .all(app.auth.authenticate())  
     .get((req,res) => {
       tiresController.getById(req.params)
         .then(response => {

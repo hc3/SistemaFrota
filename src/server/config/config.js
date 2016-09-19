@@ -7,6 +7,8 @@ export default {
       storage: 'bancoRN.sqlite',
     define: {
       underscored: true
-    }
-  }
+    },
+  },
+  jwtSecret: 'Secr3t',
+  jwtSession: { session: false },
 }

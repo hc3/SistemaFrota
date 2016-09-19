@@ -5,6 +5,7 @@ export default (app) => {
   const driversController = new DriversController(app.datasource.models.Drivers);
 
   app.route('/drivers')
+    .all(app.auth.authenticate())
     .get((req,res) => {
       driversController.listAll()
         .then(response => {
@@ -21,6 +22,7 @@ export default (app) => {
     });
 
   app.route('/drivers/:id')
+    .all(app.auth.authenticate())  
     .get((req,res) => {
       driversController.getById(req.params)
         .then(response => {

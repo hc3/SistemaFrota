@@ -7,6 +7,7 @@ export default (app) => {
   const vehicleController = new VehicleController(veiculo);
 
   app.route('/vehiclesJoin')
+  .all(app.auth.authenticate())  
     .get((req,res) => {
       vehicleController.listAllWithJoin(driver)
         .then(response => {
@@ -16,6 +17,7 @@ export default (app) => {
     })
 
   app.route('/vehicles')
+  .all(app.auth.authenticate())  
     .get((req,res) =>{
       vehicleController.listAll()
         .then(response => {
@@ -32,6 +34,7 @@ export default (app) => {
     });
 
   app.route('/vehicles/:id')
+  .all(app.auth.authenticate())  
     .get((req,res) => {
       vehicleController.getById(req.params)
         .then(response => {

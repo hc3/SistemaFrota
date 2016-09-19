@@ -1,6 +1,10 @@
+import jwt from 'jwt-simple';
+
 describe('# TEST INTEGRATION # Routes drivers', () => {
 
   const Drivers = app.datasource.models.Drivers;
+  const Users = app.datasource.models.Users;
+  const jwtSecret = app.config.jwtSecret;
 
   const defaultDriver = {
     id:1,
@@ -9,19 +13,34 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
     phone:99801147
   }
 
+  let token;
+
   beforeEach(done => {
-    Drivers
-      .destroy({where:{}})
-      .then(() => Drivers.create(defaultDriver))
-      .then(() => {
-        done();
-      });
+    Users
+      .destroy({where: {}})
+      .then(() => Users.create({
+        name: 'pepa',
+        email: 'pepa@mail.com',
+        password: '12345'
+      }))
+      .then(user => {
+        Drivers
+          .destroy({where: {}})
+          .then(() => Drivers.create(defaultDriver))
+          .then(() => {
+            token = jwt.encode({id: user.id}, jwtSecret);
+            console.log("Token: ",token);
+            done();
+          })
+      })
+    
   });
 
   describe('Route GET /drivers', () => {
     it('should return a list of drivers', done => {
         request
           .get('/drivers')
+          .set('Authorization', `JWT ${token}`)
           .end((err,res) => {
             expect(res.body[0].id).to.be.eql(defaultDriver.id);
             expect(res.body[0].cod).to.be.eql(defaultDriver.cod);
@@ -42,6 +61,7 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
       }
       request
         .post('/drivers')
+        .set('Authorization', `JWT ${token}`)
         .send(newDriver)
         .end((err,res) => {
           expect(res.body.id).to.be.eql(newDriver.id)
@@ -57,6 +77,7 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
     it('should find a one driver', done => {
       request
         .get('/drivers/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.body.id).to.be.eql(defaultDriver.id);
           expect(res.body.cod).to.be.eql(defaultDriver.cod);
@@ -77,6 +98,7 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
       }
       request
         .put('/drivers/1')
+        .set('Authorization', `JWT ${token}`)
         .send(updatedDriver)
         .end((err,res) => {
           expect(res.body).to.be.eql([1]);
@@ -89,6 +111,7 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
     it('should delete a driver', done => {
       request
         .delete('/drivers/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.statusCode).to.be.eql(204);
           done(err);
