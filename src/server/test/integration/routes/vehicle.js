@@ -1,7 +1,12 @@
+import jwt from 'jwt-simple';
+
 describe('# TEST INTEGRATION # Routes vehicles', () => {
 
   const Vehicles = app.datasource.models.Vehicles;
   const Drivers = app.datasource.models.Drivers;
+  const Users = app.datasource.models.Users;
+  const jwtSecret = app.config.jwtSecret;
+  let token;
 
   const defaultDriver = {
     id:1,
@@ -28,23 +33,33 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
   };
 
   beforeEach(done => {
-    Drivers
-      .destroy({where:{}})
-      .then(() => Drivers.create(defaultDriver))
-      .then(() => Drivers.create(defaultDriver2));
-
-    Vehicles
-      .destroy({where:{}})
-      .then(() => Vehicles.create(defaultVehicle))
-      .then(() => {
-        done();
-      });
+      Users
+        .destroy({where: {}})
+        .then(() => Users.create({
+          name: 'pepa',
+          email: 'pepa@mail.com',
+          password: '12345'
+        }))
+        .then(user => {
+          Drivers
+            .destroy({where:{}})
+            .then(() => Drivers.create(defaultDriver))
+            .then(() => Drivers.create(defaultDriver2));
+          Vehicles
+            .destroy({where:{}})
+            .then(() => Vehicles.create(defaultVehicle))
+            .then(() => {
+              token = jwt.encode({id: user.id}, jwtSecret);
+              done();
+            });
+        });
   });
 
   describe('Route get /vehicles', () => {
     it('should return a list of vehicles', done => {
       request
         .get('/vehicles')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.body[0].id).to.be.eql(defaultVehicle.id);
           expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
@@ -62,6 +77,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     it('should return a list of vehicles', done => {
       request
         .get('/vehiclesJoin')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.body[0].id).to.be.eql(defaultVehicle.id);
           expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
@@ -93,6 +109,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
       };
       request
         .post('/vehicles')
+        .set('Authorization', `JWT ${token}`)
         .send(newVehicle)
         .end((err,res) => {
           expect(res.body.id).to.be.eql(newVehicle.id);
@@ -111,6 +128,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     it('should find a one driver', done => {
       request
         .get('/vehicles/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.body.id).to.be.eql(defaultVehicle.id);
           expect(res.body.placa).to.be.eql(defaultVehicle.placa);
@@ -137,6 +155,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
       };
       request
         .put('/vehicles/1')
+        .set('Authorization', `JWT ${token}`)
         .send(updateVehicle)
         .end((err,res) => {
           expect(res.body).to.be.eql([1])
@@ -149,6 +168,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     it('should delete a vehicle', done => {
       request
         .delete('/vehicles/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.statusCode).to.be.eql(204);
           done(err);

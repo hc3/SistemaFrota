@@ -1,27 +1,32 @@
-describe('# TEST CONTRACT # Routes tires', () => {
-  // busca o model de Vehicles
+import jwt from 'jwt-simple';
+
+describe('# TEST CONTRACT # Routes Tires', () => {
+
   const Vehicles = app.datasource.models.Vehicles;
-  const Drivers = app.datasource.models.Drivers;
   const Tires = app.datasource.models.Tires;
+  const Drivers = app.datasource.models.Drivers;
+  const Users = app.datasource.models.Users;
+  const jwtSecret = app.config.jwtSecret;
+  let token;
 
   const defaultDriver = {
-    id: 1,
+    id:1,
     cod:800,
-    name:'test driver',
-    phone:99801147
-  };
+    name:'ASTROGILDO',
+    phone:91158875
+  }
 
   const defaultVehicle = {
-    id: 1,
+    id:1,
     placa:'TXT-8890',
     modelo:'FORD CARGO 1723',
     marca:'FORD',
     eixos:4,
     km_rodado:0,
-    driver_id:1
+    driver_id:defaultDriver.id
   };
 
-  const defaulTire = {
+  const defaultTire = {
     id:1,
     cod:10,
     marca:'PIRELLI',
@@ -29,29 +34,37 @@ describe('# TEST CONTRACT # Routes tires', () => {
     sulco:1,
     recap:false,
     trash:false,
-    vehicle_id:1
-  }
-  // deixa explicito para o framework de testes que antes de rodar os testes ele deve
-  // realizar os passos abaixo.
+    vehicle_id:defaultVehicle.id
+  };
+
   beforeEach(done => {
-    Drivers
-      // como o model é criado pelo sequelize o destroy faz parte do sequelize (vide documentação)
-      .destroy({ where: {} })
-      .then(() => Drivers.create(defaultDriver));
+    Users
+      .destroy({where: {}})
+      .then(() => Users.create({
+        name: 'pepa',
+        email: 'pepa@mail.com',
+        password: '12345'
+      }))
+      .then(user => {
+        Drivers
+          .destroy({where:{}})
+          .then(() => Drivers.create(defaultDriver))
 
-    Vehicles
-      // como o model é criado pelo sequelize o destroy faz parte do sequelize (vide documentação)
-      .destroy({ where: {} })
-      .then(() => Vehicles.create(defaultVehicle));
+        Vehicles
+          .destroy({where:{}})
+          .then(() => Vehicles.create(defaultVehicle))
 
-    Tires
-      .destroy({ where: {} })
-      .then(() => Tires.create(defaulTire))
-      .then(() => {
-        done();
-      });
+        Tires
+          .destroy({where:{}})
+          .then(() => Tires.create(defaultTire))
+          .then(() => {
+            token = jwt.encode({id: user.id}, jwtSecret);
+            done();
+          })
+      })
 
   });
+
 
   describe('Route GET /tires', () => {
     it('should return a list of tires', done => {
@@ -70,6 +83,7 @@ describe('# TEST CONTRACT # Routes tires', () => {
 
       request
         .get('/tires')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           joiAssert(res.body, tiresList);
           done(err);
@@ -94,6 +108,7 @@ describe('# TEST CONTRACT # Routes tires', () => {
 
       request
         .get('/tires/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           joiAssert(res.body, tires);
 
@@ -128,6 +143,7 @@ describe('# TEST CONTRACT # Routes tires', () => {
       });
       request
         .post('/tires')
+        .set('Authorization', `JWT ${token}`)
         .send(newTire)
         .end((err, res) => {
           joiAssert(res.body, tires);
@@ -152,6 +168,7 @@ describe('# TEST CONTRACT # Routes tires', () => {
 
       request
         .put('/tires/1')
+        .set('Authorization', `JWT ${token}`)
         .send(updatedTire)
         .end((err, res) => {
           joiAssert(res.body, updatedCount);
@@ -164,6 +181,7 @@ describe('# TEST CONTRACT # Routes tires', () => {
     it('should delete a driver', done => {
       request
         .delete('/tires/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(204);
           done(err);

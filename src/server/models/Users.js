@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt-nodejs';
 
 export default (sequelize, DataType) => {
   const Users = sequelize.define('Users', {
@@ -34,7 +34,7 @@ export default (sequelize, DataType) => {
       hooks: {
         beforeCreate: user => {
           const salt = bcrypt.genSaltSync(); // GERA O SALT
-          user.set('password', bcrypt.hashSync(user.password, salt)); // SETA NOVA SENHA 
+          user.set('password', bcrypt.hashSync(user.password, salt)); // SETA NOVA SENHA
         },
       },
       classMethods: {

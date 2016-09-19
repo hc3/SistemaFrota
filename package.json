@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
     "start": "nodemon --exec babel-node src/server/index.js",
-    "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/driver.js",
+    "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/*.js",
     "test-unit": "mocha --opts src/server/test/unit/mocha.opts src/server/test/unit/**/*.js",
     "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js",
     "vue": "vue"
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/hc3/SistemaFrota#readme",
   "dependencies": {
-    "bcrypt": "^0.8.7",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "http-status": "^0.2.3",

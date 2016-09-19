@@ -1,6 +1,11 @@
+import jwt from 'jwt-simple';
+
 describe('# TEST INTEGRATION # Routes users', () => {
 
     const Users = app.datasource.models.Users;
+    const jwtSecret = app.config.jwtSecret;
+
+    let token;
 
     const defaultUser = {
         id: 1,
@@ -10,18 +15,20 @@ describe('# TEST INTEGRATION # Routes users', () => {
     }
 
     beforeEach(done => {
-        Users
-            .destroy({ where: {} })
-            .then(() => Users.create(defaultUser))
-            .then(() => {
-                done();
-            });
-    });
+      Users
+        .destroy({where: {}})
+        .then(() => Users.create(defaultUser))
+        .then(user => {
+              token = jwt.encode({id: user.id}, jwtSecret);
+              done();
+            })
+        })
 
     describe('Route GET /users', () => {
         it('should return a list of users', done => {
             request
                 .get('/users')
+                .set('Authorization', `JWT ${token}`)
                 .end((err, res) => {
                     expect(res.body[0].id).to.be.eql(defaultUser.id);
                     expect(res.body[0].name).to.be.eql(defaultUser.name);
@@ -35,6 +42,7 @@ describe('# TEST INTEGRATION # Routes users', () => {
         it('should find a one user', done => {
             request
                 .get('/users/1')
+                .set('Authorization', `JWT ${token}`)
                 .end((err, res) => {
                     expect(res.body.id).to.be.eql(defaultUser.id);
                     expect(res.body.name).to.be.eql(defaultUser.name);
@@ -54,6 +62,7 @@ describe('# TEST INTEGRATION # Routes users', () => {
             }
             request
                 .post('/users')
+                .set('Authorization', `JWT ${token}`)
                 .send(newUser)
                 .end((err, res) => {
                     expect(res.body.id).to.be.eql(newUser.id);
@@ -74,6 +83,7 @@ describe('# TEST INTEGRATION # Routes users', () => {
             }
             request
                 .put('/users/1')
+                .set('Authorization', `JWT ${token}`)
                 .send(updatedUser)
                 .end((err, res) => {
                     expect(res.body).to.be.eql([1]);
@@ -86,6 +96,7 @@ describe('# TEST INTEGRATION # Routes users', () => {
         it('should delete a User', done => {
             request
                 .delete('/users/1')
+                .set('Authorization', `JWT ${token}`)
                 .end((err, res) => {
                     expect(res.statusCode).to.be.eql(204);
                     done(err);
