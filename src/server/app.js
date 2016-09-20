@@ -17,7 +17,7 @@ app.datasource = datasource(app);
 
 app.set('port',7000);
 app.use(express.static(path.join(__dirname , '../client/')));
-
+//app.use(express.static(path.join(__dirname , '../../dist/build.js')));
 const auth = authorization(app);
 
 app.use(bodyParser.json());
