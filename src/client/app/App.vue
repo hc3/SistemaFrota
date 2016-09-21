@@ -17,7 +17,6 @@ export default {
 <template>
   <div id="app">
     <app-menu></app-menu>
-    <img src="../assets/logo.png">
     <h1>{{ msg }}</h1>
     <input type="text" v-model="msg">
   </div>
