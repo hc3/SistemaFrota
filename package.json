@@ -4,7 +4,7 @@
   "description": "sistema para controle de frota",
   "main": "app.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
+    "dev": "webpack-dev-server --content-base src/client/ --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
     "start": "nodemon --exec babel-node src/server/index.js",

@@ -1,40 +1,35 @@
 <template>
 
-    <footer class="page-footer">
-        <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-            <h5 class="white-text">Sistema de Frota</h5>
-            <p class="grey-text text-lighten-4">Colocar algum texto legal</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Contatos</h5>
-            <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-            </ul>
-            </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <p class="text-muted">depois pensar no texto do footer</p>
         </div>
+        <div class="col-xs-6">
         </div>
-        <div class="footer-copyright">
-        <div class="container">
-        © 2014 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!">texto</a>
-        </div>
-        </div>
-    </footer>
-            
-</tempalte>
+      </div>
+    </div>
+  </footer>
 
-<script> 
-    export default {
+</template>
 
-    } 
-    
+<script>
+
+export default {
+
+}
+
 </script>
 
 <style>
+
+.footer {
+  position: fixed;
+  top: 90%;
+  width:100%;
+  height:40%;
+  background-color: #2e353d;
+}
 
 </style>
