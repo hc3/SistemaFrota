@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-6">
-          <p class="text-muted">depois pensar no texto do footer</p>
+          <p class="text-muted">Sistema de transporte , cadastro de motoristas , veiculos e pneus , controle de estoque para pneus</p>
         </div>
         <div class="col-xs-6">
         </div>

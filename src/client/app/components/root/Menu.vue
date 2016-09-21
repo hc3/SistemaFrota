@@ -61,7 +61,7 @@
   font-weight: 200;
   background-color: #2e353d;
   position: fixed;
-  top: 85px;
+  top: 86px;
   width: 220px;
   height: 76%;
   color: #e1ffff;
