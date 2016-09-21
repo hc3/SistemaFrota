@@ -31,7 +31,7 @@
                   </ul>
 
                   <li data-toggle="collapse" data-target="#service" class="collapsed">
-                    <a href="#"><i class="fa fa-cog fa-spin"></i> Movimentação <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-random"></i> Movimentação <span class="arrow"></span></a>
                   </li>
                   <ul class="sub-menu collapse" id="service">
                     <li><a href="#">Pneus</a></li>
@@ -39,7 +39,7 @@
 
                    <li>
                     <a href="#">
-                    <i class="fa fa-user fa-lg"></i> Profile
+                    <i class="fa fa-calculator"></i> Estoque
                     </a>
                     </li>
 
