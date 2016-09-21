@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
     "start": "nodemon --exec babel-node src/server/index.js",
-    "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/driver.js",
+    "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/*.js",
     "test-unit": "mocha --opts src/server/test/unit/mocha.opts src/server/test/unit/**/*.js",
     "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js",
     "vue": "vue"
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/hc3/SistemaFrota#readme",
   "dependencies": {
-    "bcrypt": "^0.8.7",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "http-status": "^0.2.3",
@@ -45,18 +45,17 @@
     "vue": "^2.0.0-rc.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.14.0",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
-    "cross-env": "^1.0.6",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.8.4",
-    "vue-loader": "^9.2.2",
-    "webpack": "^2.1.0-beta.20",
-    "webpack-dev-server": "^2.1.0-beta.0",
-    "babel-cli": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-watch": "^2.0.2",
     "chai": "^3.5.0",
+    "cross-env": "^1.0.6",
+    "css-loader": "^0.23.1",
+    "eslint": "^3.5.0",
+    "eslint-plugin-html": "^1.5.2",
+    "file-loader": "^0.8.4",
     "jasmine-core": "^2.5.0",
     "joi": "^9.0.4",
     "joi-assert": "0.0.3",
@@ -68,6 +67,9 @@
     "phantomjs": "^2.1.7",
     "supertest": "^2.0.0",
     "testdouble": "^1.6.1",
-    "vue-cli": "^2.3.1"
+    "vue-cli": "^2.3.1",
+    "vue-loader": "^9.2.2",
+    "webpack": "^2.1.0-beta.20",
+    "webpack-dev-server": "^2.1.0-beta.0"
   }
 }

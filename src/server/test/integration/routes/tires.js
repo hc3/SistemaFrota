@@ -1,8 +1,13 @@
+import jwt from 'jwt-simple';
+
 describe('# TEST INTEGRATION # Routes Tires', () => {
 
   const Vehicles = app.datasource.models.Vehicles;
   const Tires = app.datasource.models.Tires;
   const Drivers = app.datasource.models.Drivers;
+  const Users = app.datasource.models.Users;
+  const jwtSecret = app.config.jwtSecret;
+  let token;
 
   const defaultDriver = {
     id:1,
@@ -33,26 +38,38 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
   };
 
   beforeEach(done => {
-    Drivers
-      .destroy({where:{}})
-      .then(() => Drivers.create(defaultDriver))
+    Users
+      .destroy({where: {}})
+      .then(() => Users.create({
+        name: 'pepa',
+        email: 'pepa@mail.com',
+        password: '12345'
+      }))
+      .then(user => {
+        Drivers
+          .destroy({where:{}})
+          .then(() => Drivers.create(defaultDriver))
 
-    Vehicles
-      .destroy({where:{}})
-      .then(() => Vehicles.create(defaultVehicle))
+        Vehicles
+          .destroy({where:{}})
+          .then(() => Vehicles.create(defaultVehicle))
 
-    Tires
-      .destroy({where:{}})
-      .then(() => Tires.create(defaultTire))
-      .then(() => {
-        done();
+        Tires
+          .destroy({where:{}})
+          .then(() => Tires.create(defaultTire))
+          .then(() => {
+            token = jwt.encode({id: user.id}, jwtSecret);
+            done();
+          })
       })
+
   });
 
   describe('Route get /tires', () => {
     it('should return a list of tires', done => {
       request
         .get('/tires')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.body[0].id).to.be.eql(defaultTire.id);
           expect(res.body[0].cod).to.be.eql(defaultTire.cod);
@@ -81,6 +98,7 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
       };
       request
         .post('/tires')
+        .set('Authorization', `JWT ${token}`)
         .send(createdTire)
         .end((err,res) => {
           expect(res.body.id).to.be.eql(createdTire.id);
@@ -100,6 +118,7 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
     it('should find a one driver', done => {
       request
         .get('/tires/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.body.id).to.be.eql(defaultTire.id);
           expect(res.body.cod).to.be.eql(defaultTire.cod);
@@ -128,6 +147,7 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
       };
       request
         .put('/tires/1')
+        .set('Authorization', `JWT ${token}`)
         .send(updatedTire)
         .end((err,res) => {
           expect(res.body).to.be.eql([1])
@@ -140,6 +160,7 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
     it('should delete a vehicle', done => {
       request
         .delete('/tires/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err,res) => {
           expect(res.statusCode).to.be.eql(204);
           done(err);

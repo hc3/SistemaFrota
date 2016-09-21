@@ -1,22 +1,39 @@
+import jwt from 'jwt-simple';
+
 describe('# TEST CONTRACT # Routes driver', () => {
-  // busca o model de Drivers
+
   const Drivers = app.datasource.models.Drivers;
+  const Users = app.datasource.models.Users;
+  const jwtSecret = app.config.jwtSecret;
+
   const defaultDriver = {
-    id: 1,
+    id:1,
     cod:800,
     name:'test driver',
     phone:99801147
-  };
-  // deixa explicito para o framework de testes que antes de rodar os testes ele deve
-  // realizar os passos abaixo.
+  }
+
+  let token;
+
   beforeEach(done => {
-    Drivers
-      // como o model é criado pelo sequelize o destroy faz parte do sequelize (vide documentação)
-      .destroy({ where: {} })
-      .then(() => Drivers.create(defaultDriver))
-      .then(() => {
-        done();
-      });
+    Users
+      .destroy({where: {}})
+      .then(() => Users.create({
+        name: 'pepa',
+        email: 'pepa@mail.com',
+        password: '12345'
+      }))
+      .then(user => {
+        Drivers
+          .destroy({where: {}})
+          .then(() => Drivers.create(defaultDriver))
+          .then(() => {
+            token = jwt.encode({id: user.id}, jwtSecret);
+            console.log("Token: ",token);
+            done();
+          })
+      })
+
   });
 
   describe('Route GET /drivers', () => {
@@ -32,7 +49,9 @@ describe('# TEST CONTRACT # Routes driver', () => {
 
       request
         .get('/drivers')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
+          console.log("corpo req: ",res.body);
           joiAssert(res.body, driversList);
           done(err);
         });
@@ -52,9 +71,9 @@ describe('# TEST CONTRACT # Routes driver', () => {
 
       request
         .get('/drivers/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           joiAssert(res.body, drivers);
-
           done(err);
         });
     });
@@ -78,6 +97,7 @@ describe('# TEST CONTRACT # Routes driver', () => {
       });
       request
         .post('/drivers')
+        .set('Authorization', `JWT ${token}`)
         .send(newDriver)
         .end((err, res) => {
           joiAssert(res.body, driver);
@@ -98,6 +118,7 @@ describe('# TEST CONTRACT # Routes driver', () => {
 
       request
         .put('/drivers/1')
+        .set('Authorization', `JWT ${token}`)
         .send(updatedDriver)
         .end((err, res) => {
           joiAssert(res.body, updatedCount);
@@ -110,6 +131,7 @@ describe('# TEST CONTRACT # Routes driver', () => {
     it('should delete a driver', done => {
       request
         .delete('/drivers/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(204);
           done(err);
