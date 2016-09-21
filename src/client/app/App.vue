@@ -1,7 +1,7 @@
 <script>
-import AppMenu from './components/Menu.vue';
-import AppFooter from './components/Footer.vue';
-import AppHeader from './components/Header.vue';
+import AppMenu from './components/root/Menu.vue';
+import AppFooter from './components/root/Footer.vue';
+import AppHeader from './components/root/Header.vue';
 
 export default {
   components:{
@@ -19,6 +19,7 @@ export default {
 
 
 <template>
+
   <div id="app">
 
     <app-header></app-header>
@@ -28,6 +29,7 @@ export default {
     <app-footer></app-footer>
 
   </div>
+
 </template>
 
 
