@@ -27,7 +27,7 @@ export default {
     },
 
     cleanForm() {
-      this.driver ={}
+      this.driver = {}
     }
 
   }

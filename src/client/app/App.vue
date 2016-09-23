@@ -2,7 +2,8 @@
 import AppMenu from './components/root/Menu.vue';
 import AppFooter from './components/root/Footer.vue';
 import AppHeader from './components/root/Header.vue';
-import AppDriver from './components/forms/Form_drivers.vue';
+import FormDriver from './components/forms/Form_drivers.vue';
+import FormVehicle from './components/forms/Form_vehicles.vue';
 
 
 export default {
@@ -11,7 +12,9 @@ export default {
     AppMenu,
     AppFooter,
     AppHeader,
-    AppDriver
+    FormDriver,
+    FormVehicle
+
 
   },
   data () {
@@ -33,7 +36,7 @@ export default {
 
   <div id="app">
 
-    <app-driver class="form-horizontal" id="myForm"></app-driver>
+    <form-vehicle></form-vehicle>
 
   </div>
 
