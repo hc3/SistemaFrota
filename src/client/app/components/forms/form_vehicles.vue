@@ -1,0 +1,82 @@
+<script>
+
+export default {
+
+}
+
+</script>
+
+
+<template>
+  <!-- FORM CADASTRO VEICULOS -->
+  <h1>Cadastro de Veiculos</h1>
+  <div class="form-horizontal">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Placa: </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Modelo: </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Marca: </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Eixos: </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Km_Rodado: </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Motorista: </label>
+          <div class="col-sm-10">
+            <select class="form-control" id="">
+              <option>motorista 1</option>
+              <option>motorista 2</option>
+              <option>motorista 3</option>
+              <option>motorista 4</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="submit" class="btn brn-primary" value="Salvar">
+          <input type="submit" class="btn btn-danger" value="Cancelar">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FIM FORM CADASTRO VEICULOS -->
+</template>
+
+
+<style>
+
+</style>
