@@ -34,7 +34,7 @@ export default (sequelize, DataType) => {
         notEmpty:true
       }
     },
-    km_rodado:{
+    km_inicial:{
       type:DataType.INTEGER,
       allowNull:false,
       validate:{

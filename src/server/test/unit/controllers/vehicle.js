@@ -14,7 +14,7 @@ describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
         modelo:'FORD CARGO 1723',
         marca:'FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
@@ -41,7 +41,7 @@ describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
         modelo:'FORD CARGO 1723',
         marca:'FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z',
@@ -75,7 +75,7 @@ describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
         modelo:'FORD CARGO 1723',
         marca:'FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
@@ -100,7 +100,7 @@ describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
         modelo:'CREATED VEHICLE',
         marca:'CREATED FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1,
       };
 
@@ -110,7 +110,7 @@ describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
         modelo:'FORD CARGO 1723',
         marca:'FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
@@ -146,7 +146,7 @@ describe('# TEST UNIT CONTROLLER # Controllers: vehicles', () => {
         modelo:'FORD CARGO 1723',
         marca:'FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1,
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'

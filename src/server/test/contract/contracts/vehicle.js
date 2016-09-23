@@ -28,7 +28,7 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
     modelo:'FORD CARGO 1723',
     marca:'FORD',
     eixos:4,
-    km_rodado:0,
+    km_inicial:0,
     driver_id:defaultDriver.id
   };
 
@@ -64,7 +64,7 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
         modelo:Joi.string(),
         marca:Joi.string(),
         eixos:Joi.number(),
-        km_rodado:Joi.number(),
+        km_inicial:Joi.number(),
         driver_id:Joi.number(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
@@ -88,7 +88,7 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
         modelo:Joi.string(),
         marca:Joi.string(),
         eixos:Joi.number(),
-        km_rodado:Joi.number(),
+        km_inicial:Joi.number(),
         driver_id:Joi.number(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso(),
@@ -121,7 +121,7 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
         modelo:Joi.string(),
         marca:Joi.string(),
         eixos:Joi.number(),
-        km_rodado:Joi.number(),
+        km_inicial:Joi.number(),
         driver_id:Joi.number(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
@@ -146,7 +146,7 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
         modelo:'NEW FORD CARGO 1723',
         marca:'NEW FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1
       };
       const vehicle = Joi.object().keys({
@@ -155,7 +155,7 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
         modelo:Joi.string(),
         marca:Joi.string(),
         eixos:Joi.number(),
-        km_rodado:Joi.number(),
+        km_inicial:Joi.number(),
         driver_id:Joi.number(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
@@ -179,7 +179,7 @@ describe('# TEST CONTRACT # Routes vehicles', () => {
         modelo:'UPDATED FORD CARGO 1723',
         marca:'UPDATED FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1
       };
       const updatedCount = Joi.array().items(1);

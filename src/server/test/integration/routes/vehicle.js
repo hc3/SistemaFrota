@@ -28,7 +28,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     modelo:'FORD CARGO 1723',
     marca:'FORD',
     eixos:4,
-    km_rodado:0,
+    km_inicial:0,
     driver_id:defaultDriver.id
   };
 
@@ -66,7 +66,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
           expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
           expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
           expect(res.body[0].eixos).to.be.eql(defaultVehicle.eixos);
-          expect(res.body[0].km_rodado).to.be.eql(defaultVehicle.km_rodado);
+          expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
           expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
           done(err);
         });
@@ -84,7 +84,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
           expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
           expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
           expect(res.body[0].eixos).to.be.eql(defaultVehicle.eixos);
-          expect(res.body[0].km_rodado).to.be.eql(defaultVehicle.km_rodado);
+          expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
           expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
           expect(res.body[0].Driver.id).to.be.eql(defaultDriver.id);
           expect(res.body[0].Driver.cod).to.be.eql(defaultDriver.cod);
@@ -104,7 +104,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
         modelo:'FORD CARGO 1723',
         marca:'FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:2
       };
       request
@@ -117,7 +117,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
           expect(res.body.modelo).to.be.eql(newVehicle.modelo);
           expect(res.body.marca).to.be.eql(newVehicle.marca);
           expect(res.body.eixos).to.be.eql(newVehicle.eixos);
-          expect(res.body.km_rodado).to.be.eql(newVehicle.km_rodado);
+          expect(res.body.km_inicial).to.be.eql(newVehicle.km_inicial);
           expect(res.body.driver_id).to.be.eql(newVehicle.driver_id);
           done(err);
         });
@@ -135,7 +135,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
           expect(res.body.modelo).to.be.eql(defaultVehicle.modelo);
           expect(res.body.marca).to.be.eql(defaultVehicle.marca);
           expect(res.body.eixos).to.be.eql(defaultVehicle.eixos);
-          expect(res.body.km_rodado).to.be.eql(defaultVehicle.km_rodado);
+          expect(res.body.km_inicial).to.be.eql(defaultVehicle.km_inicial);
           expect(res.body.driver_id).to.be.eql(defaultVehicle.driver_id);
           done(err);
         });
@@ -150,7 +150,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
         modelo:'UPDATED FORD CARGO 1723',
         marca:'UPDATED FORD',
         eixos:4,
-        km_rodado:0,
+        km_inicial:0,
         driver_id:1
       };
       request

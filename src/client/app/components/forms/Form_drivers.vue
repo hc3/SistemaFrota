@@ -1,3 +1,41 @@
+<script>
+const clone = (obj) => JSON.parse(JSON.stringify(obj));
+
+export default {
+
+  data() {
+    return {
+
+      driver: {
+        nome:'',
+        codigo:'',
+        telefone:''
+      },
+
+      listDrivers: []
+
+    }
+  },
+
+  methods: {
+
+    addDriver() {
+      const driver = clone(this.driver)
+      console.log("driver add: ",driver);
+      this.listDrivers.push(driver);
+      this.driver = {}
+    },
+
+    cleanForm() {
+      this.driver ={}
+    }
+
+  }
+
+}
+
+</script>
+
 <template>
   <div>
     <form class="form-horizontal" v-on:submit.prevent="addDriver()">
@@ -45,43 +83,6 @@
   </div>
 
 </template>
-
-<script>
-const clone = (obj) => JSON.parse(JSON.stringify(obj));
-
-export default {
-
-  data() {
-    return {
-
-      driver: {
-        nome:'',
-        codigo:'',
-        telefone:''
-      },
-      listDrivers: []
-
-    }
-  },
-
-  methods: {
-
-    addDriver() {
-      const driver = clone(this.driver)
-      console.log("driver add: ",driver);
-      this.listDrivers.push(driver);
-      this.driver = {}
-    },
-
-    cleanForm() {
-      this.driver ={}
-    }
-
-  }
-
-}
-
-</script>
 
 <style>
 

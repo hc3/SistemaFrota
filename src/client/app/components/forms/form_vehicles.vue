@@ -1,22 +1,29 @@
 <script>
+const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 export default {
+  data() {
+    return {
 
+      vehicle: {
+
+      }
+    }
+  }
 }
 
 </script>
 
 
 <template>
-  <!-- FORM CADASTRO VEICULOS -->
-  <h1>Cadastro de Veiculos</h1>
-  <div class="form-horizontal">
+<div>
+  <form class="form-horizontal">
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <label for="" class="col-sm-2 control-label">Placa: </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="vehicle.placa">
           </div>
         </div>
       </div>
@@ -24,7 +31,7 @@ export default {
         <div class="form-group">
           <label for="" class="col-sm-2 control-label">Modelo: </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="vehicle.modelo">
           </div>
         </div>
       </div>
@@ -32,7 +39,7 @@ export default {
         <div class="form-group">
           <label for="" class="col-sm-2 control-label">Marca: </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="vehicle.marca">
           </div>
         </div>
       </div>
@@ -40,15 +47,15 @@ export default {
         <div class="form-group">
           <label for="" class="col-sm-2 control-label">Eixos: </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="vehicle.eixos">
           </div>
         </div>
       </div>
       <div class="col-md-12">
         <div class="form-group">
-          <label for="" class="col-sm-2 control-label">Km_Rodado: </label>
+          <label for="" class="col-sm-2 control-label">Km inicial: </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="vehicle.km_inicial">
           </div>
         </div>
       </div>
@@ -72,7 +79,8 @@ export default {
         </div>
       </div>
     </div>
-  </div>
+  </form>
+</div>
   <!-- FIM FORM CADASTRO VEICULOS -->
 </template>
 

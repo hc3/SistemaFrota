@@ -22,7 +22,7 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
     modelo:'FORD CARGO 1723',
     marca:'FORD',
     eixos:4,
-    km_rodado:0,
+    km_inicial:0,
     driver_id:defaultDriver.id
   };
 
