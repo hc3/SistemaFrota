@@ -1,10 +1,11 @@
 import Vue from 'vue';
+import VueValidator from 'vue-validator';
 import App from './App.vue';
 
-import store from './vuex/store'
+
+Vue.use(VueValidator)
 
 new Vue({
-  store,
   el: 'body',
   render: h => h(App)
-})
+});

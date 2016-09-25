@@ -19,10 +19,7 @@ export default {
   },
   data () {
     return {
-      msg: 'Hello Vue! 2',
-      drivers: {},
-      vehicles: {},
-      tires: {}
+      msg: 'Hello Vue! 2'
     }
   },
   methods: {
@@ -36,7 +33,7 @@ export default {
 
   <div id="app">
 
-    <form-vehicle></form-vehicle>
+    <form-driver></form-driver>
 
   </div>
 

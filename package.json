@@ -44,6 +44,7 @@
     "sqlite3": "^3.1.4",
     "vue": "^2.0.0-rc.1",
     "vue-router": "^0.7.13",
+    "vue-validator": "^2.1.7",
     "vuex": "^1.0.0-rc.2"
   },
   "devDependencies": {
@@ -71,7 +72,7 @@
     "testdouble": "^1.6.1",
     "vue-cli": "^2.3.1",
     "vue-loader": "^9.2.2",
-    "webpack": "^2.1.0-beta.20",
+    "webpack": "^2.1.0-beta.22",
     "webpack-dev-server": "^2.1.0-beta.0"
   }
 }
