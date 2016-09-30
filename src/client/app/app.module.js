@@ -3,6 +3,7 @@
 
     angular
         .module('app', [
+          'ui.router',
           'app.driver',
           'app.tire',
           'app.vehicle'
