@@ -3,6 +3,8 @@
 
     angular
         .module('app', [
-            'dependencies'
+          'app.driver',
+          'app.tire',
+          'app.vehicle'
         ]);
 })();

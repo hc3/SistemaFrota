@@ -19,6 +19,8 @@
         vm.update = update;
         vm.remove = remove;
 
+        vm.cleanForm = cleanForm;
+
         function insert() {
 
         }
@@ -37,6 +39,9 @@
 
         function remove() {
 
+        }
+
+        function cleanForm() {
 
         }
 
