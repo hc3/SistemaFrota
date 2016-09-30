@@ -5,10 +5,10 @@
         .module('app')
         .controller('DriverController', DriverController);
 
-    DriverController.$inject = ['dependencies'];
+    //DriverController.$inject = ['dependencies'];
 
     /* @ngInject */
-    function DriverController(dependencies) {
+    function DriverController() {
         var vm = this;
         vm.driver = {};
         vm.listDriver = [];
