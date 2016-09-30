@@ -2,7 +2,5 @@
     'use strict';
 
     angular
-        .module('app.vehicle', [
-            'dependencies'
-        ]);
+        .module('app.vehicle',[]);
 })();
