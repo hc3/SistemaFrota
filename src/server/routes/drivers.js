@@ -22,7 +22,7 @@ export default (app) => {
     });
 
   app.route('/drivers/:id')
-    .all(app.auth.authenticate())  
+    .all(app.auth.authenticate())
     .get((req,res) => {
       driversController.getById(req.params)
         .then(response => {
