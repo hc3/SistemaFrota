@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Telefone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="driver in drivers">
+      <td>{{ driver.id }}</td>
+      <td>{{ driver.cod }}</td>
+      <td>{{ driver.name }}</td>
+      <td>{{ driver.phone }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,44 @@
+<div class="nav-side-menu">
+    <div class="brand">RN Distribuidora</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+                <li>
+                  <a href="#/">
+                  <i class="fa fa-dashboard fa-lg"></i>
+                    Home
+                  </a>
+                </li>
+
+                <li  data-toggle="collapse" data-target="#cadastros" class="collapsed active">
+                  <a href="#"><i class="fa fa-car fa-lg"></i> Cadastros <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="cadastros">
+                    <li><a ui-sref="listDriver">Motoristas</a></li>
+                    <li><a href="#/vehicles">Veículos</a></li>
+                    <li><a href="#/tires">Pneus</a></li>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                  <a href="#/mov"><i class="fa fa-random"></i> Movimentação <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service">
+                  <li><a href="#">Pneus</a></li>
+                </ul>
+
+                 <li>
+                  <a href="#">
+                  <i class="fa fa-calculator"></i> Estoque
+                  </a>
+                  </li>
+
+                 <li>
+                  <a href="#">
+                  <i class="fa fa-users fa-lg"></i> Users
+                  </a>
+                </li>
+            </ul>
+     </div>
+</div>

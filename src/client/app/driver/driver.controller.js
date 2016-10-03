@@ -8,7 +8,8 @@
     //DriverController.$inject = ['dependencies'];
 
     /* @ngInject */
-    function DriverController() {
+    function DriverController(DriverService) {
+
         var vm = this;
         vm.driver = {};
         vm.listDriver = [];
@@ -30,7 +31,12 @@
         }
 
         function listAll() {
-
+          return DriverService.listAll()
+            .then(function(data) {
+              console.log('retorno do listall: ',data);
+              vm.listDriver = data;
+              return vm.listDriver;
+            })
         }
 
         function update() {
@@ -45,10 +51,6 @@
 
         }
 
-        activate();
-
-        function activate() {
-
-        }
+        listAll();
     }
 })();

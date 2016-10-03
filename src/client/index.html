@@ -6,11 +6,42 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link type="text/css" rel="stylesheet" href="app/layout/menu/menu.css"/>
+    <style media="screen">
+      #myNavBar {
+        position: fixed;
+        left:1%;
+
+      }
+
+      #myMenu {
+
+      }
+
+      #myContent {
+        border: solid;
+        border-color: black;
+        position: fixed;
+        top: 22%;
+        left: 18%;
+        width: 80%;
+        height: 76%
+      }
+    </style>
   </head>
   <body data-ng-app="app">
-    <h1>Sistema de frota</h1>
+    <div id="myNavBar">
+      <navbar></navbar>
+    </div>
 
-    <data-ui-view></data-ui-view>
+    <div id="myMenu">
+      <menu></menu>
+    </div>
+
+    <div id="myContent">
+      <ui-view></ui-view>
+    </div>
+
 
     <script src="vendor/jquery/dist/jquery.js" charset="utf-8"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
@@ -24,6 +55,7 @@
     <script src="app/driver/driver.controller.js" charset="utf-8"></script>
     <script src="app/driver/driver.module.js" charset="utf-8"></script>
     <script src="app/driver/driver.service.js" charset="utf-8"></script>
+    <script src="app/driver/driver.router.js" charset="utf-8"></script>
 
     <script src="app/tire/tire.controller.js" charset="utf-8"></script>
     <script src="app/tire/tire.module.js" charset="utf-8"></script>
@@ -32,5 +64,8 @@
     <script src="app/vehicle/vehicle.controller.js" charset="utf-8"></script>
     <script src="app/vehicle/vehicle.module.js" charset="utf-8"></script>
     <script src="app/vehicle/vehicle.service.js" charset="utf-8"></script>
+
+    <script src="app/layout/navbar/navbar.directive.js" charset="utf-8"></script>
+    <script src="app/layout/menu/menu.directive.js" charset="utf-8"></script>
   </body>
 </html>

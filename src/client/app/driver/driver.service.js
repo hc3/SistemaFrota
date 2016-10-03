@@ -8,7 +8,7 @@
     //DriverService.$inject = ['dependencies'];
 
     /* @ngInject */
-    function DriverService() {
+    function DriverService($http) {
 
       var service = {
         insert: insert,
@@ -29,7 +29,7 @@
       }
 
       function listAll() {
-
+        return $http.get('/drivers')
       }
 
       function update() {
