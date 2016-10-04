@@ -16,7 +16,9 @@ app.config = config;
 app.datasource = datasource(app);
 
 app.set('port',7000);
-app.use(express.static(path.join(__dirname , '../client/')));
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+//app.use(express.static(path.join(__dirname , '../client/app/login/login.html')));
 //app.use(express.static(path.join(__dirname , '../../dist/build.js')));
 const auth = authorization(app);
 
@@ -24,10 +26,19 @@ app.use(bodyParser.json());
 app.use(auth.initialize());
 app.auth = auth;
 
-app.get('/',function(req,res) {
-  res.sendFile(path.join(__dirname , '../client/index.html'));
+app.get('/', function(req,res) {
+  return res.redirect('/login');
 });
 
+app.get('/login',function(req,res) {
+  res.render('login');
+});
+
+app.get('/register',function(req,res) {
+  res.render('register');
+});
+
+loginRouter(app);
 authRouter(app);
 driversRouter(app);
 vehiclesRouter(app);
