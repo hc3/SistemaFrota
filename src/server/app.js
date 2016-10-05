@@ -23,14 +23,13 @@ app.set('views', __dirname + '/views');
 const auth = authorization(app);
 
 app.use(bodyParser.json());
-app.use(auth.initialize());
-app.auth = auth;
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-app.get('/', function(req,res, next) {
-  if(req.path !== '/login' && !req.session.token) {
-    return res.redirect('/login');
-  }
-});
+app.use(auth.initialize());
+
+app.auth = auth;
 
 app.get('/login',function(req,res) {
   res.render('login');
@@ -40,13 +39,14 @@ app.get('/register',function(req,res) {
   res.render('register');
 });
 
+app.get('/', function(req,res) {
+
+});
 
 authRouter(app);
 driversRouter(app);
 vehiclesRouter(app);
 tiresRouter(app);
 usersRoutes(app);
-
-
 
 export default app;

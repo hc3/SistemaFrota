@@ -15,7 +15,8 @@ export default (app) => {
           usersController.create(req.body)
               .then(response => {
                   res.status(response.statusCode);
-                  res.json(response.data);
+                  res.redirect('/login');
+                  //res.json(response.data);
               });
       });
 
@@ -41,7 +42,7 @@ export default (app) => {
                   res.sendStatus(response.statusCode);
               });
       });
-      
+
 
     app.route('/users/registration')
       .post((req, res) => {

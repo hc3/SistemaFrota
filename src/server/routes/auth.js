@@ -17,7 +17,8 @@ export default app => {
                         const payload = {id: user.id};
                         res.json({
                             token: jwt.encode(payload, config.jwtSecret)
-                        })
+                        });
+                        res.redirect('/register');
                     } else {
                         res.sendStatus(HttpStatus.UNAUTHORIZED);
                     }

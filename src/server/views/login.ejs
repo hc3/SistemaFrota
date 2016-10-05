@@ -7,10 +7,10 @@
     <% if(locals.success) { %>
         <div class="alert alert-success"><%= success %></div>
     <% } %>
-    <form method="post">
+    <form method="post" action="/token">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" value="<%= locals.username || '' %>" class="form-control" />
+            <label for="email">Username</label>
+            <input type="text" name="email" id="email" class="form-control" />
         </div>
         <div class="form-group">
             <label for="password">Password</label>
