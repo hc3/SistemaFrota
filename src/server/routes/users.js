@@ -15,8 +15,8 @@ export default (app) => {
           usersController.create(req.body)
               .then(response => {
                   res.status(response.statusCode);
-                  res.redirect('/login');
                   //res.json(response.data);
+                  res.redirect('/login');
               });
       });
 
