@@ -18,7 +18,7 @@ app.datasource = datasource(app);
 app.set('port',7000);
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
-//app.use(express.static(path.join(__dirname , '../client/app/login/login.html')));
+//app.use(express.static(path.join(__dirname , '../client/')));
 //app.use(express.static(path.join(__dirname , '../../dist/build.js')));
 const auth = authorization(app);
 
@@ -37,10 +37,6 @@ app.get('/login',function(req,res) {
 
 app.get('/register',function(req,res) {
   res.render('register');
-});
-
-app.get('/', function(req,res) {
-
 });
 
 authRouter(app);
