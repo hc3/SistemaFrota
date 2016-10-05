@@ -26,8 +26,10 @@ app.use(bodyParser.json());
 app.use(auth.initialize());
 app.auth = auth;
 
-app.get('/', function(req,res) {
-  return res.redirect('/login');
+app.get('/', function(req,res, next) {
+  if(req.path !== '/login' && !req.session.token) {
+    return res.redirect('/login');
+  }
 });
 
 app.get('/login',function(req,res) {
@@ -38,7 +40,7 @@ app.get('/register',function(req,res) {
   res.render('register');
 });
 
-loginRouter(app);
+
 authRouter(app);
 driversRouter(app);
 vehiclesRouter(app);
