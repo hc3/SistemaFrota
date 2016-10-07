@@ -3,6 +3,7 @@ angular
     .config(config);
 
 function config($httpProvider) {
-  // console.log($httpProvider);
   $httpProvider.interceptors.push('timestampInterceptor');
+  $httpProvider.interceptors.push('authInterceptor');
+
 }
