@@ -17,8 +17,8 @@
 
         return service;
 
-        function login(email, password, callback) {
-          $http.post('/token', {email: email, password: password})
+        function login(user, callback) {
+          $http.post('/token', {email: user.email, password: user.password})
             .success(function(response) {
 
               if(response.token) {
@@ -38,6 +38,6 @@
           delete $localStorage.currentUser;
           $http.defaults.headers.common.Authorization = '';
         }
-        
+
     }
 })();

@@ -27,12 +27,9 @@
 
         function request(config) {
           config.headers = config.headers || {};
-          console.log('Config Headers',config.headers);
-          console.log('LocalStorage',localStorage.getItem('token'));
           if(localStorage.getItem('token')) {
             config.headers.Authorization = 'Baerer' + localStorage.getItem('token');
           }
-          console.log('Config Headers',config.headers);
           return config;
         }
 

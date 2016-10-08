@@ -1,0 +1,11 @@
+<section id="dashboard-view" class="mainbar" data-ng-controller="LoginController as vm">
+    <section class="matter">
+        <div class="container">
+            <form ng-submit="vm.login()">
+                <input ng-model="vm.user.email" type="email" name="email" placeholder="Email" />
+                <input ng-model="vm.user.password" type="password" name="email" placeholder="Password" />
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+    </section>
+</section>

@@ -16,16 +16,19 @@ app.config = config;
 app.datasource = datasource(app);
 
 app.set('port',7000);
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-app.use(express.static(path.join(__dirname , '../client/')));
-//app.use(express.static(path.join(__dirname , '../../dist/build.js')));
-const auth = authorization(app);
+app.use('/',express.static('./src/client'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
+// app.set('view engine', 'ejs');
+// app.set('views', __dirname + '/views');
+//app.use(express.static(path.join(__dirname , '../client/')));
+//app.use(express.static(path.join(__dirname , '../../dist/build.js')));
+
+const auth = authorization(app);
+
 
 app.use(auth.initialize());
 

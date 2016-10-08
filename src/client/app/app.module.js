@@ -6,6 +6,7 @@
           'ui.router',
           'app.driver',
           'app.tire',
-          'app.vehicle'
-        ]);
+          'app.vehicle',
+          'app.login'
+        ])
 })();
