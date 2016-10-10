@@ -5,7 +5,7 @@
         .module('app')
         .factory('LoginService', LoginService);
 
-    //LoginService.$inject = ['dependencies'];
+    LoginService.$inject = ['$http', '$localStorage'];
 
     /* @ngInject */
     function LoginService($http, $localStorage) {
@@ -24,8 +24,8 @@
               if(response.token) {
 
                 $localStorage.currentUser = {email: user.email, token: response.token};
-
                 $http.defaults.headers.common.Authorization = 'Baerer' + response.token;
+                localStorage.setItem('token',response.token);
 
                 callback(true);
               } else {

@@ -5,10 +5,10 @@
         .module('app')
         .factory('authInterceptor', authInterceptor);
 
-    authInterceptor.$inject = ['$q','$location'];
+    authInterceptor.$inject = ['$q','$location','$localStorage'];
 
     /* @ngInject */
-    function authInterceptor($q, $location) {
+    function authInterceptor($q, $location, $localStorage) {
 
         var service = {
             request: request,
