@@ -19,9 +19,8 @@
 
         function request(config) {
           config.headers = config.headers || {};
-          console.log("retorno do getItem: ",localStorage.getItem('token'));
           if(localStorage.getItem('token')) {
-            config.headers.Authorization = 'Baerer' + localStorage.getItem('token');
+            config.headers.Authorization = localStorage.getItem('token');
           }
           return config;
         }

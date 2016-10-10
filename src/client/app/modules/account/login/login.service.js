@@ -22,10 +22,10 @@
             .success(function(response) {
 
               if(response.token) {
-
+                var token = 'JWT ' + response.token;
                 $localStorage.currentUser = {email: user.email, token: response.token};
-                $http.defaults.headers.common.Authorization = 'Baerer' + response.token;
-                localStorage.setItem('token',response.token);
+                $http.defaults.headers.common.Authorization =  response.token;
+                localStorage.setItem('token',token);
 
                 callback(true);
               } else {
