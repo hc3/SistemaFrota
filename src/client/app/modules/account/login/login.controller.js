@@ -5,28 +5,31 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['LoginService'];
+    LoginController.$inject = ['LoginService','$location','$http'];
 
     /* @ngInject */
-    function LoginController(LoginService) {
+    function LoginController(LoginService, $location, $http) {
         var vm = this;
-        vm.isAuthenticated;
+
         vm.login = login;
 
+        initController();
+
+        function initController() {
+          LoginService.logout();
+        }
+
         function login() {
-          return LoginService.login(user)
-            .success(function(data) {
-              console.log('Sucesso', data);
-            })
-            .error(function(err) {
-              console.log('Deu zica :O',err);
-            })
+          vm.loading = true;
+          LoginService.login(vm.user, function(result){
+            if(result === true) {
+              $location.path('/drivers');
+            } else {
+              vm.error = 'Usuário ou senha incorretos';
+              vm.loading = false;
+            }
+          });
         }
 
-        activate();
-
-        function activate() {
-
-        }
     }
 })();

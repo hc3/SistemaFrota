@@ -17,16 +17,9 @@
 
         return service;
 
-        // function request(config) {
-        //   config.headers = config.headers || {};
-        //   if($cookies.get('token')) {
-        //     config.headers.Authorization = 'Baerer' + $cookies.get('token');
-        //   }
-        //   return config;
-        // }
-
         function request(config) {
           config.headers = config.headers || {};
+          console.log("retorno do getItem: ",localStorage.getItem('token'));
           if(localStorage.getItem('token')) {
             config.headers.Authorization = 'Baerer' + localStorage.getItem('token');
           }

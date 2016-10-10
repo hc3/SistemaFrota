@@ -5,7 +5,7 @@
         .module('app')
         .service('DriverService', DriverService);
 
-    //DriverService.$inject = ['dependencies'];
+    DriverService.$inject = ['$http'];
 
     /* @ngInject */
     function DriverService($http) {

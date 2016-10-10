@@ -5,7 +5,7 @@
         .module('app')
         .controller('DriverController', DriverController);
 
-    //DriverController.$inject = ['dependencies'];
+    DriverController.$inject = ['DriverService'];
 
     /* @ngInject */
     function DriverController(DriverService) {

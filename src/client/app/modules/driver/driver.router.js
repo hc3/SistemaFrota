@@ -4,7 +4,9 @@
     .module('app')
     .config(config);
 
-    function config($stateProvider) {
+    config.$inject = ['$stateProvider','$locationProvider']
+
+    function config($stateProvider, $locationProvider) {
       $stateProvider
 
         .state('listDriver', {
@@ -33,7 +35,9 @@
           templateUrl:'app/modules/driver/templates/driver_view.html',
           controller:'DriverController',
           controllerAs:'vm'
-        })
+        });
+
+        $locationProvider.html5Mode(true);
     }
 
 })();

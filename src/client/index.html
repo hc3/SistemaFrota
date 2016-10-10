@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <base href="/">
     <title>Sistema frota</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css"/>
@@ -30,23 +31,15 @@
     </style>
   </head>
   <body data-ng-app="app">
-    <div id="myNavBar">
-      <navbar></navbar>
-    </div>
 
-    <div id="myMenu">
-      <menu></menu>
-    </div>
-
-    <div id="myContent">
       <ui-view></ui-view>
-    </div>
 
 
     <script src="vendor/jquery/dist/jquery.js" charset="utf-8"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
 
     <script src="vendor/angular/angular.js" charset="utf-8"></script>
+    <script src="vendor/ngstorage/ngStorage.js" charset="utf-8"></script>
     <script src="vendor/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
 
     <script src="app/app.module.js" charset="utf-8"></script>
@@ -76,6 +69,7 @@
     <script src="app/modules/account/login/login.controller.js" charset="utf-8"></script>
     <script src="app/modules/account/login/login.module.js" charset="utf-8"></script>
     <script src="app/modules/account/login/login.service.js" charset="utf-8"></script>
+    <script src="app/modules/account/login/login.router.js" charset="utf-8"></script>
 
   </body>
 </html>
