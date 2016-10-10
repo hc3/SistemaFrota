@@ -16,7 +16,7 @@
         initController();
 
         function initController() {
-          LoginService.logout();
+          return LoginService.logout();
         }
 
         function login() {
