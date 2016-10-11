@@ -20,24 +20,24 @@
 
       return service;
 
-      function insert() {
-
+      function insert(data) {
+        return $http.post('/drivers',data)
       }
 
-      function listOne() {
-
+      function listOne(data) {
+        return $http.get('/drivers/'+data.id,{params: {id:data.id}})
       }
 
       function listAll() {
         return $http.get('/drivers')
       }
 
-      function update() {
-
+      function update(data,id) {
+        return $http.put('/drivers/'+id,data,{params: {id: id}})
       }
 
-      function remove() {
-
+      function remove(data) {
+        return $http.delete('/drivers/'+data.id,{params: {id:data.id}})
       }
 
 

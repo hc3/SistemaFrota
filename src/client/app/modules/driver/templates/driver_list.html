@@ -1,3 +1,5 @@
+<navbar></navbar>
+<button ui-sref="newDriver" class="btn btn-primary">Novo</button>
 <table class="table">
   <thead>
     <tr>
@@ -5,14 +7,18 @@
       <th>Código</th>
       <th>Nome</th>
       <th>Telefone</th>
+      <th> - </th>
+      <th> - </th>
     </tr>
   </thead>
   <tbody>
-    <tr data-ng-repeat="driver in drivers">
+    <tr data-ng-repeat="driver in vm.listDriver">
       <td>{{ driver.id }}</td>
       <td>{{ driver.cod }}</td>
       <td>{{ driver.name }}</td>
       <td>{{ driver.phone }}</td>
+      <td><a ui-sref="editDriver">Update</a></td>
+      <td><a data-ng-click="vm.listOne(driver)">View</a></td>
     </tr>
   </tbody>
 </table>
