@@ -12,7 +12,7 @@
         .state('listDriver', {
             url:'/drivers',
             templateUrl:'app/modules/driver/templates/driver_list.html',
-            controller:'DriverController',
+            controller:'DriverControllerList',
             controllerAs:'vm'
         })
 
@@ -33,7 +33,7 @@
         .state('viewDriver', {
           url:'/drivers/:id/view',
           templateUrl:'app/modules/driver/templates/driver_view.html',
-          controller:'DriverController',
+          controller:'DriverControllerOne',
           controllerAs:'vm'
         });
 

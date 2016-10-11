@@ -3,23 +3,53 @@
 
     angular
         .module('app')
-        .controller('DriverController', DriverController);
+        .controller('DriverControllerList', DriverControllerList)
+        .controller('DriverControllerOne', DriverControllerOne)
+        .controller('DriverControllerNew', DriverControllerNew);
 
-    DriverController.$inject = ['DriverService','$state'];
+    DriverControllerNew.$inject = ['DriverService','$state','$stateParams'];
+    DriverControllerList.$inject = ['DriverService','$state','$stateParams'];
+    DriverControllerOne.$inject = ['DriverService','$state','$stateParams'];
+
+    function DriverControllerList(DriverService, $state, $stateParams) {
+      var vm = this;
+      vm.listDriver = [];
+      listAll();
+
+      function listAll() {
+        return DriverService.listAll()
+          .then(function(data) {
+            console.log('retorno do listall: ',data);
+            vm.listDriver = data.data;
+            return vm.listDriver;
+          })
+      }
+    }
+
+    function DriverControllerOne(DriverService, $state, $stateParams) {
+      var vm = this;
+      vm.driverOne = listOne();
+
+      function listOne() {
+        return DriverService.listOne($stateParams.id)
+          .then(function(data) {
+            console.log('Retorno do listOne: ',data.data);
+            console.log('StateParams: ',$stateParams);
+            vm.driverOne = data.data;
+            console.log('Driver one: ',vm.driverOne);
+            return vm.driverOne;
+          })
+      }
+
+    }
 
     /* @ngInject */
-    function DriverController(DriverService, $state) {
+    function DriverControllerNew(DriverService, $state, $stateParams) {
 
         var vm = this;
         vm.driver = {};
-        vm.listDriver = [];
-        vm.driverOne = {};
         vm.errorDrivers = {};
         vm.insert = insert;
-        vm.listOne = listOne;
-        vm.listAll = listAll;
-        vm.update = update;
-        vm.remove = remove;
 
         function insert() {
           return DriverService.insert(vm.driver)
@@ -34,43 +64,16 @@
             })
         }
 
-        function listOne(driver) {
-          return DriverService.listOne(driver)
-            .then(function(data) {
-              console.log('Retorno do listOne: ',data.data);
-              vm.driverOne = data.data;
-              $state.go('viewDriver',{id: data.data.id})
-              console.log('Driver one: ',vm.driverOne);
-              return vm.driverOne;
-            })
-        }
-
-        function listAll() {
-          return DriverService.listAll()
-            .then(function(data) {
-              console.log('retorno do listall: ',data);
-              vm.listDriver = data.data;
-              return vm.listDriver;
-            })
-        }
-
-        function update() {
-
-        }
-
-        function remove() {
-
-        }
-
-        function cleanForm(form_new) {
-          console.log('form new: ',form_new);
-          if(form_new) {
-            vm.driver = {};
-            form_new.$setPristine();
-            form_new.$setUntouched();
-          }
-        }
-
-        listAll();
     }
+
+    function cleanForm(form_new) {
+      console.log('form new: ',form_new);
+      if(form_new) {
+        vm.driver = {};
+        form_new.$setPristine();
+        form_new.$setUntouched();
+      }
+    }
+
+
 })();

@@ -18,7 +18,7 @@
       <td>{{ driver.name }}</td>
       <td>{{ driver.phone }}</td>
       <td><a ui-sref="editDriver">Update</a></td>
-      <td><a data-ng-click="vm.listOne(driver)">View</a></td>
+      <td><a ui-sref="viewDriver({id: driver.id})">View</a></td>
     </tr>
   </tbody>
 </table>

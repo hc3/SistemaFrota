@@ -24,8 +24,8 @@
         return $http.post('/drivers',data)
       }
 
-      function listOne(data) {
-        return $http.get('/drivers/'+data.id,{params: {id:data.id}})
+      function listOne(id) {
+        return $http.get('/drivers/'+id,{params: {id:id}})
       }
 
       function listAll() {
