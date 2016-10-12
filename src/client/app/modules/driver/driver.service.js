@@ -36,8 +36,8 @@
         return $http.put('/drivers/'+id,data,{params: {id: id}})
       }
 
-      function remove(data) {
-        return $http.delete('/drivers/'+data.id,{params: {id:data.id}})
+      function remove(id) {
+        return $http.delete('/drivers/'+id,{params: {id:id}})
       }
 
 

@@ -19,14 +19,14 @@
         .state('newDriver', {
           url:'/drivers/new',
           templateUrl:'app/modules/driver/templates/driver_new.html',
-          controller:'DriverController',
+          controller:'DriverControllerNew',
           controllerAs:'vm'
         })
 
         .state('editDriver', {
           url:'/drivers/:id/edit',
           templateUrl:'app/modules/driver/templates/driver_update.html',
-          controller:'DriverController',
+          controller:'DriverControllerEdit',
           controllerAs:'vm'
         })
 

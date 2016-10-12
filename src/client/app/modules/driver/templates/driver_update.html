@@ -1,8 +1,7 @@
 <navbar></navbar>
 
-<form class="form-horizontal" role="form" data-ng-sugmit="update()">
-  <div data-ng-include="app/driver/templates/_driver_form.html">
+<form class="form-horizontal" role="form" name="form_update" data-ng-submit="vm.edit()">
+  <div data-ng-include="'app/modules/driver/templates/_driver_form.html'">
   </div>
 </form>
 
-<footer></footer>

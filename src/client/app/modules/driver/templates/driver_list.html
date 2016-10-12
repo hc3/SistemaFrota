@@ -1,24 +1,39 @@
-<navbar></navbar>
-<button ui-sref="newDriver" class="btn btn-primary">Novo</button>
-<table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Código</th>
-      <th>Nome</th>
-      <th>Telefone</th>
-      <th> - </th>
-      <th> - </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-ng-repeat="driver in vm.listDriver">
-      <td>{{ driver.id }}</td>
-      <td>{{ driver.cod }}</td>
-      <td>{{ driver.name }}</td>
-      <td>{{ driver.phone }}</td>
-      <td><a ui-sref="editDriver">Update</a></td>
-      <td><a ui-sref="viewDriver({id: driver.id})">View</a></td>
-    </tr>
-  </tbody>
-</table>
+  <div class="row">
+    <div class="col-sm-12">
+      <navbar></navbar>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <menu></menu>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button ui-sref="newDriver" class="btn btn-primary">Novo</button>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th> - </th>
+          <th> - </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="driver in vm.listDriver">
+          <td>{{ driver.id }}</td>
+          <td>{{ driver.cod }}</td>
+          <td>{{ driver.name }}</td>
+          <td>{{ driver.phone }}</td>
+          <td><a ui-sref="editDriver({id: driver.id})">Update</a></td>
+          <td><a ui-sref="viewDriver({id: driver.id})">View</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

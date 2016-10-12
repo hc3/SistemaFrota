@@ -8,37 +8,15 @@
     <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.css"/>
     <link type="text/css" rel="stylesheet" href="app/layout/menu/menu.css"/>
-    <style media="screen">
-      #myNavBar {
-        position: fixed;
-        left:1%;
-
-      }
-
-      #myMenu {
-
-      }
-
-      #myContent {
-        border: solid;
-        border-color: black;
-        position: fixed;
-        top: 22%;
-        left: 18%;
-        width: 80%;
-        height: 76%
-      }
-    </style>
   </head>
   <body data-ng-app="app">
-
-    <div class="jumbotron">
-  <div class="container">
-      <div class="col-sm-8 col-sm-offset-2">
-          <ui-view></ui-view>
+  <div class="jumbotron">
+      <div class="container">
+          <div class="col-sm-8 col-sm-offset-2">
+              <ui-view></ui-view>
+          </div>
       </div>
   </div>
-</div>
 
 
     <script src="vendor/jquery/dist/jquery.js" charset="utf-8"></script>
