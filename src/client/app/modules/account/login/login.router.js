@@ -3,8 +3,9 @@
     .module('app')
     .config(config)
 
-    config.$inject = ['$stateProvider','$locationProvider', '$urlRouterProvider']
+    config.$inject = ['$stateProvider','$locationProvider', '$urlRouterProvider'];
 
+    /* @ngInject */
     function config($stateProvider, $locationProvider, $urlRouterProvider) {
 
       $urlRouterProvider.otherwise('/login');
@@ -18,9 +19,7 @@
           controllerAs:'vm'
         });
 
-
-
         $locationProvider.html5Mode(true);
     }
 
-})()
+})();

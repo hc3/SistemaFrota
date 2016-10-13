@@ -4,8 +4,9 @@
     .module('app')
     .config(config);
 
-    config.$inject = ['$stateProvider','$locationProvider']
+    config.$inject = ['$stateProvider','$locationProvider'];
 
+    /* @ngInject */
     function config($stateProvider, $locationProvider) {
       $stateProvider
 
