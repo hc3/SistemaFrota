@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-sm-12">
+    <navbar></navbar>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <menu></menu>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <button ui-sref="newVehicle" class="btn btn-primary">Novo</button>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Motorista</th>
+        <th>Placa</th>
+        <th>Modelo</th>
+        <th>Marca</th>
+        <th>Eixos</th>
+        <th> - </th>
+        <th> - </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="vehicle in vm.listVehicle">
+        <td>{{ vehicle.id }}</td>
+        <td>{{ vehicle.driver_id }}</td>
+        <td>{{ vehicle.placa }}</td>
+        <td>{{ vehicle.modelo }}</td>
+        <td>{{ vehicle.marca }}</td>
+        <td>{{ vehicle.eixos }}</td>
+        <td><a ui-sref="editVehicle({id: vehicle.id})">Update</a></td>
+        <td><a ui-sref="viewVehicle({id: vehicle.id})">View</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

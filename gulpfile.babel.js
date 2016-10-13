@@ -16,7 +16,7 @@ gulp.task('nodemon', function (cb) {
   return nodemon({
 
     // nodemon our expressjs server
-    exec:'./node_modules/.bin/babel-node',
+    exec:'npm start',
     script: 'src/server/index.js',
     // watch core server file(s) that require server restart on change
     watch: ['src/server/index.js']
@@ -42,14 +42,13 @@ gulp.task('browser-sync', ['nodemon'], function () {
   browserSync({
 
     // informs browser-sync to proxy our expressjs app which would run at the following location
-    proxy: 'http://localhost:3000',
+    proxy: 'http://localhost:7000',
 
     // informs browser-sync to use the following port for the proxied app
     // notice that the default port is 3000, which would clash with our expressjs
-    port: 4000,
 
-    // open the proxied app in chrome
-    browser: ['google-chrome']
+    // open the proxied app in chrome ( windows ) | google-chrome ( linux ) 
+    browser: ['chrome']
   });
 });
 

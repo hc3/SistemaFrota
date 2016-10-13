@@ -8,12 +8,12 @@
     /* @ngInject */
     function config($stateProvider, $locationProvider, $urlRouterProvider) {
 
-      $urlRouterProvider.otherwise('/login');
+      $urlRouterProvider.otherwise('/');
 
       $stateProvider
 
         .state('login', {
-          url:'/login',
+          url:'/',
           templateUrl:'app/modules/account/login.html',
           controller:'LoginController',
           controllerAs:'vm'

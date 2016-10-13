@@ -19,13 +19,14 @@
       var vm = this;
       vm.listDriver = [];
       listAll();
-        function listAll() {
-            return DriverService.listAll()
-                .then(function(data) {
-                    vm.listDriver = data.data;
-                    return vm.listDriver;
-                })
-        }
+      
+      function listAll() {
+          return DriverService.listAll()
+              .then(function(data) {
+                  vm.listDriver = data.data;
+                  return vm.listDriver;
+              })
+      }
 
     }
 
