@@ -9,7 +9,7 @@
     function menu() {
         var menu = {
             restrict: 'EA',
-            templateUrl: 'app/layout/menu/basicMenu.html',
+            templateUrl: 'app/layout/menu/menu-ui.html',
             scope: {
             },
             link: linkFunc,
@@ -30,11 +30,12 @@
     /* @ngInject */
     function Controller() {
         var vm = this;
+        vm.navCollapsed = true;
 
         activate();
 
         function activate() {
-
+          
         }
     }
 })();

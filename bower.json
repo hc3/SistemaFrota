@@ -29,6 +29,9 @@
     "jquery": "^3.1.0",
     "angular": "^1.5.8",
     "angular-ui-router": "^0.3.1",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "angular-animate": "^1.5.8",
+    "angular-touch": "^1.5.8",
+    "angular-bootstrap": "^2.2.0"
   }
 }

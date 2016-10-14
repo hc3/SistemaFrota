@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/hc3/SistemaFrota#readme",
   "dependencies": {
+    "angular-ui-bootstrap": "^2.2.0",
     "angular-ui-router": "^0.3.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",

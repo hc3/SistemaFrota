@@ -48,7 +48,7 @@ export default (sequelize, DataType) => {
     foreignKey: 'driver_id',
     targetKey: 'id',
     allowNull:true,
-    unique:false
+    unique:true
   });
   //Vehicles.hasMany(sequelize.import('./Tires'),{foreignKey: 'vehicle_id'});
   return Vehicles;

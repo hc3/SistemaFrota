@@ -8,9 +8,11 @@
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Motorista: </label>
       <div class="col-sm-10">
-        <input id="vehiclePlaca" type="text" class="form-control"
-        data-ng-model="vm.vehicle.driver_id"
-        data-ng-require="true">
+        <select class="form-control" name="driver_id" data-ng-require="true" data-ng-model="vm.vehicle.driver_id">
+          <option value="{{driver.id}}" ng-repeat="driver in vm.listDriver">
+            {{driver.cod}} - {{driver.name}}
+          </option>
+        </select>
       </div>
     </div>
   </div>
@@ -74,7 +76,7 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <input type="submit" class="btn brn-primary" value="Salvar">
-      <input type="submit" class="btn btn-danger" value="Cancelar" ui-sref="listDriver">
+      <input type="submit" class="btn btn-danger" value="Cancelar" ui-sref="listVehicle">
     </div>
   </div>
 

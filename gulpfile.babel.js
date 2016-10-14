@@ -47,7 +47,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
     // informs browser-sync to use the following port for the proxied app
     // notice that the default port is 3000, which would clash with our expressjs
 
-    // open the proxied app in chrome ( windows ) | google-chrome ( linux ) 
+    // open the proxied app in chrome ( windows ) | google-chrome ( linux )
     browser: ['chrome']
   });
 });
@@ -72,6 +72,6 @@ gulp.task('bs-reload', function () {
 
 gulp.task('default', ['browser-sync'], function () {
   gulp.watch('src/client/app/**/*.js',   ['js', browserSync.reload]);
-  gulp.watch('src/client/**/*.css',  ['css']);
-  gulp.watch('src/client/**/*.html', ['bs-reload']);
+  gulp.watch('src/client/app/**/*.css',  ['css']);
+  gulp.watch('src/client/app/**/*.html', ['bs-reload']);
 });

@@ -4,7 +4,7 @@ function config(e) {
   e.interceptors.push("authInterceptor");
 }!function () {
   "use strict";
-  angular.module("app", ["ui.router", "ngStorage", "app.driver", "app.tire", "app.vehicle", "app.login"]);
+  angular.module("app", ["ui.router", "ngStorage", "ui.bootstrap", "app.driver", "app.tire", "app.vehicle", "app.login"]);
 }(), function () {
   "use strict";
   function e(e, t) {
@@ -24,9 +24,9 @@ function config(e) {
 }(), function () {
   "use strict";
   function e() {
-    function e(e, t, r, n) {}var r = { restrict: "EA", templateUrl: "app/layout/menu/basicMenu.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
+    function e(e, t, r, n) {}var r = { restrict: "EA", templateUrl: "app/layout/menu/menu-ui.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
   }function t() {
-    function e() {}e();
+    function e() {}var t = this;t.navCollapsed = !0, e();
   }angular.module("app").directive("menu", e);
 }(), function () {
   "use strict";
@@ -41,6 +41,8 @@ function config(e) {
     function n() {
       return e.listAll().then(function (e) {
         return i.listDriver = e.data, i.listDriver;
+      }).catch(function (e) {
+        console.log("Erro ao buscar motoristas: ", e);
       });
     }var i = this;i.listDriver = [], n();
   }function t(e, t, r) {
@@ -48,7 +50,7 @@ function config(e) {
       return e.insert(o.driver).then(function (e) {
         i(o.form_new);
       }).catch(function (e) {
-        console.log("Retorno do erro no insert: ", e), o.errorDrivers.insertError = "Erro ao cadastrar Motorista";
+        o.errorDrivers.insertError = "Erro ao cadastrar Motorista";
       });
     }function i(e) {
       e && (o.driver = {}, e.$setPristine(), e.$setUntouched());
@@ -57,20 +59,28 @@ function config(e) {
     function n() {
       return e.listOne(r.id).then(function (e) {
         return o.driverOne = e.data, o.driverOne;
+      }).catch(function (e) {
+        console.log("erro ao buscar o motorista: ", e);
       });
     }function i() {
       return e.remove(r.id).then(function (e) {
         t.go("listDriver");
+      }).catch(function (e) {
+        console.log("erro ao remover motorista: ", e);
       });
     }var o = this;o.driverOne = n(), o.removeOne = i;
   }function n(e, t, r) {
     function n() {
       return e.listOne(r.id).then(function (e) {
         return o.driver = e.data, o.driver;
+      }).catch(function (e) {
+        console.log("erro ao buscar motorista: ", e);
       });
     }function i() {
       return e.update(o.driver, r.id).then(function (e) {
         t.go("listDriver");
+      }).catch(function (e) {
+        console.log("erro ao editar motorista: ", e);
       });
     }var o = this;o.driver = n(), o.edit = i;
   }angular.module("app").controller("DriverControllerList", e).controller("DriverControllerOne", r).controller("DriverControllerNew", t).controller("DriverControllerEdit", n), t.$inject = ["DriverService", "$state", "$stateParams"], e.$inject = ["DriverService", "$state", "$stateParams"], r.$inject = ["DriverService", "$state", "$stateParams"], n.$inject = ["DriverService", "$state", "$stateParams"];
@@ -122,7 +132,7 @@ function config(e) {
       });
     }function i() {
       return e.remove(r.id).then(function (e) {
-        console.log("removido com sucesso! ", e);
+        t.go("listVehicle");
       });
     }var o = this;o.vehicleOne = n(), o.removeOne = i;
   }function t(e, t, r) {
@@ -130,28 +140,45 @@ function config(e) {
       return e.listAll().then(function (e) {
         return i.listVehicle = e.data, i.listVehicle;
       });
-    }var i = this;i.listVehicle = [], n();
-  }function r(e, t, r) {
-    function n() {
-      return e.insert(o.vehicle).then(function (e) {
-        i(o.form_new);
+    }var i = this;i.listVehicle = [], i.listDriver = [], n();
+  }function r(e, t, r, n) {
+    function i() {
+      return e.insert(a.vehicle).then(function (e) {
+        c(a.form_new);
       }).catch(function (e) {
-        console.log("Retorno do erro no insert: ", e), o.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
+        console.log("Retorno do erro no insert: ", e), a.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
       });
-    }function i(e) {
-      e && (o.vehicle = {}, e.$setPristine(), e.$setUntouched());
-    }var o = this;o.vehicle = {}, o.errorVehicles = {}, o.insert = n;
-  }function n(e, t, r) {
-    function n() {
-      return e.listOne(r.id).then(function (e) {
-        return o.vehicle = e.data, o.vehicle;
+    }function o() {
+      return t.listAll().then(function (e) {
+        return console.log("retorno da busca de drivers: ", e.data), a.listDriver = e.data, u.forEach(function (e) {
+          a.listDriver.forEach(function (t, r) {
+            t.id === e.driver_id && a.listDriver.splice(r, 1);
+          });
+        }), a.listDriver;
       });
-    }function i() {
-      return e.update(o.vehicle, r.id).then(function (e) {
-        console.log("Editado com sucesso! ", e);
+    }function l() {
+      return e.listAll().then(function (e) {
+        return u = e.data;
       });
-    }var o = this;o.vehicle = n(), o.edit = i;
-  }angular.module("app").controller("VehicleControllerOne", e).controller("VehicleControllerList", t).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", n), e.$inject = ["VehicleService", "$state", "$stateParams"], t.$inject = ["VehicleService", "$state", "$stateParams"], r.$inject = ["VehicleService", "$state", "$stateParams"], n.$inject = ["VehicleService", "$state", "$stateParams"];
+    }function c(e) {
+      e && (a.vehicle = {}, e.$setPristine(), e.$setUntouched());
+    }var a = this,
+        u = l();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, l(), o();
+  }function n(e, t, r, n) {
+    function i() {
+      return e.listOne(n.id).then(function (e) {
+        return c.vehicle = e.data, c.vehicle;
+      });
+    }function o() {
+      return t.listAll().then(function (e) {
+        return c.listDriver = e.data, c.listDriver;
+      });
+    }function l() {
+      return e.update(c.vehicle, n.id).then(function (e) {
+        r.go("listVehicle");
+      });
+    }var c = this;c.vehicle = i(), c.listDriver = [], c.edit = l, o();
+  }angular.module("app").controller("VehicleControllerOne", e).controller("VehicleControllerList", t).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", n), e.$inject = ["VehicleService", "$state", "$stateParams"], t.$inject = ["VehicleService", "$state", "$stateParams"], r.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"], n.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"];
 }(), function () {
   "use strict";
   angular.module("app.vehicle", []);

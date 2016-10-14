@@ -6,12 +6,6 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <menu></menu>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-12">
     <button ui-sref="newVehicle" class="btn btn-primary">Novo</button>
     <table class="table">
       <thead>
@@ -22,8 +16,8 @@
         <th>Modelo</th>
         <th>Marca</th>
         <th>Eixos</th>
-        <th> - </th>
-        <th> - </th>
+        <th>Editar</th>
+        <th>Visualizar</th>
       </tr>
       </thead>
       <tbody>
@@ -34,8 +28,8 @@
         <td>{{ vehicle.modelo }}</td>
         <td>{{ vehicle.marca }}</td>
         <td>{{ vehicle.eixos }}</td>
-        <td><a ui-sref="editVehicle({id: vehicle.id})">Update</a></td>
-        <td><a ui-sref="viewVehicle({id: vehicle.id})">View</a></td>
+        <td><a ui-sref="editVehicle({id: vehicle.id})"><span class="glyphicon glyphicon-check"></span></a></td>
+        <td><a ui-sref="viewVehicle({id: vehicle.id})"><span class="glyphicon glyphicon-eye-open"></span></a></td>
       </tr>
       </tbody>
     </table>

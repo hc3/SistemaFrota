@@ -19,16 +19,19 @@
       var vm = this;
       vm.listDriver = [];
       listAll();
-      
+
       function listAll() {
           return DriverService.listAll()
               .then(function(data) {
                   vm.listDriver = data.data;
                   return vm.listDriver;
               })
-      }
+              .catch(function(err){
+                console.log('Erro ao buscar motoristas: ',err);
+              })
+      };
 
-    }
+    };
 
     /* @ngInject */
     function DriverControllerNew(DriverService, $state, $stateParams) {
@@ -44,10 +47,9 @@
               cleanForm(vm.form_new);
             })
             .catch(function(err) {
-              console.log('Retorno do erro no insert: ', err);
               vm.errorDrivers.insertError = 'Erro ao cadastrar Motorista';
             })
-        }
+        };
 
         function cleanForm(form_new) {
             if(form_new) {
@@ -55,9 +57,9 @@
                 form_new.$setPristine();
                 form_new.$setUntouched();
             }
-        }
+        };
 
-    }
+    };
 
     /* @ngInject */
     function DriverControllerOne(DriverService, $state, $stateParams) {
@@ -71,16 +73,22 @@
                     vm.driverOne = data.data;
                     return vm.driverOne;
                 })
-        }
+                .catch(function(err) {
+                  console.log('erro ao buscar o motorista: ',err);
+                })
+        };
 
         function removeOne() {
             return DriverService.remove($stateParams.id)
                 .then(function(data) {
                     $state.go('listDriver');
                 })
-        }
+                .catch(function(err) {
+                  console.log('erro ao remover motorista: ',err);
+                })
+        };
 
-    }
+    };
 
     /* @ngInject */
     function DriverControllerEdit(DriverService, $state, $stateParams) {
@@ -94,15 +102,21 @@
                     vm.driver = data.data;
                     return vm.driver;
                 })
-        }
+                .catch(function(err) {
+                  console.log('erro ao buscar motorista: ',err);
+                })
+        };
 
         function edit() {
             return DriverService.update(vm.driver, $stateParams.id)
                 .then(function(data) {
                     $state.go('listDriver');
                 })
-        }
+                .catch(function(err) {
+                  console.log('erro ao editar motorista: ',err);
+                })
+        };
 
-    }
+    };
 
 })();

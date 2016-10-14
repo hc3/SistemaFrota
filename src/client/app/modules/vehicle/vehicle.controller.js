@@ -9,9 +9,9 @@
         .controller('VehicleControllerEdit', VehicleControllerEdit);
 
     VehicleControllerOne.$inject = ['VehicleService','$state','$stateParams'];
-    VehicleControllerList.$inject = ['VehicleService','$state','$stateParams'];
-    VehicleControllerNew.$inject = ['VehicleService','$state','$stateParams'];
-    VehicleControllerEdit.$inject = ['VehicleService','$state','$stateParams'];
+    VehicleControllerList.$inject = ['VehicleService', '$state','$stateParams'];
+    VehicleControllerNew.$inject = ['VehicleService', 'DriverService', '$state','$stateParams'];
+    VehicleControllerEdit.$inject = ['VehicleService', 'DriverService', '$state','$stateParams'];
 
     /* @ngInject */
     function VehicleControllerOne(VehicleService, $state, $stateParams) {
@@ -30,16 +30,16 @@
         function removeOne() {
           return VehicleService.remove($stateParams.id)
             .then(function(data) {
-              //$state.go('');
-              console.log('removido com sucesso! ',data);
+              $state.go('listVehicle');
             })
         }
-    }
+    };
 
     /* @ngInject */
     function VehicleControllerList(VehicleService, $state, $stateParams) {
         var vm = this;
         vm.listVehicle = [];
+        vm.listDriver = [];
         listAll();
 
         function listAll() {
@@ -48,15 +48,19 @@
               vm.listVehicle = data.data;
               return vm.listVehicle;
             })
-        }
-    }
+        };
+    };
 
     /* @ngInject */
-    function VehicleControllerNew(VehicleService, $state, $stateParams) {
+    function VehicleControllerNew(VehicleService, DriverService, $state, $stateParams) {
         var vm = this;
+        var allVehicles = listAllVehicles();
         vm.vehicle = {};
+        vm.listDriver = [];
         vm.errorVehicles = {};
         vm.insert = insert;
+        listAllVehicles();
+        listAllDrivers();
 
         function insert() {
           return VehicleService.insert(vm.vehicle)
@@ -67,7 +71,31 @@
               console.log('Retorno do erro no insert: ', err);
               vm.errorVehicles.insertError = 'Erro ao cadastrar Veiculo';
             })
-        }
+        };
+
+        function listAllDrivers() {
+          return DriverService.listAll()
+            .then(function(data) {
+              console.log('retorno da busca de drivers: ', data.data);
+              vm.listDriver = data.data;
+              allVehicles.forEach(function(veiculo) {
+                vm.listDriver.forEach(function(driver,index) {
+                  if(driver.id === veiculo.driver_id) {
+                    vm.listDriver.splice(index,1);
+                  }
+                })
+              })
+              return vm.listDriver;
+            })
+        };
+
+        function listAllVehicles() {
+          return VehicleService.listAll()
+            .then(function(data) {
+              allVehicles = data.data;
+              return allVehicles;
+            })
+        };
 
         function cleanForm(form_new) {
           if(form_new) {
@@ -75,14 +103,17 @@
             form_new.$setPristine();
             form_new.$setUntouched();
           }
-        }
-    }
+        };
+    };
 
     /* @ngInject */
-    function VehicleControllerEdit(VehicleService, $state, $stateParams) {
+    function VehicleControllerEdit(VehicleService, DriverService, $state, $stateParams) {
         var vm = this;
         vm.vehicle = listOne();
+        vm.listDriver = [];
         vm.edit = edit;
+
+        listAllDrivers();
 
         function listOne() {
           return VehicleService.listOne($stateParams.id)
@@ -90,16 +121,23 @@
               vm.vehicle = data.data;
               return vm.vehicle;
             })
-        }
+        };
+
+        function listAllDrivers() {
+          return DriverService.listAll()
+            .then(function(data) {
+              vm.listDriver = data.data;
+              return vm.listDriver;
+            })
+        };
 
         function edit() {
           return VehicleService.update(vm.vehicle, $stateParams.id)
             .then(function(data) {
-              //$state.go('');
-              console.log('Editado com sucesso! ',data);
+              $state.go('listVehicle');
             })
-        }
-    }
+        };
+    };
 
 
 })();
