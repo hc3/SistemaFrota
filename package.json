@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
-    "start": "nodemon --exec babel-node src/server/index.js",
+    "start": "nodemon --exec nodejs-dashboard babel-node src/server/index.js",
     "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/*.js",
     "test-unit": "mocha --opts src/server/test/unit/mocha.opts src/server/test/unit/**/*.js",
     "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js",
@@ -70,6 +70,7 @@
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.2",
     "mocha": "^3.0.2",
+    "nodejs-dashboard": "^0.1.1",
     "phantomjs": "^2.1.7",
     "supertest": "^2.0.0",
     "testdouble": "^1.6.1"
