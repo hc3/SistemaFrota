@@ -8,24 +8,31 @@
         .controller('TireControllerEdit', TireControllerEdit)
         .controller('TireControllerOne', TireControllerOne);
 
-    TireControllerOne.$inject = ['TireService', '$state', 'stateParams'];
+    TireControllerOne.$inject = ['TireService', '$state', '$stateParams'];
     TireControllerList.$inject = ['TireService', '$state'];
-    TireControllerNew.$inject = ['TireService', '$state'];
-    TireControllerEdit.$inject = ['TireService', '$state', 'stateParams'];
+    TireControllerNew.$inject = ['TireService', 'VehicleService', '$state'];
+    TireControllerEdit.$inject = ['TireService', '$state', '$stateParams'];
 
     /* @ngInject */
-    function TireControllerOne(TireService, $state, stateParams) {
+    function TireControllerOne(TireService, $state, $stateParams) {
         var vm = this;
         vm.tireOne = listOne();
         vm.removeOne = removeOne;
 
-        function listone() {
+        function listOne() {
           return TireService.listOne($stateParams.id)
             .then(function(data) {
               vm.tireOne = data.data;
               return vm.tireOne;
             })
         };
+
+        function removeOne() {
+          return TireService.remove($stateParams.id)
+            .then(function(data) {
+              $state.go('listTire');
+            })
+        }
     };
 
     /* @ngInject */
@@ -45,13 +52,15 @@
     };
 
     /* @ngInject */
-    function TireControllerNew(TireService, $state) {
+    function TireControllerNew(TireService, VehicleService, $state) {
       var vm = this;
       vm.tire = {};
-      vm.listVehicle = [];
-      vm.insertt = insert;
+      vm.listVehicle = listAll();
+      vm.insert = insert;
+      listAll();
 
       function insert() {
+        vm.tire.trash = false;
           return TireService.insert(vm.tire)
             .then(function(data) {
               cleanForm(vm.form_new);
@@ -61,9 +70,18 @@
             })
       };
 
+      function listAll() {
+        return VehicleService.listAll()
+          .then(function(data) {
+            vm.listVehicle = data.data;
+            return vm.listVehicle;
+          })
+      };
+
       function cleanForm(form_new) {
         if(form_new) {
           vm.tire = {};
+          listAll();
           form_new.$setPristine();
           form_new.$setUntouched();
         }
