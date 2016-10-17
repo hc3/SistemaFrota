@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-sm-12">
+    <navbar></navbar>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <button ui-sref="newTire" class="btn btn-primary">Novo</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Código</th>
+          <th>Marca</th>
+          <th>Vida</th>
+          <th>Sulco</th>
+          <th>Recap</th>
+          <th>Trash</th>
+          <th>Editar</th>
+          <th>Visualizar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="tire in vm.listTire">
+          <td>{{ tire.id }}</td>
+          <td>{{ tire.cod }}</td>
+          <td>{{ tire.marca }}</td>
+          <td>{{ tire.vida }}</td>
+          <td>{{ tire.sulco }}</td>
+          <td>{{ tire.recap }}</td>
+          <td>{{ tire.trash }}</td>
+          <td><a ui-sref="editTire({id: tire.id})"><span class="glyphicon glyphicon-check"></span></a></td>
+          <td><a ui-sref="viewTire({id: tire.id})"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

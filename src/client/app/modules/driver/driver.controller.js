@@ -21,16 +21,15 @@
       listAll();
 
       function listAll() {
-          return DriverService.listAll()
-              .then(function(data) {
-                  vm.listDriver = data.data;
-                  return vm.listDriver;
-              })
-              .catch(function(err){
-                console.log('Erro ao buscar motoristas: ',err);
-              })
+        return DriverService.listAll()
+          .then(function(data) {
+              vm.listDriver = data.data;
+              return vm.listDriver;
+          })
+          .catch(function(err){
+            console.log('Erro ao buscar motoristas: ',err);
+          })
       };
-
     };
 
     /* @ngInject */

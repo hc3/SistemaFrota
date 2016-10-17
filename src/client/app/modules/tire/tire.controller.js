@@ -3,47 +3,94 @@
 
     angular
         .module('app')
-        .controller('TireController', TireController);
+        .controller('TireControllerList', TireControllerList)
+        .controller('TireControllerNew', TireControllerNew)
+        .controller('TireControllerEdit', TireControllerEdit)
+        .controller('TireControllerOne', TireControllerOne);
 
-    TireController.$inject = ['dependencies'];
+    TireControllerOne.$inject = ['TireService', '$state', 'stateParams'];
+    TireControllerList.$inject = ['TireService', '$state'];
+    TireControllerNew.$inject = ['TireService', '$state'];
+    TireControllerEdit.$inject = ['TireService', '$state', 'stateParams'];
 
     /* @ngInject */
-    function TireController(dependencies) {
+    function TireControllerOne(TireService, $state, stateParams) {
         var vm = this;
-        vm.tire = {};
-        vm.listTire = [];
+        vm.tireOne = listOne();
+        vm.removeOne = removeOne;
 
-        vm.insert = insert;
-        vm.listOne = listOne;
-        vm.listAll = listAll;
-        vm.update = update;
-        vm.remove = remove;
+        function listone() {
+          return TireService.listOne($stateParams.id)
+            .then(function(data) {
+              vm.tireOne = data.data;
+              return vm.tireOne;
+            })
+        };
+    };
 
-        function insert() {
+    /* @ngInject */
+    function TireControllerList(TireService, $state) {
+      var vm = this;
+      vm.listTire = [];
+      listAll();
 
+      function listAll() {
+        return TireService.listAll()
+          .then(function(data) {
+            vm.listTire = data.data;
+            return vm.listTire;
+          })
+      };
+
+    };
+
+    /* @ngInject */
+    function TireControllerNew(TireService, $state) {
+      var vm = this;
+      vm.tire = {};
+      vm.listVehicle = [];
+      vm.insertt = insert;
+
+      function insert() {
+          return TireService.insert(vm.tire)
+            .then(function(data) {
+              cleanForm(vm.form_new);
+            })
+            .catch(function(err) {
+              console.log('Retorno do erro do insert: ',err);
+            })
+      };
+
+      function cleanForm(form_new) {
+        if(form_new) {
+          vm.tire = {};
+          form_new.$setPristine();
+          form_new.$setUntouched();
         }
+      };
 
-        function listOne() {
+    };
 
-        }
+    /* @ngInject */
+    function TireControllerEdit(TireService, $state, $stateParams) {
+      var vm = this;
+      vm.tire = listOne();
+      vm.edit = edit;
 
-        function listAll() {
+      function listOne() {
+        return TireService.listOne($stateParams.id)
+          .then(function(data) {
+            vm.tire = data.data;
+            return vm.tire;
+          })
+      };
 
-        }
-
-        function update() {
-
-        }
-
-        function remove() {
-
-
-        }
-
-        activate();
-
-        function activate() {
-
-        }
+      function edit() {
+        return TireService.update(vm.tire, $stateParams.id)
+          .then(function(data) {
+            $state.go('listTire');
+          })
+      }
     }
+
 })();

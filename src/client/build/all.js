@@ -24,17 +24,17 @@ function config(e) {
 }(), function () {
   "use strict";
   function e() {
-    function e(e, t, r, n) {}var r = { restrict: "EA", templateUrl: "app/layout/menu/menu-ui.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
-  }function t() {
-    function e() {}var t = this;t.navCollapsed = !0, e();
-  }angular.module("app").directive("menu", e);
-}(), function () {
-  "use strict";
-  function e() {
     function e(e, t, r, n) {}var r = { restrict: "EA", templateUrl: "app/layout/navbar/navbar.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
   }function t() {
     function e() {}e();
   }angular.module("app").directive("navbar", e);
+}(), function () {
+  "use strict";
+  function e() {
+    function e(e, t, r, n) {}var r = { restrict: "EA", templateUrl: "app/layout/menu/menu-ui.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
+  }function t() {
+    function e() {}var t = this;t.navCollapsed = !0, e();
+  }angular.module("app").directive("menu", e);
 }(), function () {
   "use strict";
   function e(e, t, r) {
@@ -112,17 +112,57 @@ function config(e) {
   }angular.module("app").config(e), e.$inject = ["$stateProvider"];
 }(), function () {
   "use strict";
-  function e(e) {
-    function t() {}function r() {}function n() {}function i() {}function o() {}function l() {}var c = this;c.tire = {}, c.listTire = [], c.insert = t, c.listOne = r, c.listAll = n, c.update = i, c.remove = o, l();
-  }angular.module("app").controller("TireController", e), e.$inject = ["dependencies"];
+  function e(e, t, r) {
+    var n = this;n.tireOne = listOne(), n.removeOne = removeOne;
+  }function t(e, t) {
+    function r() {
+      return e.listAll().then(function (e) {
+        return n.listTire = e.data, n.listTire;
+      });
+    }var n = this;n.listTire = [], r();
+  }function r(e, t) {
+    function r() {
+      return e.insert(i.tire).then(function (e) {
+        n(i.form_new);
+      }).catch(function (e) {
+        console.log("Retorno do erro do insert: ", e);
+      });
+    }function n(e) {
+      e && (i.tire = {}, e.$setPristine(), e.$setUntouched());
+    }var i = this;i.tire = {}, i.listVehicle = [], i.insertt = r;
+  }function n(e, t, r) {
+    function n() {
+      return e.listOne(r.id).then(function (e) {
+        return o.tire = e.data, o.tire;
+      });
+    }function i() {
+      return e.update(o.tire, r.id).then(function (e) {
+        t.go("listTire");
+      });
+    }var o = this;o.tire = n(), o.edit = i;
+  }angular.module("app").controller("TireControllerList", t).controller("TireControllerNew", r).controller("TireControllerEdit", n).controller("TireControllerOne", e), e.$inject = ["TireService", "$state", "stateParams"], t.$inject = ["TireService", "$state"], r.$inject = ["TireService", "$state"], n.$inject = ["TireService", "$state", "stateParams"];
 }(), function () {
   "use strict";
   angular.module("app.tire", []);
 }(), function () {
+  function e(e, t) {
+    e.state("listTire", { url: "/tires", templateUrl: "app/modules/tire/templates/tire_list.html", controller: "TireControllerList", controllerAs: "vm" }).state("newTire", { url: "/tires/new", templateUrl: "app/modules/tire/templates/tire_new.html", controller: "TireControllerNew", controllerAs: "vm" }).state("editTire", { url: "/tires/:id/edit", templateUrl: "app/modules/tire/templates/tire_update.html", controller: "TireControllerEdit", controllerAs: "vm" }).state("viewTire", { url: "/tires/:id/view", templateUrl: "app/modules/tire/templates/tire_view.html", controller: "TireControllerOne", controllerAs: "vm" }), t.html5Mode(!0);
+  }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider"];
+}(), function () {
   "use strict";
-  function e() {
-    function e() {}function t() {}function r() {}function n() {}function i() {}var o = { insert: e, listOne: t, listAll: r, update: n, remove: i };return o;
-  }angular.module("app").service("TireService", e);
+  function e(e) {
+    function t(t) {
+      return e.post("/tires", t);
+    }function r(t) {
+      return e.get("/tires/" + t, { params: { id: t } });
+    }function n() {
+      return e.get("/tires");
+    }function i(t, r) {
+      return e.put("/tires/" + r, { params: { id: r } });
+    }function o(t) {
+      return e.delete("/tires/" + t, { params: { id: t } });
+    }var l = { insert: t, listOne: r, listAll: n, update: i, remove: o };return l;
+  }angular.module("app").service("TireService", e), e.$inject = ["$http"];
 }(), function () {
   "use strict";
   function e(e, t, r) {
@@ -135,18 +175,39 @@ function config(e) {
         t.go("listVehicle");
       });
     }var o = this;o.vehicleOne = n(), o.removeOne = i;
-  }function t(e, t, r) {
-    function n() {
+  }function t(e, t) {
+    function r() {
       return e.listAll().then(function (e) {
-        return i.listVehicle = e.data, i.listVehicle;
+        return n.listVehicle = e.data, n.listVehicle;
       });
-    }var i = this;i.listVehicle = [], i.listDriver = [], n();
-  }function r(e, t, r, n) {
-    function i() {
-      return e.insert(a.vehicle).then(function (e) {
-        c(a.form_new);
+    }var n = this;n.listVehicle = [], r();
+  }function r(e, t, r) {
+    function n() {
+      return e.insert(c.vehicle).then(function (e) {
+        l(c.form_new);
       }).catch(function (e) {
-        console.log("Retorno do erro no insert: ", e), a.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
+        console.log("Retorno do erro no insert: ", e), c.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
+      });
+    }function i() {
+      return t.listAll().then(function (e) {
+        return console.log("retorno da busca de drivers: ", e.data), c.listDriver = e.data, a.forEach(function (e) {
+          c.listDriver.forEach(function (t, r) {
+            t.id === e.driver_id && c.listDriver.splice(r, 1);
+          });
+        }), c.listDriver;
+      });
+    }function o() {
+      return e.listAll().then(function (e) {
+        return a = e.data;
+      });
+    }function l(e) {
+      e && (c.vehicle = {}, o(), i(), e.$setPristine(), e.$setUntouched());
+    }var c = this,
+        a = o();c.vehicle = {}, c.listDriver = [], c.errorVehicles = {}, c.insert = n, o(), i();
+  }function n(e, t, r, n) {
+    function i() {
+      return e.listOne(n.id).then(function (e) {
+        return a.vehicle = e.data, a.vehicle;
       });
     }function o() {
       return t.listAll().then(function (e) {
@@ -160,24 +221,12 @@ function config(e) {
       return e.listAll().then(function (e) {
         return u = e.data;
       });
-    }function c(e) {
-      e && (a.vehicle = {}, e.$setPristine(), e.$setUntouched());
-    }var a = this,
-        u = l();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, l(), o();
-  }function n(e, t, r, n) {
-    function i() {
-      return e.listOne(n.id).then(function (e) {
-        return c.vehicle = e.data, c.vehicle;
-      });
-    }function o() {
-      return t.listAll().then(function (e) {
-        return c.listDriver = e.data, c.listDriver;
-      });
-    }function l() {
-      return e.update(c.vehicle, n.id).then(function (e) {
+    }function c() {
+      return e.update(a.vehicle, n.id).then(function (e) {
         r.go("listVehicle");
       });
-    }var c = this;c.vehicle = i(), c.listDriver = [], c.edit = l, o();
+    }var a = this,
+        u = l();a.vehicle = i(), a.listDriver = [], a.edit = c, l(), o();
   }angular.module("app").controller("VehicleControllerOne", e).controller("VehicleControllerList", t).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", n), e.$inject = ["VehicleService", "$state", "$stateParams"], t.$inject = ["VehicleService", "$state", "$stateParams"], r.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"], n.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"];
 }(), function () {
   "use strict";

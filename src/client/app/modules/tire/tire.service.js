@@ -5,10 +5,10 @@
         .module('app')
         .service('TireService', TireService);
 
-    //TireService.$inject = ['dependencies'];
+    TireService.$inject = ['$http'];
 
     /* @ngInject */
-    function TireService() {
+    function TireService($http) {
 
       var service = {
         insert: insert,
@@ -20,24 +20,25 @@
 
       return service;
 
-      function insert() {
+      function insert(data) {
+        return $http.post('/tires',data)
+      };
 
-      }
-
-      function listOne() {
-
-      }
+      function listOne(id) {
+        return $http.get('/tires/'+id, {params: {id:id}})
+      };
 
       function listAll() {
+        return $http.get('/tires')
+      };
 
-      }
+      function update(data,id) {
+        return $http.put('/tires/'+id, {params: {id:id}})
+      };
 
-      function update() {
+      function remove(id) {
+        return $http.delete('/tires/'+id, {params:{id:id}})
+      };
 
-      }
-
-      function remove() {
-
-      }
     }
 })();

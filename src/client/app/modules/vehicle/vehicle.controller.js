@@ -36,10 +36,9 @@
     };
 
     /* @ngInject */
-    function VehicleControllerList(VehicleService, $state, $stateParams) {
+    function VehicleControllerList(VehicleService, $state) {
         var vm = this;
         vm.listVehicle = [];
-        vm.listDriver = [];
         listAll();
 
         function listAll() {
@@ -49,10 +48,12 @@
               return vm.listVehicle;
             })
         };
+
+
     };
 
     /* @ngInject */
-    function VehicleControllerNew(VehicleService, DriverService, $state, $stateParams) {
+    function VehicleControllerNew(VehicleService, DriverService, $state) {
         var vm = this;
         var allVehicles = listAllVehicles();
         vm.vehicle = {};
@@ -100,6 +101,8 @@
         function cleanForm(form_new) {
           if(form_new) {
             vm.vehicle = {};
+            listAllVehicles();
+            listAllDrivers();
             form_new.$setPristine();
             form_new.$setUntouched();
           }
@@ -109,10 +112,12 @@
     /* @ngInject */
     function VehicleControllerEdit(VehicleService, DriverService, $state, $stateParams) {
         var vm = this;
+        var allVehicles = listAllVehicles();
         vm.vehicle = listOne();
         vm.listDriver = [];
         vm.edit = edit;
 
+        listAllVehicles();
         listAllDrivers();
 
         function listOne() {
@@ -126,8 +131,24 @@
         function listAllDrivers() {
           return DriverService.listAll()
             .then(function(data) {
+              console.log('retorno da busca de drivers: ', data.data);
               vm.listDriver = data.data;
+              allVehicles.forEach(function(veiculo) {
+                vm.listDriver.forEach(function(driver,index) {
+                  if(driver.id === veiculo.driver_id) {
+                    vm.listDriver.splice(index,1);
+                  }
+                })
+              })
               return vm.listDriver;
+            })
+        };
+
+        function listAllVehicles() {
+          return VehicleService.listAll()
+            .then(function(data) {
+              allVehicles = data.data;
+              return allVehicles;
             })
         };
 

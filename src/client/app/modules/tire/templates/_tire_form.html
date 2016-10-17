@@ -1,0 +1,80 @@
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="" class="col-sm-1 control-label">Motorista: </label>
+      <div class="col-sm-11">
+        <select class="form-control" name="vehicle_id" data-ng-require="true" data-ng-model="vm.tire.vehicle_id">
+          <option value="{{vehicle.id}}" ng-repeat="vehicle in vm.listVehicle">
+            {{vehicle.cod}} - {{vehicle.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Código: </label>
+      <div class="col-sm-10">
+        <input id="vehiclePlaca" type="number" class="form-control"
+        data-ng-model="vm.tire.cod"
+        data-ng-require="true">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Marca: </label>
+      <div class="col-sm-10">
+        <input id="vehiclePlaca" type="text" class="form-control"
+        data-ng-model="vm.tire.marca"
+        data-ng-require="true">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Vida: </label>
+      <div class="col-sm-10">
+        <select class="form-control" name="vida" data-ng-require="true" data-ng-model="vm.tire.vida">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Sulco: </label>
+      <div class="col-sm-10">
+        <select class="form-control" name="sulco" data-ng-require="true" data-ng-model="vm.tire.sulco">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Recap: </label>
+      <div class="col-sm-10">
+        <select class="form-control" name="recap" data-ng-require="true" data-ng-model="vm.tire.recap">
+          <option value="true">1</option>
+          <option value="false">2</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>
