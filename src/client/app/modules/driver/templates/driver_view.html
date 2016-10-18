@@ -7,7 +7,6 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="row">
-    <button ui-sref="listDriver" class="btn btn-default">Lista</button>
     <div class="col-md-12">
         <div class="form-group">
             <label for="" class="col-sm-2 control-label">Nome: </label>
@@ -34,7 +33,7 @@
         <div class="form-group">
             <label for="" class="col-sm-2 control-label">Telefone: </label>
             <div class="col-sm-10">
-                <input id="driverTelefone" type="number" class="form-control"
+                <input id="driverTelefone" type="text" class="form-control"
                        data-ng-model="vm.driverOne.phone"
                        ng-disabled="true">
             </div>
@@ -43,6 +42,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
+            <button ui-sref="listDriver" class="btn btn-default">Lista</button>
             <button data-ng-click="vm.removeOne()" class="btn btn-danger">Remove</button>
         </div>
     </div>

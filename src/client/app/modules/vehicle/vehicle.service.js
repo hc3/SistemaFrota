@@ -14,6 +14,8 @@
         insert: insert,
         listOne: listOne,
         listAll: listAll,
+        listAllWithJoin: listAllWithJoin,
+        listOneWithJoin: listOneWithJoin,
         update: update,
         remove: remove
       };
@@ -30,6 +32,14 @@
 
       function listAll() {
         return $http.get('/vehicles')
+      }
+
+      function listAllWithJoin() {
+        return $http.get('/vehiclesJoin')
+      }
+
+      function listOneWithJoin(id) {
+        return $http.get('/vehicleOneJoin/'+id, {params: {id:id}})
       }
 
       function update(data,id) {

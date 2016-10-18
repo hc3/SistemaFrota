@@ -1,14 +1,20 @@
-<div class="row">
+<style type="text/css">
+  input.ng-valid.ng-touched {
+    background-color:green
+  }
 
-<div class="alert alert-danger" role="alert" ng-show="{{vm.errorDrivers.insertError}}">
-  {{vm.errorDrivers.insertError}}
-</div>
+  input.ng-invalid.ng-touched {
+    background-color:red
+  }
+</style>
+
+<div class="row">
 
   <div class="col-md-12">
     <div class="form-group">
       <label for="" class="col-sm-1 control-label">Motorista: </label>
       <div class="col-sm-11">
-        <select class="form-control" name="driver_id" data-ng-require="true" data-ng-model="vm.vehicle.driver_id">
+        <select class="form-control" name="driver_id" required data-ng-model="vm.vehicle.driver_id">
           <option value="{{driver.id}}" ng-repeat="driver in vm.listDriver">
             {{driver.cod}} - {{driver.name}}
           </option>
@@ -23,7 +29,9 @@
       <div class="col-sm-10">
         <input id="vehiclePlaca" type="text" class="form-control"
         data-ng-model="vm.vehicle.placa"
-        data-ng-require="true">
+        data-ng-minlength="7"
+        mask="AAA-9999"
+        required>
       </div>
     </div>
   </div>
@@ -34,7 +42,7 @@
       <div class="col-sm-10">
         <input id="vehiclePlaca" type="text" class="form-control"
         data-ng-model="vm.vehicle.modelo"
-        data-ng-require="true">
+        required>
       </div>
     </div>
   </div>
@@ -45,7 +53,7 @@
       <div class="col-sm-10">
         <input id="vehiclePlaca" type="text" class="form-control"
         data-ng-model="vm.vehicle.marca"
-        data-ng-require="true">
+        required>
       </div>
     </div>
   </div>
@@ -54,9 +62,9 @@
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Eixos: </label>
       <div class="col-sm-10">
-        <input id="vehiclePlaca" type="text" class="form-control"
+        <input id="vehiclePlaca" type="number" class="form-control"
         data-ng-model="vm.vehicle.eixos"
-        data-ng-require="true">
+        required>
       </div>
     </div>
   </div>
@@ -65,9 +73,9 @@
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Km inicial: </label>
       <div class="col-sm-10">
-        <input id="vehiclePlaca" type="text" class="form-control"
+        <input id="vehiclePlaca" type="number" class="form-control"
         data-ng-model="vm.vehicle.km_inicial"
-        data-ng-require="true">
+        required>
       </div>
     </div>
   </div>
@@ -75,7 +83,7 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn brn-primary" value="Salvar">
+      <input type="submit" class="btn btn-success" value="Salvar" data-ng-disabled="vm.driverForm.$invalid">
       <input type="submit" class="btn btn-danger" value="Cancelar" ui-sref="listVehicle">
     </div>
   </div>

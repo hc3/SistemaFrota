@@ -71,7 +71,7 @@
       };
 
       function listAll() {
-        return VehicleService.listAll()
+        return VehicleService.listAllWithJoin()
           .then(function(data) {
             vm.listVehicle = data.data;
             return vm.listVehicle;

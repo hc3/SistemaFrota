@@ -10,7 +10,7 @@
         <label for="" class="col-sm-1 control-label">Motorista: </label>
         <div class="col-sm-11">
           <input id="vehiclePlaca" type="text" class="form-control"
-          data-ng-model="vm.vehicleOne.placa"
+          data-ng-model="vm.vehicleOne.Driver.name"
           data-ng-require="true"
           ng-disabled="true">
         </div>
@@ -78,6 +78,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
+            <button ui-sref="listVehicle" class="btn btn-default">Lista</button>
             <button data-ng-click="vm.removeOne()" class="btn btn-danger">Remove</button>
         </div>
     </div>

@@ -4,7 +4,13 @@
   </div>
 </div>
 
-<form class="form-horizontal" role="form" name="form_update" data-ng-submit="vm.edit()">
+<form class="form-horizontal" name="vm.driverForm" role="form" data-ng-submit="vm.edit()">
+
+  <div class="alert alert-danger" role="alert" ng-show="vm.driverForm.$invalid">
+    Favor verificar os campos do formulário, todos os campos devem ser preenchidos.
+  </div>
+
   <div data-ng-include="'app/modules/driver/templates/_driver_form.html'">
   </div>
+
 </form>

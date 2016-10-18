@@ -9,8 +9,8 @@
         .controller('VehicleControllerEdit', VehicleControllerEdit);
 
     VehicleControllerOne.$inject = ['VehicleService','$state','$stateParams'];
-    VehicleControllerList.$inject = ['VehicleService', '$state','$stateParams'];
-    VehicleControllerNew.$inject = ['VehicleService', 'DriverService', '$state','$stateParams'];
+    VehicleControllerList.$inject = ['VehicleService', '$state'];
+    VehicleControllerNew.$inject = ['VehicleService', 'DriverService', '$state'];
     VehicleControllerEdit.$inject = ['VehicleService', 'DriverService', '$state','$stateParams'];
 
     /* @ngInject */
@@ -20,7 +20,7 @@
         vm.removeOne = removeOne;
 
         function listOne() {
-          return VehicleService.listOne($stateParams.id)
+          return VehicleService.listOneWithJoin($stateParams.id)
             .then(function(data) {
               vm.vehicleOne = data.data;
               return vm.vehicleOne;
@@ -42,7 +42,7 @@
         listAll();
 
         function listAll() {
-          return VehicleService.listAll()
+          return VehicleService.listAllWithJoin()
             .then(function(data) {
               vm.listVehicle = data.data;
               return vm.listVehicle;
@@ -66,7 +66,7 @@
         function insert() {
           return VehicleService.insert(vm.vehicle)
             .then(function(data) {
-              cleanForm(vm.form_new);
+              cleanForm(vm.driverForm);
             })
             .catch(function(err) {
               console.log('Retorno do erro no insert: ', err);
@@ -98,13 +98,13 @@
             })
         };
 
-        function cleanForm(form_new) {
-          if(form_new) {
+        function cleanForm(driverForm) {
+          if(driverForm) {
             vm.vehicle = {};
             listAllVehicles();
             listAllDrivers();
-            form_new.$setPristine();
-            form_new.$setUntouched();
+            driverForm.$setPristine();
+            driverForm.$setUntouched();
           }
         };
     };

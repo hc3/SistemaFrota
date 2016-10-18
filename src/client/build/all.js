@@ -4,7 +4,7 @@ function config(e) {
   e.interceptors.push("authInterceptor");
 }!function () {
   "use strict";
-  angular.module("app", ["ui.router", "ngStorage", "ui.bootstrap", "app.driver", "app.tire", "app.vehicle", "app.login"]);
+  angular.module("app", ["ui.router", "ngStorage", "ngMask", "ui.bootstrap", "app.driver", "app.tire", "app.vehicle", "app.login"]);
 }(), function () {
   "use strict";
   function e(e, t) {
@@ -48,13 +48,13 @@ function config(e) {
   }function t(e, t, r) {
     function n() {
       return e.insert(o.driver).then(function (e) {
-        i(o.form_new);
+        o.messageDriver.error = !1, i(o.driverForm);
       }).catch(function (e) {
-        o.errorDrivers.insertError = "Erro ao cadastrar Motorista";
+        o.messageDriver.insertError = "Erro ao cadastrar Motorista";
       });
     }function i(e) {
       e && (o.driver = {}, e.$setPristine(), e.$setUntouched());
-    }var o = this;o.driver = {}, o.errorDrivers = {}, o.insert = n;
+    }var o = this;o.driver = {}, o.messageDriver = {}, o.messageDriver.error = !1, o.insert = n;
   }function r(e, t, r) {
     function n() {
       return e.listOne(r.id).then(function (e) {
@@ -136,7 +136,7 @@ function config(e) {
         console.log("Retorno do erro do insert: ", e);
       });
     }function i() {
-      return t.listAll().then(function (e) {
+      return t.listAllWithJoin().then(function (e) {
         return l.listVehicle = e.data, l.listVehicle;
       });
     }function o(e) {
@@ -179,7 +179,7 @@ function config(e) {
   "use strict";
   function e(e, t, r) {
     function n() {
-      return e.listOne(r.id).then(function (e) {
+      return e.listOneWithJoin(r.id).then(function (e) {
         return o.vehicleOne = e.data, o.vehicleOne;
       });
     }function i() {
@@ -189,14 +189,14 @@ function config(e) {
     }var o = this;o.vehicleOne = n(), o.removeOne = i;
   }function t(e, t) {
     function r() {
-      return e.listAll().then(function (e) {
+      return e.listAllWithJoin().then(function (e) {
         return n.listVehicle = e.data, n.listVehicle;
       });
     }var n = this;n.listVehicle = [], r();
   }function r(e, t, r) {
     function n() {
       return e.insert(c.vehicle).then(function (e) {
-        l(c.form_new);
+        l(c.driverForm);
       }).catch(function (e) {
         console.log("Retorno do erro no insert: ", e), c.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
       });
@@ -239,7 +239,7 @@ function config(e) {
       });
     }var a = this,
         u = l();a.vehicle = i(), a.listDriver = [], a.edit = c, l(), o();
-  }angular.module("app").controller("VehicleControllerOne", e).controller("VehicleControllerList", t).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", n), e.$inject = ["VehicleService", "$state", "$stateParams"], t.$inject = ["VehicleService", "$state", "$stateParams"], r.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"], n.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"];
+  }angular.module("app").controller("VehicleControllerOne", e).controller("VehicleControllerList", t).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", n), e.$inject = ["VehicleService", "$state", "$stateParams"], t.$inject = ["VehicleService", "$state"], r.$inject = ["VehicleService", "DriverService", "$state"], n.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"];
 }(), function () {
   "use strict";
   angular.module("app.vehicle", []);
@@ -256,11 +256,15 @@ function config(e) {
       return e.get("/vehicles/" + t, { params: { id: t } });
     }function n() {
       return e.get("/vehicles");
-    }function i(t, r) {
-      return e.put("/vehicles/" + r, t, { params: { id: r } });
+    }function i() {
+      return e.get("/vehiclesJoin");
     }function o(t) {
+      return e.get("/vehicleOneJoin/" + t, { params: { id: t } });
+    }function l(t, r) {
+      return e.put("/vehicles/" + r, t, { params: { id: r } });
+    }function c(t) {
       return e.delete("/vehicles/" + t, { params: { id: t } });
-    }var l = { insert: t, listOne: r, listAll: n, update: i, remove: o };return l;
+    }var a = { insert: t, listOne: r, listAll: n, listAllWithJoin: i, listOneWithJoin: o, update: l, remove: c };return a;
   }angular.module("app").service("VehicleService", e), e.$inject = ["$http"];
 }(), function () {
   "use strict";

@@ -6,7 +6,7 @@
       <div class="col-sm-11">
         <select class="form-control" name="vehicle_id" data-ng-require="true" data-ng-model="vm.tire.vehicle_id">
           <option value="{{vehicle.id}}" ng-repeat="vehicle in vm.listVehicle">
-            {{vehicle.placa}}
+            {{vehicle.Driver.cod}} | {{vehicle.Driver.name}} | {{vehicle.placa}}
           </option>
         </select>
       </div>

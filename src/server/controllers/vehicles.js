@@ -19,10 +19,21 @@ class VehicleController {
     })
     .then(result => callback.defaultResponse(result))
     .catch(() => callback.errorResponse(error.message));
-  }
+  };
+
+  getByIdWithJoin(params,driver) {
+    return this.Vehicle.findOne({
+      where:params,
+      include: [{model: driver}]
+    })
+      .then(result => callback.defaultResponse(result))
+      .catch(() => callback.errorResponse(error.message));
+  };
 
   getById(params) {
-    return this.Vehicle.findOne({where:params})
+    return this.Vehicle.findOne({
+      where:params
+    })
       .then(result => callback.defaultResponse(result))
       .catch(() => callback.errorResponse(error.message));
   };

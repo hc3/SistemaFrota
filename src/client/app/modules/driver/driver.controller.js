@@ -37,24 +37,26 @@
 
         var vm = this;
         vm.driver = {};
-        vm.errorDrivers = {};
+        vm.messageDriver = {};
+        vm.messageDriver.error = false;
         vm.insert = insert;
 
         function insert() {
           return DriverService.insert(vm.driver)
             .then(function(data) {
-              cleanForm(vm.form_new);
+              vm.messageDriver.error = false;
+              cleanForm(vm.driverForm);
             })
             .catch(function(err) {
-              vm.errorDrivers.insertError = 'Erro ao cadastrar Motorista';
+              vm.messageDriver.insertError = 'Erro ao cadastrar Motorista';
             })
         };
 
-        function cleanForm(form_new) {
-            if(form_new) {
+        function cleanForm(driverForm) {
+            if(driverForm) {
                 vm.driver = {};
-                form_new.$setPristine();
-                form_new.$setUntouched();
+                driverForm.$setPristine();
+                driverForm.$setUntouched();
             }
         };
 
