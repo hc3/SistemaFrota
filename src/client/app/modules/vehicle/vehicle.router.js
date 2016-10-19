@@ -8,6 +8,7 @@
 
     /* @ngInject */
     function config($stateProvider, $locationProvider) {
+
       $stateProvider
 
         .state('listVehicle', {

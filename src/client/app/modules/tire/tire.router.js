@@ -7,7 +7,8 @@
     config.$inject = ['$stateProvider','$locationProvider'];
 
     /* @ngInject */
-    function config($stateProvider, $locationProvider) {
+    function config($stateProvider, $locationProvider, $urlRouterProvider) {
+
       $stateProvider
 
         .state('listTire', {

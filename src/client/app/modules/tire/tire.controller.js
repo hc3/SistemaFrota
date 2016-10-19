@@ -20,7 +20,7 @@
         vm.removeOne = removeOne;
 
         function listOne() {
-          return TireService.listOne($stateParams.id)
+          return TireService.listOneWithJoin($stateParams.id)
             .then(function(data) {
               vm.tireOne = data.data;
               return vm.tireOne;
@@ -42,8 +42,9 @@
       listAll();
 
       function listAll() {
-        return TireService.listAll()
+        return TireService.listAllWithJoin()
           .then(function(data) {
+            console.log('retorno da busca de pneu: ',data.data);
             vm.listTire = data.data;
             return vm.listTire;
           })
@@ -109,6 +110,6 @@
             $state.go('listTire');
           })
       }
-    }
+    };
 
 })();

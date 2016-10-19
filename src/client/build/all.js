@@ -88,7 +88,7 @@ function config(e) {
   "use strict";
   angular.module("app.driver", []);
 }(), function () {
-  function e(e, t) {
+  function e(e, t, r) {
     e.state("listDriver", { url: "/drivers", templateUrl: "app/modules/driver/templates/driver_list.html", controller: "DriverControllerList", controllerAs: "vm" }).state("newDriver", { url: "/drivers/new", templateUrl: "app/modules/driver/templates/driver_new.html", controller: "DriverControllerNew", controllerAs: "vm" }).state("editDriver", { url: "/drivers/:id/edit", templateUrl: "app/modules/driver/templates/driver_update.html", controller: "DriverControllerEdit", controllerAs: "vm" }).state("viewDriver", { url: "/drivers/:id/view", templateUrl: "app/modules/driver/templates/driver_view.html", controller: "DriverControllerOne", controllerAs: "vm" }), t.html5Mode(!0);
   }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider"];
 }(), function () {
@@ -114,7 +114,7 @@ function config(e) {
   "use strict";
   function e(e, t, r) {
     function n() {
-      return e.listOne(r.id).then(function (e) {
+      return e.listOneWithJoin(r.id).then(function (e) {
         return o.tireOne = e.data, o.tireOne;
       });
     }function i() {
@@ -124,8 +124,8 @@ function config(e) {
     }var o = this;o.tireOne = n(), o.removeOne = i;
   }function t(e, t) {
     function r() {
-      return e.listAll().then(function (e) {
-        return n.listTire = e.data, n.listTire;
+      return e.listAllWithJoin().then(function (e) {
+        return console.log("retorno da busca de pneu: ", e.data), n.listTire = e.data, n.listTire;
       });
     }var n = this;n.listTire = [], r();
   }function r(e, t, r) {
@@ -157,7 +157,7 @@ function config(e) {
   "use strict";
   angular.module("app.tire", []);
 }(), function () {
-  function e(e, t) {
+  function e(e, t, r) {
     e.state("listTire", { url: "/tires", templateUrl: "app/modules/tire/templates/tire_list.html", controller: "TireControllerList", controllerAs: "vm" }).state("newTire", { url: "/tires/new", templateUrl: "app/modules/tire/templates/tire_new.html", controller: "TireControllerNew", controllerAs: "vm" }).state("editTire", { url: "/tires/:id/edit", templateUrl: "app/modules/tire/templates/tire_update.html", controller: "TireControllerEdit", controllerAs: "vm" }).state("viewTire", { url: "/tires/:id/view", templateUrl: "app/modules/tire/templates/tire_view.html", controller: "TireControllerOne", controllerAs: "vm" }), t.html5Mode(!0);
   }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider"];
 }(), function () {
@@ -167,13 +167,17 @@ function config(e) {
       return e.post("/tires", t);
     }function r(t) {
       return e.get("/tires/" + t, { params: { id: t } });
-    }function n() {
+    }function n(t) {
+      return e.get("/tiresWithJoin/" + t, { params: { id: t } });
+    }function i() {
       return e.get("/tires");
-    }function i(t, r) {
+    }function o() {
+      return e.get("/tiresWithJoin");
+    }function l(t, r) {
       return e.put("/tires/" + r, { params: { id: r } });
-    }function o(t) {
+    }function c(t) {
       return e.delete("/tires/" + t, { params: { id: t } });
-    }var l = { insert: t, listOne: r, listAll: n, update: i, remove: o };return l;
+    }var a = { insert: t, listOne: r, listAll: i, listAllWithJoin: o, listOneWithJoin: n, update: l, remove: c };return a;
   }angular.module("app").service("TireService", e), e.$inject = ["$http"];
 }(), function () {
   "use strict";

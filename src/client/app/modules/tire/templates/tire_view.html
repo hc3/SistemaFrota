@@ -10,8 +10,8 @@
     <div class="form-group">
       <label for="" class="col-sm-1 control-label">Motorista: </label>
       <div class="col-sm-11">
-        <input id="tireOneVehicle_id" type="number" class="form-control"
-        data-ng-model="vm.tireOne.vehicle_id"
+        <input id="tireOneVehicle_id" type="text" class="form-control"
+        data-ng-model="vm.tireOne.Vehicle.placa"
         data-ng-require="true"
         data-ng-disabled="true">
       </div>
@@ -77,6 +77,13 @@
         </select>
       </div>
     </div>
+  </div>
+
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+          <button ui-sref="listTire" class="btn btn-default">Lista</button>
+          <button data-ng-click="vm.removeOne()" class="btn btn-danger">Remove</button>
+      </div>
   </div>
 
 </div>
