@@ -13,6 +13,16 @@ class VehicleController {
       .catch(error => callback.errorResponse(error.message));
   };
 
+  listAllByPlaca(params) {
+    return this.Vehicle.findAll({
+      where: {
+        placa: params
+      }
+    })
+      .then(result => callback.defaultResponse(result))
+      .catch(error => callback.errorResponse(error.message));
+  };
+
   listAllWithJoin(driver) {
     return this.Vehicle.findAll({
       include: [{model: driver}]

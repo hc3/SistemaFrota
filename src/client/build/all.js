@@ -213,27 +213,29 @@ function config(e) {
     }var i = this;i.listVehicle = [], r();
   }function r(e, t, r) {
     function i() {
-      return e.insert(c.vehicle).then(function (e) {
-        l(c.vehicleForm);
+      return e.insert(a.vehicle).then(function (e) {
+        c(a.vehicleForm);
       }).catch(function (e) {
-        console.log("Retorno do erro no insert: ", e), c.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
+        console.log("Retorno do erro no insert: ", e), a.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
       });
     }function n() {
       return t.listAll().then(function (e) {
-        return console.log("retorno da busca de drivers: ", e.data), c.listDriver = e.data, a.forEach(function (e) {
-          c.listDriver.forEach(function (t, r) {
-            t.id === e.driver_id && c.listDriver.splice(r, 1);
+        return console.log("retorno da busca de drivers: ", e.data), a.listDriver = e.data, u.forEach(function (e) {
+          a.listDriver.forEach(function (t, r) {
+            t.id === e.driver_id && a.listDriver.splice(r, 1);
           });
-        }), c.listDriver;
+        }), a.listDriver;
       });
     }function o() {
       return e.listAll().then(function (e) {
-        return a = e.data;
+        return u = e.data;
       });
     }function l(e) {
-      e && (c.vehicle = {}, o(), n(), e.$setPristine(), e.$setUntouched());
-    }var c = this,
-        a = o();c.vehicle = {}, c.listDriver = [], c.errorVehicles = {}, c.insert = i, o(), n();
+      console.log("placa digitada é: ", e);
+    }function c(e) {
+      e && (a.vehicle = {}, o(), n(), e.$setPristine(), e.$setUntouched());
+    }var a = this,
+        u = o();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, a.buscaPlacaCadastrada = l, o(), n();
   }function i(e, t, r, i) {
     function n() {
       return e.listOne(i.id).then(function (e) {

@@ -14,7 +14,20 @@ export default (app) => {
           res.status(response.statusCode)
           res.json(response.data);
         });
-    })
+    });
+
+  app.route('/vehicleByPlaca/:placa')
+    .all(app.auth.authenticate())
+      .get((req,res) => {
+        vehicleController.listAllByPlaca(req.params.placa)
+          .then(response => {
+            res.status(response.statusCode);
+            res.json(response.data);
+          })
+          .catch(error => {
+            console.log('Erro ao acessar busca por Placa',error);
+          });
+      });
 
   app.route('/vehicleOneJoin/:id')
   .all(app.auth.authenticate())
@@ -24,7 +37,7 @@ export default (app) => {
           res.status(response.statusCode)
           res.json(response.data);
         });
-    })
+    });
 
   app.route('/vehicles')
   .all(app.auth.authenticate())

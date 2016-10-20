@@ -142,6 +142,24 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     });
   });
 
+  describe('Route GET /vehicleByPlaca/:placa', () => {
+    it('should find a one driver', done => {
+      request
+        .get('/vehicleByPlaca/TXT-8890')
+        .set('Authorization', `JWT ${token}`)
+        .end((err,res) => {
+          expect(res.body[0].id).to.be.eql(defaultVehicle.id);
+          expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
+          expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
+          expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
+          expect(res.body[0].eixos).to.be.eql(defaultVehicle.eixos);
+          expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
+          expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
+          done(err);
+        });
+    });
+  });
+
   describe('Route PUT /vehicles/:id', () => {
     it('should update a vehicles', done => {
       const updateVehicle = {

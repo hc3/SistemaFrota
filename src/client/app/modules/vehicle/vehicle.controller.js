@@ -60,6 +60,7 @@
         vm.listDriver = [];
         vm.errorVehicles = {};
         vm.insert = insert;
+        vm.buscaPlacaCadastrada = buscaPlacaCadastrada;
         listAllVehicles();
         listAllDrivers();
 
@@ -96,6 +97,10 @@
               allVehicles = data.data;
               return allVehicles;
             })
+        };
+
+        function buscaPlacaCadastrada(placa) {
+          console.log('placa digitada é: ',placa);
         };
 
         function cleanForm(vehicleForm) {
