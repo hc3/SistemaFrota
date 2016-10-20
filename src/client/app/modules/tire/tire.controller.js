@@ -44,7 +44,6 @@
       function listAll() {
         return TireService.listAllWithJoin()
           .then(function(data) {
-            console.log('retorno da busca de pneu: ',data.data);
             vm.listTire = data.data;
             return vm.listTire;
           })

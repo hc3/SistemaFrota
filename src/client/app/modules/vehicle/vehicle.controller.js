@@ -60,6 +60,7 @@
         vm.listDriver = [];
         vm.errorVehicles = {};
         vm.insert = insert;
+        vm.errorVehicle = false;
         vm.buscaPlacaCadastrada = buscaPlacaCadastrada;
         listAllVehicles();
         listAllDrivers();
@@ -78,7 +79,6 @@
         function listAllDrivers() {
           return DriverService.listAll()
             .then(function(data) {
-              console.log('retorno da busca de drivers: ', data.data);
               vm.listDriver = data.data;
               allVehicles.forEach(function(veiculo) {
                 vm.listDriver.forEach(function(driver,index) {
@@ -100,7 +100,18 @@
         };
 
         function buscaPlacaCadastrada(placa) {
-          console.log('placa digitada é: ',placa);
+          if(placa.length == 8) {
+            return VehicleService.listAllByPlaca(placa)
+              .then(function(data) {
+                if(data.data.length > 0) {
+                  vm.errorVehicle = true;
+                } else {
+                  vm.errorVehicle = false;
+                }
+              })
+          } else {
+            return
+          }
         };
 
         function cleanForm(vehicleForm) {
@@ -136,7 +147,6 @@
         function listAllDrivers() {
           return DriverService.listAll()
             .then(function(data) {
-              console.log('retorno da busca de drivers: ', data.data);
               vm.listDriver = data.data;
               allVehicles.forEach(function(veiculo) {
                 vm.listDriver.forEach(function(driver,index) {

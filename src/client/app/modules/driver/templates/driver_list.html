@@ -7,27 +7,29 @@
   <div class="row">
     <div class="col-sm-12">
       <button ui-sref="newDriver" class="btn btn-primary">Novo</button>
-      <table class="table">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Código</th>
-          <th>Nome</th>
-          <th>Telefone</th>
-          <th>Editar</th>
-          <th>Visualizar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="driver in vm.listDriver">
-          <td>{{ driver.id }}</td>
-          <td>{{ driver.cod }}</td>
-          <td>{{ driver.name }}</td>
-          <td>{{ driver.phone }}</td>
-          <td><a ui-sref="editDriver({id: driver.id})"><span class="glyphicon glyphicon-check"></span></a></td>
-          <td><a ui-sref="viewDriver({id: driver.id})"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Editar</th>
+            <th>Visualizar</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr data-ng-repeat="driver in vm.listDriver">
+            <td>{{ driver.id }}</td>
+            <td>{{ driver.cod }}</td>
+            <td>{{ driver.name }}</td>
+            <td>{{ driver.phone }}</td>
+            <td><a ui-sref="editDriver({id: driver.id})"><span class="glyphicon glyphicon-check"></span></a></td>
+            <td><a ui-sref="viewDriver({id: driver.id})"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>

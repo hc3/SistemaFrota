@@ -15,7 +15,7 @@
         listOne: listOne,
         listAll: listAll,
         listAllWithJoin: listAllWithJoin,
-        listOneWithJoin: listOneWithJoin,
+        listAllByPlaca: listAllByPlaca,
         update: update,
         remove: remove
       };
@@ -40,6 +40,10 @@
 
       function listOneWithJoin(id) {
         return $http.get('/vehicleOneJoin/'+id, {params: {id:id}})
+      }
+
+      function listAllByPlaca(placa) {
+        return $http.get('/vehicleByPlaca/'+placa, {params: {placa:placa}})
       }
 
       function update(data,id) {

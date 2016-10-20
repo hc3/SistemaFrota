@@ -36,6 +36,10 @@ function config(e) {
     function e() {}e();
   }angular.module("app").directive("navbar", e);
 }(), function () {
+  function e(e) {
+    e.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
+  }angular.module("app").config(e), e.$inject = ["$stateProvider"];
+}(), function () {
   "use strict";
   function e(e, t, r) {
     function i() {
@@ -107,10 +111,6 @@ function config(e) {
     }var l = { insert: t, listOne: r, listAll: i, update: n, remove: o };return l;
   }angular.module("app").service("DriverService", e), e.$inject = ["$http"];
 }(), function () {
-  function e(e) {
-    e.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
-  }angular.module("app").config(e), e.$inject = ["$stateProvider"];
-}(), function () {
   "use strict";
   function e(e, t, r) {
     function i() {
@@ -125,7 +125,7 @@ function config(e) {
   }function t(e, t) {
     function r() {
       return e.listAllWithJoin().then(function (e) {
-        return console.log("retorno da busca de pneu: ", e.data), i.listTire = e.data, i.listTire;
+        return i.listTire = e.data, i.listTire;
       });
     }var i = this;i.listTire = [], r();
   }function r(e, t, r) {
@@ -220,7 +220,7 @@ function config(e) {
       });
     }function n() {
       return t.listAll().then(function (e) {
-        return console.log("retorno da busca de drivers: ", e.data), a.listDriver = e.data, u.forEach(function (e) {
+        return a.listDriver = e.data, u.forEach(function (e) {
           a.listDriver.forEach(function (t, r) {
             t.id === e.driver_id && a.listDriver.splice(r, 1);
           });
@@ -230,12 +230,14 @@ function config(e) {
       return e.listAll().then(function (e) {
         return u = e.data;
       });
-    }function l(e) {
-      console.log("placa digitada é: ", e);
+    }function l(t) {
+      return 8 == t.length ? e.listAllByPlaca(t).then(function (e) {
+        e.data.length > 0 ? a.errorVehicle = !0 : a.errorVehicle = !1;
+      }) : void 0;
     }function c(e) {
       e && (a.vehicle = {}, o(), n(), e.$setPristine(), e.$setUntouched());
     }var a = this,
-        u = o();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, a.buscaPlacaCadastrada = l, o(), n();
+        u = o();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, a.errorVehicle = !1, a.buscaPlacaCadastrada = l, o(), n();
   }function i(e, t, r, i) {
     function n() {
       return e.listOne(i.id).then(function (e) {
@@ -243,7 +245,7 @@ function config(e) {
       });
     }function o() {
       return t.listAll().then(function (e) {
-        return console.log("retorno da busca de drivers: ", e.data), a.listDriver = e.data, u.forEach(function (e) {
+        return a.listDriver = e.data, u.forEach(function (e) {
           a.listDriver.forEach(function (t, r) {
             t.id === e.driver_id && a.listDriver.splice(r, 1);
           });
@@ -279,12 +281,12 @@ function config(e) {
     }function n() {
       return e.get("/vehiclesJoin");
     }function o(t) {
-      return e.get("/vehicleOneJoin/" + t, { params: { id: t } });
+      return e.get("/vehicleByPlaca/" + t, { params: { placa: t } });
     }function l(t, r) {
       return e.put("/vehicles/" + r, t, { params: { id: r } });
     }function c(t) {
       return e.delete("/vehicles/" + t, { params: { id: t } });
-    }var a = { insert: t, listOne: r, listAll: i, listAllWithJoin: n, listOneWithJoin: o, update: l, remove: c };return a;
+    }var a = { insert: t, listOne: r, listAll: i, listAllWithJoin: n, listAllByPlaca: o, update: l, remove: c };return a;
   }angular.module("app").service("VehicleService", e), e.$inject = ["$http"];
 }(), function () {
   "use strict";

@@ -12,6 +12,11 @@
         Favor verificar os campos do formulário, todos os campos devem ser preenchidos.
       </div>
 
+      <div class="alert alert-danger" role="alert" ng-show="vm.errorVehicle">
+        Placa já cadastrada, favor verificar.
+      </div>
+
+
       <div data-ng-include="'app/modules/vehicle/templates/_vehicle_form.html'">
       </div>
     </form>
