@@ -1,10 +1,20 @@
+<style type="text/css">
+  input.ng-valid.ng-touched {
+    background-color:green
+  }
+
+  input.ng-invalid.ng-touched {
+    background-color:red
+  }
+</style>
+
 <div class="row">
 
   <div class="col-md-12">
     <div class="form-group">
       <label for="" class="col-sm-1 control-label">Veiculo: </label>
       <div class="col-sm-11">
-        <select class="form-control" name="vehicle_id" data-ng-require="true" data-ng-model="vm.tire.vehicle_id">
+        <select class="form-control" name="vehicle_id" required data-ng-model="vm.tire.vehicle_id">
           <option value="{{vehicle.id}}" ng-repeat="vehicle in vm.listVehicle">
             {{vehicle.Driver.cod}} | {{vehicle.Driver.name}} | {{vehicle.placa}}
           </option>
@@ -19,7 +29,9 @@
       <div class="col-sm-10">
         <input id="vehiclePlaca" type="number" class="form-control"
         data-ng-model="vm.tire.cod"
-        data-ng-require="true">
+        data-ng-minlength="2"
+        data-ng-change="vm.buscaCodigoCadastrado(vm.tire.cod)"
+        required>
       </div>
     </div>
   </div>
@@ -30,7 +42,7 @@
       <div class="col-sm-10">
         <input id="vehiclePlaca" type="text" class="form-control"
         data-ng-model="vm.tire.marca"
-        data-ng-require="true">
+        required>
       </div>
     </div>
   </div>
@@ -39,7 +51,7 @@
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Vida: </label>
       <div class="col-sm-10">
-        <select class="form-control" name="vida" data-ng-require="true" data-ng-model="vm.tire.vida">
+        <select class="form-control" name="vida" required data-ng-model="vm.tire.vida">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -52,7 +64,7 @@
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Sulco: </label>
       <div class="col-sm-10">
-        <select class="form-control" name="sulco" data-ng-require="true" data-ng-model="vm.tire.sulco">
+        <select class="form-control" name="sulco" required data-ng-model="vm.tire.sulco">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -69,7 +81,7 @@
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Recap: </label>
       <div class="col-sm-10">
-        <select class="form-control" name="recap" data-ng-require="true" data-ng-model="vm.tire.recap">
+        <select class="form-control" name="recap" required data-ng-model="vm.tire.recap">
           <option value="true">1</option>
           <option value="false">2</option>
         </select>
@@ -79,7 +91,7 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn brn-primary" value="Salvar">
+      <input type="submit" class="btn btn-success" value="Salvar" data-ng-disabled="vm.tireForm.$invalid || vm.errorTire">
       <input type="submit" class="btn btn-danger" value="Cancelar" ui-sref="listTire">
     </div>
   </div>

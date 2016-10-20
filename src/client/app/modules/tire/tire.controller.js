@@ -58,13 +58,15 @@
       vm.tire = {};
       vm.listVehicle = listAll();
       vm.insert = insert;
+      vm.errorTire = false;
+      vm.buscaCodigoCadastrado = buscaCodigoCadastrado;
       listAll();
 
       function insert() {
         vm.tire.trash = false;
           return TireService.insert(vm.tire)
             .then(function(data) {
-              cleanForm(vm.form_new);
+              cleanForm(vm.tireForm);
             })
             .catch(function(err) {
               console.log('Retorno do erro do insert: ',err);
@@ -79,14 +81,25 @@
           })
       };
 
-      function cleanForm(form_new) {
-        if(form_new) {
+      function cleanForm(tireForm) {
+        if(tireForm) {
           vm.tire = {};
           listAll();
-          form_new.$setPristine();
-          form_new.$setUntouched();
+          tireForm.$setPristine();
+          tireForm.$setUntouched();
         }
       };
+
+      function buscaCodigoCadastrado(codigo) {
+        TireService.listAllByCod(codigo)
+          .then(function(data) {
+            if(data.data.length > 0) {
+              vm.errorTire = true;
+            } else {
+              vm.errorTire = false;
+            }
+          })
+        };
 
     };
 

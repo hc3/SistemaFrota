@@ -16,6 +16,7 @@
         listAll: listAll,
         listAllWithJoin: listAllWithJoin,
         listOneWithJoin: listOneWithJoin,
+        listAllByCod: listAllByCod,
         update: update,
         remove: remove
       };
@@ -37,6 +38,10 @@
       function listAll() {
         return $http.get('/tires')
       };
+
+      function listAllByCod(cod) {
+        return $http.get('/tiresByCodigo/'+cod,{params: {cod:cod}})
+      }
 
       function listAllWithJoin() {
         return $http.get('/tiresWithJoin')

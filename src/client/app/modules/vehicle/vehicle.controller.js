@@ -66,7 +66,7 @@
         function insert() {
           return VehicleService.insert(vm.vehicle)
             .then(function(data) {
-              cleanForm(vm.driverForm);
+              cleanForm(vm.vehicleForm);
             })
             .catch(function(err) {
               console.log('Retorno do erro no insert: ', err);
@@ -98,13 +98,13 @@
             })
         };
 
-        function cleanForm(driverForm) {
-          if(driverForm) {
+        function cleanForm(vehicleForm) {
+          if(vehicleForm) {
             vm.vehicle = {};
             listAllVehicles();
             listAllDrivers();
-            driverForm.$setPristine();
-            driverForm.$setUntouched();
+            vehicleForm.$setPristine();
+            vehicleForm.$setUntouched();
           }
         };
     };

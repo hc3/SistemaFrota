@@ -115,7 +115,7 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
   });
 
   describe('Route GET /tires/:id', () => {
-    it('should find a one driver', done => {
+    it('should find a one tires', done => {
       request
         .get('/tires/1')
         .set('Authorization', `JWT ${token}`)
@@ -128,6 +128,25 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
           expect(res.body.recap).to.be.eql(defaultTire.recap);
           expect(res.body.trash).to.be.eql(defaultTire.trash);
           expect(res.body.vehicle_id).to.be.eql(defaultTire.vehicle_id);
+          done(err);
+        });
+    });
+  });
+
+  describe('Route GET /tires/:cod', () => {
+    it('should find a one tires', done => {
+      request
+        .get('/tiresByCodigo/10')
+        .set('Authorization', `JWT ${token}`)
+        .end((err,res) => {
+          expect(res.body[0].id).to.be.eql(defaultTire.id);
+          expect(res.body[0].cod).to.be.eql(defaultTire.cod);
+          expect(res.body[0].marca).to.be.eql(defaultTire.marca);
+          expect(res.body[0].vida).to.be.eql(defaultTire.vida);
+          expect(res.body[0].sulco).to.be.eql(defaultTire.sulco);
+          expect(res.body[0].recap).to.be.eql(defaultTire.recap);
+          expect(res.body[0].trash).to.be.eql(defaultTire.trash);
+          expect(res.body[0].vehicle_id).to.be.eql(defaultTire.vehicle_id);
           done(err);
         });
     });
@@ -157,7 +176,7 @@ describe('# TEST INTEGRATION # Routes Tires', () => {
   });
 
   describe('Route DELETE /tires/:id', () => {
-    it('should delete a vehicle', done => {
+    it('should delete a tires', done => {
       request
         .delete('/tires/1')
         .set('Authorization', `JWT ${token}`)

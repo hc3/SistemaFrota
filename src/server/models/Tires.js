@@ -9,6 +9,7 @@ export default (sequelize,DataType) => {
     },
     cod:{
       type:DataType.INTEGER,
+      unique: true,
       allowNull:false,
       validate:{
         notEmpty:true

@@ -15,6 +15,19 @@ export default (app) => {
           });
       });
 
+  app.route('/tiresByCodigo/:cod')
+    .all(app.auth.authenticate())
+      .get((req,res) => {
+        tiresController.listAllByCod(req.params.cod)
+          .then(response => {
+            res.status(response.statusCode);
+            res.json(response.data);
+          })
+          .catch(error => {
+            console.log('Erro ao acessar busca por Cod',error);
+          });
+      });
+
   app.route('/tiresWithJoin/:id')
     .all(app.auth.authenticate())
       .get((req,res) => {

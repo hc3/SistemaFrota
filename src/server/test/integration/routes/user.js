@@ -65,7 +65,6 @@ describe('# TEST INTEGRATION # Routes users', () => {
                 .set('Authorization', `JWT ${token}`)
                 .send(newUser)
                 .end((err, res) => {
-                    expect(res.body.id).to.be.eql(newUser.id);
                     expect(res.body.name).to.be.eql(newUser.name);
                     expect(res.body.email).to.be.eql(newUser.email);
                     done(err);

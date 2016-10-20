@@ -6,9 +6,15 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <form class="form-horizontal" name="vm.form_edit" role="form" data-ng-submit="vm.edit()">
+    <form class="form-horizontal" name="vm.tireForm" role="form" data-ng-submit="vm.edit()">
+
+      <div class="alert alert-danger" role="alert" ng-show="vm.tireForm.$invalid">
+        Favor verificar os campos do formulário, todos os campos devem ser preenchidos.
+      </div>
+
       <div data-ng-include="'app/modules/tire/templates/_tire_form.html'">
       </div>
+
     </form>
   </div>
 </div>

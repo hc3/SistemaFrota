@@ -10,7 +10,7 @@ class VehicleController {
   listAll() {
     return this.Vehicle.findAll({})
       .then(result => callback.defaultResponse(result))
-      .catch(() => callback.errorResponse(error.message));
+      .catch(error => callback.errorResponse(error.message));
   };
 
   listAllWithJoin(driver) {
@@ -18,7 +18,7 @@ class VehicleController {
       include: [{model: driver}]
     })
     .then(result => callback.defaultResponse(result))
-    .catch(() => callback.errorResponse(error.message));
+    .catch(error => callback.errorResponse(error.message));
   };
 
   getByIdWithJoin(params,driver) {
@@ -27,7 +27,7 @@ class VehicleController {
       include: [{model: driver}]
     })
       .then(result => callback.defaultResponse(result))
-      .catch(() => callback.errorResponse(error.message));
+      .catch(error => callback.errorResponse(error.message));
   };
 
   getById(params) {
@@ -35,25 +35,25 @@ class VehicleController {
       where:params
     })
       .then(result => callback.defaultResponse(result))
-      .catch(() => callback.errorResponse(error.message));
+      .catch(error => callback.errorResponse(error.message));
   };
 
   create(data) {
     return this.Vehicle.create(data)
       .then(result => callback.defaultResponse(result,httpStatus.CREATED))
-      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
+      .catch(error => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   };
 
   update(data,params) {
     return this.Vehicle.update(data,{where:params})
       .then(result => callback.defaultResponse(result))
-      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
+      .catch(error => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   };
 
   remove(params) {
     return this.Vehicle.destroy({where:params})
       .then(result => callback.defaultResponse(result,httpStatus.NO_CONTENT))
-      .catch(() => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
+      .catch(error => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
   };
 }
 

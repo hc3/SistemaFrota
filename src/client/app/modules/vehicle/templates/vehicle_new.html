@@ -6,12 +6,12 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <form class="form-horizontal" name="vm.driverForm" role="form" data-ng-submit="vm.insert()">
+    <form class="form-horizontal" name="vm.vehicleForm" role="form" data-ng-submit="vm.insert()">
 
-      <div class="alert alert-danger" role="alert" ng-show="vm.driverForm.$invalid">
+      <div class="alert alert-danger" role="alert" ng-show="vm.vehicleForm.$invalid">
         Favor verificar os campos do formulário, todos os campos devem ser preenchidos.
       </div>
-      
+
       <div data-ng-include="'app/modules/vehicle/templates/_vehicle_form.html'">
       </div>
     </form>
