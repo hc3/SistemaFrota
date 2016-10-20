@@ -11,7 +11,7 @@
     TireControllerOne.$inject = ['TireService', '$state', '$stateParams'];
     TireControllerList.$inject = ['TireService', '$state'];
     TireControllerNew.$inject = ['TireService', 'VehicleService', '$state'];
-    TireControllerEdit.$inject = ['TireService', '$state', '$stateParams'];
+    TireControllerEdit.$inject = ['TireService', 'VehicleService', '$state', '$stateParams'];
 
     /* @ngInject */
     function TireControllerOne(TireService, $state, $stateParams) {
@@ -104,10 +104,12 @@
     };
 
     /* @ngInject */
-    function TireControllerEdit(TireService, $state, $stateParams) {
+    function TireControllerEdit(TireService, VehicleService, $state, $stateParams) {
       var vm = this;
       vm.tire = listOne();
       vm.edit = edit;
+      vm.buscaCodigoCadastrado = buscaCodigoCadastrado;
+      listAll();
 
       function listOne() {
         return TireService.listOne($stateParams.id)
@@ -116,6 +118,25 @@
             return vm.tire;
           })
       };
+
+      function listAll() {
+        return VehicleService.listAllWithJoin()
+          .then(function(data) {
+            vm.listVehicle = data.data;
+            return vm.listVehicle;
+          })
+      };
+
+      function buscaCodigoCadastrado(codigo) {
+        TireService.listAllByCod(codigo)
+          .then(function(data) {
+            if(data.data.length > 0) {
+              vm.errorTire = true;
+            } else {
+              vm.errorTire = false;
+            }
+          })
+        };
 
       function edit() {
         return TireService.update(vm.tire, $stateParams.id)

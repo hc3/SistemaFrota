@@ -146,17 +146,25 @@ function config(e) {
         e.data.length > 0 ? c.errorTire = !0 : c.errorTire = !1;
       });
     }var c = this;c.tire = {}, c.listVehicle = n(), c.insert = i, c.errorTire = !1, c.buscaCodigoCadastrado = l, n();
-  }function i(e, t, r) {
-    function i() {
-      return e.listOne(r.id).then(function (e) {
-        return o.tire = e.data, o.tire;
+  }function i(e, t, r, i) {
+    function n() {
+      return e.listOne(i.id).then(function (e) {
+        return a.tire = e.data, a.tire;
       });
-    }function n() {
-      return e.update(o.tire, r.id).then(function (e) {
-        t.go("listTire");
+    }function o() {
+      return t.listAllWithJoin().then(function (e) {
+        return a.listVehicle = e.data, a.listVehicle;
       });
-    }var o = this;o.tire = i(), o.edit = n;
-  }angular.module("app").controller("TireControllerList", t).controller("TireControllerNew", r).controller("TireControllerEdit", i).controller("TireControllerOne", e), e.$inject = ["TireService", "$state", "$stateParams"], t.$inject = ["TireService", "$state"], r.$inject = ["TireService", "VehicleService", "$state"], i.$inject = ["TireService", "$state", "$stateParams"];
+    }function l(t) {
+      e.listAllByCod(t).then(function (e) {
+        e.data.length > 0 ? a.errorTire = !0 : a.errorTire = !1;
+      });
+    }function c() {
+      return e.update(a.tire, i.id).then(function (e) {
+        r.go("listTire");
+      });
+    }var a = this;a.tire = n(), a.edit = c, a.buscaCodigoCadastrado = l, o();
+  }angular.module("app").controller("TireControllerList", t).controller("TireControllerNew", r).controller("TireControllerEdit", i).controller("TireControllerOne", e), e.$inject = ["TireService", "$state", "$stateParams"], t.$inject = ["TireService", "$state"], r.$inject = ["TireService", "VehicleService", "$state"], i.$inject = ["TireService", "VehicleService", "$state", "$stateParams"];
 }(), function () {
   "use strict";
   angular.module("app.tire", []);
