@@ -16,6 +16,7 @@
         listAll: listAll,
         listAllWithJoin: listAllWithJoin,
         listAllByPlaca: listAllByPlaca,
+        listOneWithJoin: listOneWithJoin,
         update: update,
         remove: remove
       };

@@ -5,10 +5,10 @@
         .module('app')
         .factory('LoginService', LoginService);
 
-    LoginService.$inject = ['$http', '$localStorage'];
+    LoginService.$inject = ['$http'];
 
     /* @ngInject */
-    function LoginService($http, $localStorage) {
+    function LoginService($http) {
 
         var service = {
             login: login,
@@ -23,7 +23,7 @@
 
               if(response.token) {
                 var token = 'JWT ' + response.token;
-                $localStorage.currentUser = {email: user.email, token: response.token};
+                localStorage.currentUser = {email: user.email, token: response.token};
                 $http.defaults.headers.common.Authorization =  response.token;
                 localStorage.setItem('token',token);
 
@@ -35,7 +35,7 @@
         }
 
         function logout() {
-          delete $localStorage.currentUser;
+          delete localStorage.currentUser;
           $http.defaults.headers.common.Authorization = '';
         }
 

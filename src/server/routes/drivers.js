@@ -4,6 +4,19 @@ export default (app) => {
 
   const driversController = new DriversController(app.datasource.models.Drivers);
 
+  app.route('/driversByCodigo/:cod')
+    .all(app.auth.authenticate())
+    .get((req,res) => {
+      driversController.getAllByCodigo(req.params.cod)
+        .then(response => {
+          res.status(response.statusCode);
+          res.json(response.data);
+        })
+        .catch(error => {
+          console.log('Erro ao buscar por código: ',error);
+        })
+    })
+
   app.route('/drivers')
     .all(app.auth.authenticate())
     .get((req,res) => {

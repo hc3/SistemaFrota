@@ -10,6 +10,8 @@
     "start-dashboard": "nodemon --exec nodejs-dashboard babel-node src/server/index.js",
     "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/*.js",
     "test-integration-vehicle": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/vehicle.js",
+    "test-integration-tire": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/tires.js",
+    "test-integration-driver": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/driver.js",
     "test-unit": "mocha --opts src/server/test/unit/mocha.opts src/server/test/unit/**/*.js",
     "test-contract": "mocha --opts src/server/test/contract/mocha.opts src/server/test/contract/contracts/*.js",
     "vue": "vue"

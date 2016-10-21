@@ -14,6 +14,7 @@
         insert: insert,
         listOne: listOne,
         listAll: listAll,
+        listByCodigo: listByCodigo,
         update: update,
         remove: remove
       };
@@ -26,6 +27,10 @@
 
       function listOne(id) {
         return $http.get('/drivers/'+id,{params: {id:id}})
+      }
+
+      function listByCodigo(cod) {
+        return $http.get('/driversByCodigo/'+cod,{params: {cod:cod}})
       }
 
       function listAll() {

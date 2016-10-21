@@ -18,7 +18,7 @@
         return service;
 
         function request(config) {
-          config.headers = config.headers || {};
+          //config.headers = config.headers || {};
           if(localStorage.getItem('token')) {
             config.headers.Authorization = localStorage.getItem('token');
           }

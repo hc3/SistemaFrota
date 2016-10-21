@@ -29,11 +29,10 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
           .then(() => Drivers.create(defaultDriver))
           .then(() => {
             token = jwt.encode({id: user.id}, jwtSecret);
-            console.log("Token: ",token);
             done();
           })
       })
-    
+
   });
 
   describe('Route GET /drivers', () => {
@@ -117,6 +116,21 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
           done(err);
         })
     })
-  })
+  });
+
+  describe('Route GET /driversByCodigo/:cod', () => {
+    it('should find a one driver', done => {
+      request
+        .get('/driversByCodigo/800')
+        .set('Authorization', `JWT ${token}`)
+        .end((err,res) => {
+          expect(res.body[0].id).to.be.eql(defaultDriver.id);
+          expect(res.body[0].cod).to.be.eql(defaultDriver.cod);
+          expect(res.body[0].name).to.be.eql(defaultDriver.name);
+          expect(res.body[0].phone).to.be.eql(defaultDriver.phone);
+          done(err);
+        });
+    });
+  });
 
 })

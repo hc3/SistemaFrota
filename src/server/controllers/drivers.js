@@ -20,6 +20,16 @@ class DriversController {
       .catch(error => callback.errorResponse(error.message));
   };
 
+  getAllByCodigo(params) {
+    return this.Drivers.findAll({
+      where:{
+          cod: params
+      }
+    })
+      .then(result => callback.defaultResponse(result))
+      .catch(error => callback.errorResponse(error.message));
+  };
+
   create(data) {
     return this.Drivers.create(data)
       .then(result => callback.defaultResponse(result,httpStatus.CREATED))

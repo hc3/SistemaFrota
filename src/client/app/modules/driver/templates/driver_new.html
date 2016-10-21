@@ -10,6 +10,10 @@
     Favor verificar os campos do formulário, todos os campos devem ser preenchidos.
   </div>
 
+  <div class="alert alert-danger" role="alert" ng-show="vm.errorDriver">
+    Código já cadastrada, favor verificar.
+  </div>
+
   <div data-ng-include="'app/modules/driver/templates/_driver_form.html'">
   </div>
 

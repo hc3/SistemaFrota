@@ -9,7 +9,7 @@ function config(e) {
   "use strict";
   function e(e, t) {
     function r(e) {
-      return e.headers = e.headers || {}, localStorage.getItem("token") && (e.headers.Authorization = localStorage.getItem("token")), e;
+      return localStorage.getItem("token") && (e.headers.Authorization = localStorage.getItem("token")), e;
     }function i(r) {
       return 401 !== r.status && 403 !== r.status || t.path("/error/nao-auth"), e.reject(r);
     }var n = { request: r, responseError: i };return n;
@@ -36,10 +36,6 @@ function config(e) {
     function e() {}e();
   }angular.module("app").directive("navbar", e);
 }(), function () {
-  function e(e) {
-    e.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
-  }angular.module("app").config(e), e.$inject = ["$stateProvider"];
-}(), function () {
   "use strict";
   function e(e, t, r) {
     function i() {
@@ -51,14 +47,18 @@ function config(e) {
     }var n = this;n.listDriver = [], i();
   }function t(e, t, r) {
     function i() {
-      return e.insert(o.driver).then(function (e) {
-        o.messageDriver.error = !1, n(o.driverForm);
+      return e.insert(l.driver).then(function (e) {
+        l.messageDriver.error = !1, o(l.driverForm);
       }).catch(function (e) {
-        o.messageDriver.insertError = "Erro ao cadastrar Motorista";
+        l.messageDriver.insertError = "Erro ao cadastrar Motorista";
       });
-    }function n(e) {
-      e && (o.driver = {}, e.$setPristine(), e.$setUntouched());
-    }var o = this;o.driver = {}, o.messageDriver = {}, o.messageDriver.error = !1, o.insert = i;
+    }function n(t) {
+      if (t > 2) return e.listByCodigo(t).then(function (e) {
+        e.data.length > 0 ? l.errorDriver = !0 : l.errorDriver = !1;
+      });
+    }function o(e) {
+      e && (l.driver = {}, e.$setPristine(), e.$setUntouched());
+    }var l = this;l.driver = {}, l.messageDriver = {}, l.messageDriver.error = !1, l.errorDriver = !1, l.insert = i, l.buscaCodigoCadastrado = n;
   }function r(e, t, r) {
     function i() {
       return e.listOne(r.id).then(function (e) {
@@ -102,14 +102,20 @@ function config(e) {
       return e.post("/drivers", t);
     }function r(t) {
       return e.get("/drivers/" + t, { params: { id: t } });
-    }function i() {
+    }function i(t) {
+      return e.get("/driversByCodigo/" + t, { params: { cod: t } });
+    }function n() {
       return e.get("/drivers");
-    }function n(t, r) {
+    }function o(t, r) {
       return e.put("/drivers/" + r, t, { params: { id: r } });
-    }function o(t) {
+    }function l(t) {
       return e.delete("/drivers/" + t, { params: { id: t } });
-    }var l = { insert: t, listOne: r, listAll: i, update: n, remove: o };return l;
+    }var c = { insert: t, listOne: r, listAll: n, listByCodigo: i, update: o, remove: l };return c;
   }angular.module("app").service("DriverService", e), e.$inject = ["$http"];
+}(), function () {
+  function e(e) {
+    e.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
+  }angular.module("app").config(e), e.$inject = ["$stateProvider"];
 }(), function () {
   "use strict";
   function e(e, t, r) {
@@ -281,23 +287,23 @@ function config(e) {
     }function n() {
       return e.get("/vehiclesJoin");
     }function o(t) {
+      return e.get("/vehicleOneJoin/" + t, { params: { id: t } });
+    }function l(t) {
       return e.get("/vehicleByPlaca/" + t, { params: { placa: t } });
-    }function l(t, r) {
+    }function c(t, r) {
       return e.put("/vehicles/" + r, t, { params: { id: r } });
-    }function c(t) {
+    }function a(t) {
       return e.delete("/vehicles/" + t, { params: { id: t } });
-    }var a = { insert: t, listOne: r, listAll: i, listAllWithJoin: n, listAllByPlaca: o, update: l, remove: c };return a;
+    }var u = { insert: t, listOne: r, listAll: i, listAllWithJoin: n, listAllByPlaca: l, listOneWithJoin: o, update: c, remove: a };return u;
   }angular.module("app").service("VehicleService", e), e.$inject = ["$http"];
 }(), function () {
   "use strict";
   function e(e, t, r) {
     function i() {
-      return e.logout();
-    }function n() {
-      o.loading = !0, e.login(o.user, function (e) {
-        e === !0 ? t.path("/drivers") : (o.error = "Usuário ou senha incorretos", o.loading = !1);
+      n.loading = !0, e.login(n.user, function (e) {
+        e === !0 ? t.path("/drivers") : (n.error = "Usuário ou senha incorretos", n.loading = !1);
       });
-    }var o = this;o.login = n, i();
+    }var n = this;n.login = i;
   }angular.module("app").controller("LoginController", e), e.$inject = ["LoginService", "$location", "$http"];
 }(), function () {
   "use strict";
@@ -308,15 +314,15 @@ function config(e) {
   }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
 }(), function () {
   "use strict";
-  function e(e, t) {
-    function r(r, i) {
-      e.post("/token", { email: r.email, password: r.password }).success(function (n) {
-        if (n.token) {
-          var o = "JWT " + n.token;t.currentUser = { email: r.email, token: n.token }, e.defaults.headers.common.Authorization = n.token, localStorage.setItem("token", o), i(!0);
-        } else i(!1);
+  function e(e) {
+    function t(t, r) {
+      e.post("/token", { email: t.email, password: t.password }).success(function (i) {
+        if (i.token) {
+          var n = "JWT " + i.token;localStorage.currentUser = { email: t.email, token: i.token }, e.defaults.headers.common.Authorization = i.token, localStorage.setItem("token", n), r(!0);
+        } else r(!1);
       });
-    }function i() {
-      delete t.currentUser, e.defaults.headers.common.Authorization = "";
-    }var n = { login: r, logout: i };return n;
-  }angular.module("app").factory("LoginService", e), e.$inject = ["$http", "$localStorage"];
+    }function r() {
+      delete localStorage.currentUser, e.defaults.headers.common.Authorization = "";
+    }var i = { login: t, logout: r };return i;
+  }angular.module("app").factory("LoginService", e), e.$inject = ["$http"];
 }();

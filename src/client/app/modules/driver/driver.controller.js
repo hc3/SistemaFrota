@@ -39,7 +39,9 @@
         vm.driver = {};
         vm.messageDriver = {};
         vm.messageDriver.error = false;
+        vm.errorDriver = false;
         vm.insert = insert;
+        vm.buscaCodigoCadastrado = buscaCodigoCadastrado;
 
         function insert() {
           return DriverService.insert(vm.driver)
@@ -50,6 +52,19 @@
             .catch(function(err) {
               vm.messageDriver.insertError = 'Erro ao cadastrar Motorista';
             })
+        };
+
+        function buscaCodigoCadastrado(cod) {
+          if(cod > 2) {
+              return DriverService.listByCodigo(cod)
+                .then(function(data) {
+                  if(data.data.length > 0) {
+                    vm.errorDriver = true;
+                  } else {
+                    vm.errorDriver = false;
+                  }
+                })
+          }
         };
 
         function cleanForm(driverForm) {
