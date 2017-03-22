@@ -4,9 +4,10 @@
   "description": "sistema para controle de frota",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npm install babel -S",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
-    "start": "babel-node src/server/index.js",
+    "start": "./node_modules/.bin/babel-node src/server/index.js",
     "start-dev": "nodemon --exec babel-node src/server/index.js",
     "start-dashboard": "nodemon --exec nodejs-dashboard babel-node src/server/index.js",
     "test-integration": "mocha --opts src/server/test/integration/mocha.opts src/server/test/integration/**/*.js",
