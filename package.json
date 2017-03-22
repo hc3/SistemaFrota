@@ -4,7 +4,6 @@
   "description": "sistema para controle de frota",
   "main": "index.js",
   "scripts": {
-    //"preinstall": "bower install",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "npm run test-integration && npm run test-unit && npm run test-contract",
     "start": "nodemon --exec babel-node src/server/index.js",
