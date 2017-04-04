@@ -1,51 +1,22 @@
 import callback from '../utils/callbackCtrl';
 import httpStatus from 'http-status';
+import AbstractController from './abstractController';
 
-
-class DriversController {
+class DriversController extends AbstractController {
 
   constructor(Drivers) {
+    super(Drivers);
     this.Drivers = Drivers;
-  };
-
-  listAll() {
-    return this.Drivers.findAll({})
-      .then(result => callback.defaultResponse(result))
-      .catch(error => callback.errorResponse(error.message));
-  };
-
-  getById(params) {
-    return this.Drivers.findOne({where: params})
-      .then(result => callback.defaultResponse(result))
-      .catch(error => callback.errorResponse(error.message));
   };
 
   getAllByCodigo(params) {
     return this.Drivers.findAll({
-      where:{
+        where: {
           cod: params
-      }
-    })
+        }
+      })
       .then(result => callback.defaultResponse(result))
       .catch(error => callback.errorResponse(error.message));
-  };
-
-  create(data) {
-    return this.Drivers.create(data)
-      .then(result => callback.defaultResponse(result,httpStatus.CREATED))
-      .catch(error => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
-  };
-
-  update(data,params) {
-    return this.Drivers.update(data,{where:params})
-      .then(result => callback.defaultResponse(result))
-      .catch(error => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY));
-  };
-
-  remove(params) {
-    return this.Drivers.destroy({where:params})
-      .then(result => callback.defaultResponse(result,httpStatus.NO_CONTENT))
-      .catch(error => callback.errorResponse(error.message,httpStatus.UNPROCESSABLE_ENTITY))
   };
 
 }
