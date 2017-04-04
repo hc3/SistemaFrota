@@ -54,7 +54,8 @@ export default (app) => {
             return res.redirect('/login');
           })
           .catch(error => {
-            res.statusCode(response.statusCode);
+            //res.statusCode(error.statusCode);
+            res.json(error);
             req.session.error = 'Erro ao realizar registro';
             return res.redirect('/register');
           })

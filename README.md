@@ -1,6 +1,6 @@
 # sistemafrota
 
-> A Vue.js project
+> A AngularJS project
 
 ## Build Setup
 
@@ -12,7 +12,7 @@ npm install
 npm run test
 
 # Inicia a aplicação
-npm start
+gulp
 ```
 
 esse código foi baseado na série aulas do [Waldemar](https://github.com/waldemarnt/building-testable-nodejs-api), se vocês não conhecem vale MUITO a pena assistir.
