@@ -24,7 +24,7 @@ function config(e) {
 }(), function () {
   "use strict";
   function e() {
-    function e(e, t, r, i) {}var r = { restrict: "EA", templateUrl: "app/layout/menu/menu-ui.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
+    function e(e, t, r, i) {}var r = { restrict: "EA", templateUrl: "app/layout/menu/menu-final.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
   }function t() {
     function e() {}var t = this;t.navCollapsed = !0, e();
   }angular.module("app").directive("menu", e);
@@ -35,7 +35,18 @@ function config(e) {
   }function t() {
     function e() {}e();
   }angular.module("app").directive("navbar", e);
-}(), function () {
+}(), $(function () {
+  $("#side-menu").metisMenu();
+}), $(function () {
+  $(window).bind("load resize", function () {
+    var e = 50,
+        t = this.window.innerWidth > 0 ? this.window.innerWidth : this.screen.width;t < 768 ? ($("div.navbar-collapse").addClass("collapse"), e = 100) : $("div.navbar-collapse").removeClass("collapse");var r = (this.window.innerHeight > 0 ? this.window.innerHeight : this.screen.height) - 1;r -= e, r < 1 && (r = 1), r > e && $("#page-wrapper").css("min-height", r + "px");
+  });for (var e = window.location, t = $("ul.nav a").filter(function () {
+    return this.href == e;
+  }).addClass("active").parent();;) {
+    if (!t.is("li")) break;t = t.parent().addClass("in").parent();
+  }
+}), function () {
   "use strict";
   function e(e, t, r) {
     function i() {
@@ -197,7 +208,7 @@ function config(e) {
       return e.put("/tires/" + r, { params: { id: r } });
     }function a(t) {
       return e.delete("/tires/" + t, { params: { id: t } });
-    }var u = { insert: t, listOne: r, listAll: n, listAllWithJoin: l, listOneWithJoin: i, listAllByCod: o, update: c, remove: a };return u;
+    }var s = { insert: t, listOne: r, listAll: n, listAllWithJoin: l, listOneWithJoin: i, listAllByCod: o, update: c, remove: a };return s;
   }angular.module("app").service("TireService", e), e.$inject = ["$http"];
 }(), function () {
   "use strict";
@@ -226,7 +237,7 @@ function config(e) {
       });
     }function n() {
       return t.listAll().then(function (e) {
-        return a.listDriver = e.data, u.forEach(function (e) {
+        return a.listDriver = e.data, s.forEach(function (e) {
           a.listDriver.forEach(function (t, r) {
             t.id === e.driver_id && a.listDriver.splice(r, 1);
           });
@@ -234,7 +245,7 @@ function config(e) {
       });
     }function o() {
       return e.listAll().then(function (e) {
-        return u = e.data;
+        return s = e.data;
       });
     }function l(t) {
       return 8 == t.length ? e.listAllByPlaca(t).then(function (e) {
@@ -243,7 +254,7 @@ function config(e) {
     }function c(e) {
       e && (a.vehicle = {}, o(), n(), e.$setPristine(), e.$setUntouched());
     }var a = this,
-        u = o();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, a.errorVehicle = !1, a.buscaPlacaCadastrada = l, o(), n();
+        s = o();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, a.errorVehicle = !1, a.buscaPlacaCadastrada = l, o(), n();
   }function i(e, t, r, i) {
     function n() {
       return e.listOne(i.id).then(function (e) {
@@ -251,7 +262,7 @@ function config(e) {
       });
     }function o() {
       return t.listAll().then(function (e) {
-        return a.listDriver = e.data, u.forEach(function (e) {
+        return a.listDriver = e.data, s.forEach(function (e) {
           a.listDriver.forEach(function (t, r) {
             t.id === e.driver_id && a.listDriver.splice(r, 1);
           });
@@ -259,14 +270,14 @@ function config(e) {
       });
     }function l() {
       return e.listAll().then(function (e) {
-        return u = e.data;
+        return s = e.data;
       });
     }function c() {
       return e.update(a.vehicle, i.id).then(function (e) {
         r.go("listVehicle");
       });
     }var a = this,
-        u = l();a.vehicle = n(), a.listDriver = [], a.edit = c, l(), o();
+        s = l();a.vehicle = n(), a.listDriver = [], a.edit = c, l(), o();
   }angular.module("app").controller("VehicleControllerOne", e).controller("VehicleControllerList", t).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", i), e.$inject = ["VehicleService", "$state", "$stateParams"], t.$inject = ["VehicleService", "$state"], r.$inject = ["VehicleService", "DriverService", "$state"], i.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"];
 }(), function () {
   "use strict";
@@ -294,7 +305,7 @@ function config(e) {
       return e.put("/vehicles/" + r, t, { params: { id: r } });
     }function a(t) {
       return e.delete("/vehicles/" + t, { params: { id: t } });
-    }var u = { insert: t, listOne: r, listAll: i, listAllWithJoin: n, listAllByPlaca: l, listOneWithJoin: o, update: c, remove: a };return u;
+    }var s = { insert: t, listOne: r, listAll: i, listAllWithJoin: n, listAllByPlaca: l, listOneWithJoin: o, update: c, remove: a };return s;
   }angular.module("app").service("VehicleService", e), e.$inject = ["$http"];
 }(), function () {
   "use strict";

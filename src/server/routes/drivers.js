@@ -18,12 +18,15 @@ export default (app) => {
     })
 
   app.route('/drivers')
-    .all(app.auth.authenticate())
+    //.all(app.auth.authenticate())
     .get((req,res) => {
       driversController.listAll()
         .then(response => {
           res.status(response.statusCode);
           res.json(response.data);
+        })
+        .catch(error => {
+          console.log('Erro ao buscar Drivers: ', error);
         });
     })
     .post((req,res) => {
@@ -31,6 +34,9 @@ export default (app) => {
         .then(response => {
           res.status(response.statusCode);
           res.json(response.data);
+        })
+        .catch(error => {
+          console.log('erro é :',error);
         })
     });
 

@@ -9,7 +9,7 @@
     function menu() {
         var menu = {
             restrict: 'EA',
-            templateUrl: 'app/layout/menu/menu-ui.html',
+            templateUrl: 'app/layout/menu/menu-final.html',
             scope: {
             },
             link: linkFunc,

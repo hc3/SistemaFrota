@@ -1,4 +1,5 @@
 import TiresController from '../controllers/tires';
+import callback from '../utils/callbackRoutes';
 
 export default (app) => {
 
@@ -7,75 +8,65 @@ export default (app) => {
 
   app.route('/tiresWithJoin')
     .all(app.auth.authenticate())
-      .get((req,res) => {
-        tiresController.listAllWithJoin(vehicle)
-          .then(response => {
-            res.status(response.statusCode);
-            res.json(response.data);
-          });
-      });
+    .get((req, res) => {
+      tiresController.listAllWithJoin(vehicle)
+        .then(response => {
+          res.status(response.statusCode);
+          res.json(response.data);
+        });
+    });
 
   app.route('/tiresByCodigo/:cod')
     .all(app.auth.authenticate())
-      .get((req,res) => {
-        tiresController.listAllByCod(req.params.cod)
-          .then(response => {
-            res.status(response.statusCode);
-            res.json(response.data);
-          })
-          .catch(error => {
-            console.log('Erro ao acessar busca por Cod',error);
-          });
-      });
+    .get((req, res) => {
+      tiresController.listAllByCod(req.params.cod)
+        .then(response => {
+          res.status(response.statusCode);
+          res.json(response.data);
+        })
+        .catch(error => {
+          console.log('Erro ao acessar busca por Cod', error);
+        });
+    });
 
   app.route('/tiresWithJoin/:id')
     .all(app.auth.authenticate())
-      .get((req,res) => {
-        tiresController.getByIdWithJoin(req.params,vehicle)
-          .then(response => {
-            res.status(response.statusCode);
-            res.json(response.data);
-          });
-      });
+    .get((req, res) => {
+      tiresController.getByIdWithJoin(req.params, vehicle)
+        .then(response => {
+          res.status(response.statusCode);
+          res.json(response.data);
+        });
+    });
 
 
   app.route('/tires')
-  .all(app.auth.authenticate())
-    .get((req,res) => {
+    .all(app.auth.authenticate())
+    .get((req, res) => {
       tiresController.listAll()
-        .then(response => {
-          res.status(response.statusCode);
-          res.json(response.data);
-        })
+        .then(response => callback.defaultResponse(response))
+        .catch(error => callback.defaultError(error))
     })
-    .post((req,res) => {
+    .post((req, res) => {
       tiresController.create(req.body)
-        .then(response => {
-          res.status(response.statusCode);
-          res.json(response.data);
-        })
+        .then(response => callback.defaultResponse(response))
+        .catch(error => callback.defaultError(error))
     });
 
   app.route('/tires/:id')
-  .all(app.auth.authenticate())
-    .get((req,res) => {
+    .all(app.auth.authenticate())
+    .get((req, res) => {
       tiresController.getById(req.params)
-        .then(response => {
-          res.status(response.statusCode);
-          res.json(response.data);
-        })
+        .then(response => callback.defaultResponse(response))
+        .catch(error => callback.defaulError(error))
     })
-    .put((req,res) => {
-      tiresController.update(req.body,req.params)
-        .then(response => {
-          res.status(response.statusCode);
-          res.json(response.data);
-        })
+    .put((req, res) => {
+      tiresController.update(req.body, req.params)
+        .then(response => callback.defaultResponse(response))
+        .catch(error => callback.defaulError(error))
     })
-    .delete((req,res) => {
+    .delete((req, res) => {
       tiresController.remove(req.params)
-        .then(response => {
-          res.sendStatus(response.statusCode);
-        })
+        .then(response => callback.defaultRemove(response))
     });
 }

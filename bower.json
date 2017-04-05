@@ -33,6 +33,7 @@
     "angular-animate": "^1.5.8",
     "angular-touch": "^1.5.8",
     "angular-bootstrap": "^2.2.0",
-    "ngMask": "angular-mask#^3.1.1"
+    "ngMask": "angular-mask#^3.1.1",
+    "metisMenu": "metismenu#^2.7.0"
   }
 }
