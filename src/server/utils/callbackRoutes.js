@@ -6,7 +6,8 @@ const callback = (() => {
     };
 
     const defaultRemove = (response , req ,res) => {
-        res.sendStatus(response.StatusCode);
+        res.status(response.statusCode);
+        res.json(response.data);
     };
 
     const errorResponse = (error , req ,res) => {
@@ -18,7 +19,7 @@ const callback = (() => {
     };
 
     const defaultError = (error , req ,res) => {
-        res.json(error);
+        console.log(error);
     };
 
     return {
