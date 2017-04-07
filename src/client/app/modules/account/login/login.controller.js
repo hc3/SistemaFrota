@@ -13,12 +13,6 @@
 
         vm.login = login;
 
-        // initController();
-        //
-        // function initController() {
-        //   return LoginService.logout();
-        // }
-
         function login() {
           vm.loading = true;
           LoginService.login(vm.user, function(result){

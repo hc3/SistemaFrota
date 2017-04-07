@@ -1,15 +1,16 @@
-  <div class="row">
-    <div class="col-sm-12">
-      <navbar></navbar>
-    </div>
+<div class="row">
+  <div class="col-sm-12">
+    <navbar></navbar>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <button ui-sref="newDriver" class="btn btn-primary">Novo</button>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
+<div class="row table-hc3">
+  <div class="col-sm-12">
+    <h1 class="h1-hc3">Lista de Clientes</h1>
+    <button ui-sref="newDriver" class="btn btn-primary">Novo</button>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
           <tr>
             <th>#</th>
             <th>Código</th>
@@ -18,8 +19,8 @@
             <th>Editar</th>
             <th>Visualizar</th>
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           <tr data-ng-repeat="driver in vm.listDriver">
             <td>{{ driver.id }}</td>
             <td>{{ driver.cod }}</td>
@@ -28,8 +29,8 @@
             <td><a ui-sref="editDriver({id: driver.id})"><span class="glyphicon glyphicon-check"></span></a></td>
             <td><a ui-sref="viewDriver({id: driver.id})"><span class="glyphicon glyphicon-eye-open"></span></a></td>
           </tr>
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>

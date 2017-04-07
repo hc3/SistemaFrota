@@ -1,0 +1,28 @@
+  .table-hc3 {
+    padding-left: 18%;
+    padding-top: 2%;
+  }
+  
+  .h1-hc3 {
+    text-align: center;
+    position: relative;
+    font-family: Denmark;
+  }
+  
+  .h1-hc3:before,
+  .h1-hc3:after {
+    content: "";
+    width: 35%;
+    height: 1px;
+    background: #555;
+    position: absolute;
+    top: 50%;
+  }
+  
+  .h1-hc3:before {
+    left: 0;
+  }
+  
+  .h1-hc3:after {
+    right: 0;
+  }

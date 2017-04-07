@@ -44,29 +44,30 @@ export default (app) => {
     .all(app.auth.authenticate())
     .get((req, res) => {
       tiresController.listAll()
-        .then(response => callback.defaultResponse(response))
-        .catch(error => callback.defaultError(error))
+        .then(response => callback.defaultResponse(response , req ,res ))
+        .catch(error => callback.defaultError(error , req ,res))
     })
     .post((req, res) => {
       tiresController.create(req.body)
-        .then(response => callback.defaultResponse(response))
-        .catch(error => callback.defaultError(error))
+        .then(response => callback.defaultResponse(response , req ,res))
+        .catch(error => callback.defaultError(error , req ,res))
     });
 
   app.route('/tires/:id')
     .all(app.auth.authenticate())
     .get((req, res) => {
       tiresController.getById(req.params)
-        .then(response => callback.defaultResponse(response))
-        .catch(error => callback.defaulError(error))
+        .then(response => callback.defaultResponse(response , req ,res))
+        .catch(error => callback.defaultError(error , req ,res))
     })
     .put((req, res) => {
       tiresController.update(req.body, req.params)
-        .then(response => callback.defaultResponse(response))
-        .catch(error => callback.defaulError(error))
+        .then(response => callback.defaultResponse(response , req ,res))
+        .catch(error => callback.defaultError(error , req ,res))
     })
     .delete((req, res) => {
       tiresController.remove(req.params)
-        .then(response => callback.defaultRemove(response))
+        .then(response => callback.defaultRemove(response , req ,res))
+        .catch(error => callback.defaultError(error , req ,res))
     });
 }

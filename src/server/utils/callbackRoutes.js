@@ -1,24 +1,24 @@
-const callback = ((req, res) => {
+const callback = (() => {
    
-   const defaultResponse = (response) => {
+   const defaultResponse = (response ,req , res) => {
         res.status(response.statusCode);
         res.json(response.data);
     };
 
-    const defaultRemove = (response) => {
+    const defaultRemove = (response , req ,res) => {
         res.sendStatus(response.StatusCode);
     };
 
-    const errorResponse = (error) => {
+    const errorResponse = (error , req ,res) => {
         console.log('error', error);
     };
 
-    const defaultResponseForError = (response) => {
+    const defaultResponseForError = (response , req ,res) => {
         res.sendStatus(response.StatusCode);
     };
 
-    const defaultError = (error) => {
-        console.log(error);
+    const defaultError = (error , req ,res) => {
+        res.json(error);
     };
 
     return {
