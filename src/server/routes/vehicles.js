@@ -41,7 +41,7 @@ export default (app) => {
     });
 
   app.route('/vehicles')
-    .all(app.auth.authenticate())
+    //.all(app.auth.authenticate())
     .get((req, res) => {
       vehicleController.listAll()
         .then(response => callback.defaultResponse(response, req, res))

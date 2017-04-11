@@ -4,6 +4,7 @@ import callback from '../utils/callbackRoutes';
 export default (app) => {
 
   const driversController = new DriversController(app.datasource.models.Drivers);
+  const vehicle = app.datasource.models.Vehicles;
 
   app.route('/driversByCodigo/:cod')
     .all(app.auth.authenticate())
@@ -17,6 +18,14 @@ export default (app) => {
           console.log('Erro ao buscar por código: ',error);
         })
     })
+  
+  app.route('/driversWithJoin')
+    .all(app.auth.authenticate())
+    .get((req, res) => {
+        driversController.listAllWithJoin(vehicle)
+          .then(response => callback.defaultResponse(response, req, res))
+          .catch(error => callback.defaultError(error, req, res))
+    });
 
   app.route('/drivers')
     .all(app.auth.authenticate())

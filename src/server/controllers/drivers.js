@@ -19,6 +19,14 @@ class DriversController extends AbstractController {
       .catch(error => callback.errorResponse(error.message));
   };
 
+  listAllWithJoin(vehicle) {
+    return this.Drivers.findAll({
+      include: [{model: vehicle}]
+    })
+    .then(result => callback.defaultResponse(result))
+    .catch(error => callback.errorResponse(error.message));
+  };
+
 }
 
 export default DriversController;
