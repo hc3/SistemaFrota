@@ -237,11 +237,7 @@ function config(e) {
       });
     }function n() {
       return t.listAll().then(function (e) {
-        return a.listDriver = e.data, s.forEach(function (e) {
-          a.listDriver.forEach(function (t, r) {
-            t.id === e.driver_id && a.listDriver.splice(r, 1);
-          });
-        }), a.listDriver;
+        return a.listDriver = e.data, a.listDriver;
       });
     }function o() {
       return e.listAll().then(function (e) {
@@ -262,11 +258,7 @@ function config(e) {
       });
     }function o() {
       return t.listAll().then(function (e) {
-        return a.listDriver = e.data, s.forEach(function (e) {
-          a.listDriver.forEach(function (t, r) {
-            t.id === e.driver_id && a.listDriver.splice(r, 1);
-          });
-        }), a.listDriver;
+        return a.listDriver = e.data, a.listDriver;
       });
     }function l() {
       return e.listAll().then(function (e) {

@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Código: </label>
       <div class="col-sm-10">
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Telefone: </label>
       <div class="col-sm-10">
@@ -44,6 +44,41 @@
         required
         data-ng-minlength="11"
         mask="(99) 99999-9999">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Email: </label>
+      <div class="col-sm-10">
+        <input id="driverTelefone" type="email" class="form-control"
+        data-ng-model="vm.driver.email"
+        required>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Tipo: </label>
+      <div class="col-sm-10">
+       <select class="form-control" name="typeDriver" required data-ng-model="vm.driver.type">
+          <option value="PHYSICAL">Física</option>
+          <option value="LEGAL">Juridica</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Documento: </label>
+      <div class="col-sm-10">
+        <input id="driverDoc" type="text" class="form-control"
+        data-ng-model="vm.driver.documento"
+        required
+        data-ng-minlength="10">
       </div>
     </div>
   </div>

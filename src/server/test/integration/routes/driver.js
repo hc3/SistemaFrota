@@ -11,7 +11,10 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
     id: 1,
     cod: 800,
     name: 'test driver',
-    phone: 99801147
+    phone: '99801147',
+    email: 'teste@mail.com',
+    documento: '05088900989',
+    type: 'PHYSICAL'
   }
 
   const ROTA = '/drivers';
@@ -55,9 +58,12 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
       id: 2,
       cod: 800,
       name: 'test driver',
-      phone: 99801147
+      phone: '99801147',
+      email: 'teste2@mail.com',
+      documento: '05288900989',
+      type: 'PHYSICAL'
     };
-    it('should create a driver', done => callback.defaultPost(done,request,token,newDriver,ROTA))
+    it('should create a driver', done => callback.defaultPost(done, request, token, newDriver, ROTA))
   });
 
   describe('Route GET /drivers/:id', () => {
@@ -69,7 +75,10 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
       id: 1,
       cod: 801,
       name: 'Updated driver',
-      phone: 88901147
+      phone: '88901147',
+      email: 'teste3@mail.com',
+      documento: '05988900989',
+      type: 'PHYSICAL'
     };
     it('should update a driver', done => callback.defaultPut(done, request, token, updatedDriver, ROTA_ID));
   });

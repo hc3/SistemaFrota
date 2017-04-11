@@ -80,6 +80,7 @@
           return DriverService.listAll()
             .then(function(data) {
               vm.listDriver = data.data;
+              /*
               allVehicles.forEach(function(veiculo) {
                 vm.listDriver.forEach(function(driver,index) {
                   if(driver.id === veiculo.driver_id) {
@@ -87,6 +88,7 @@
                   }
                 })
               })
+              */
               return vm.listDriver;
             })
         };
@@ -148,6 +150,7 @@
           return DriverService.listAll()
             .then(function(data) {
               vm.listDriver = data.data;
+              /*
               allVehicles.forEach(function(veiculo) {
                 vm.listDriver.forEach(function(driver,index) {
                   if(driver.id === veiculo.driver_id) {
@@ -155,6 +158,7 @@
                   }
                 })
               })
+              */
               return vm.listDriver;
             })
         };

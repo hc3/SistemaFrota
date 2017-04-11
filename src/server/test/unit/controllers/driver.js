@@ -9,10 +9,13 @@ describe('# TEST UNIT CONTROLLER # Controllers: drivers', () => {
       };
 
       const expetectedResponse = [{
-        id:1,
-        cod:800,
-        name:'test driver',
-        phone:99801147,
+        id: 1,
+        cod: 800,
+        name: 'test driver',
+        phone: '99801147',
+        email: 'teste@mail.com',
+        documento: '05088900989',
+        type: 'PHYSICAL',
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
@@ -26,24 +29,33 @@ describe('# TEST UNIT CONTROLLER # Controllers: drivers', () => {
   });
 
   describe('GET a driver getById()', () => {
-    it('should return a driver',() => {
+    it('should return a driver', () => {
       const Drivers = {
         findOne: td.function(),
       };
 
       const expetectedResponse = [{
-        id:1,
-        cod:800,
-        name:'test driver',
-        phone:99801147,
+        id: 1,
+        cod: 800,
+        name: 'test driver',
+        phone: '99801147',
+        email: 'teste2@mail.com',
+        documento: '05088900989',
+        type: 'PHYSICAL',
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
 
-      td.when(Drivers.findOne({ where: {id: 1}})).thenResolve(expetectedResponse);
+      td.when(Drivers.findOne({
+        where: {
+          id: 1
+        }
+      })).thenResolve(expetectedResponse);
 
       const driversController = new DriversController(Drivers);
-      return driversController.getById({ id: 1 })
+      return driversController.getById({
+          id: 1
+        })
         .then(response => expect(response.data).to.be.eql(expetectedResponse));
     });
   });
@@ -55,16 +67,22 @@ describe('# TEST UNIT CONTROLLER # Controllers: drivers', () => {
       };
 
       const requestBody = {
-        cod:999,
-        name:'created on test unit',
-        phone:91586692
+        cod: 999,
+        name: 'created on test unit',
+        phone: '99801147',
+        email: 'teste@mail.com',
+        documento: '05088900989',
+        type: 'PHYSICAL'
       };
 
       const expetectedResponse = [{
-        id:1,
-        cod:999,
-        name:'created on test unit',
-        phone:91586692,
+        id: 1,
+        cod: 999,
+        name: 'created on test unit',
+        phone: '99801147',
+        email: 'teste@mail.com',
+        documento: '05088900989',
+        type: 'PHYSICAL',
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
@@ -87,25 +105,37 @@ describe('# TEST UNIT CONTROLLER # Controllers: drivers', () => {
       }
 
       const requestBody = {
-        id:1,
-        cod:999,
-        name:'updated on test unit',
-        phone:91586692
+        id: 1,
+        cod: 999,
+        name: 'updated on test unit',
+        phone: '99801147',
+        email: 'teste@mail.com',
+        documento: '05088900989',
+        type: 'PHYSICAL'
       };
 
       const expetectedResponse = [{
-        id:1,
-        cod:999,
-        name:'updated on test unit',
-        phone:91586692,
+        id: 1,
+        cod: 999,
+        name: 'updated on test unit',
+        phone: '99801147',
+        email: 'teste@mail.com',
+        documento: '05088900989',
+        type: 'PHYSICAL',
         created_at: '2016-08-06T23:55:36.692Z',
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
 
-      td.when(Drivers.update(requestBody, { where: { id: 1}})).thenResolve(expetectedResponse);
+      td.when(Drivers.update(requestBody, {
+        where: {
+          id: 1
+        }
+      })).thenResolve(expetectedResponse);
 
       const driversController = new DriversController(Drivers);
-      return driversController.update(requestBody, { id: 1})
+      return driversController.update(requestBody, {
+          id: 1
+        })
         .then(response => {
           expect(response.data).to.be.eql(expetectedResponse);
         })
@@ -120,10 +150,16 @@ describe('# TEST UNIT CONTROLLER # Controllers: drivers', () => {
 
       const expetectedResponse = {};
 
-      td.when(Drivers.destroy({ where: { id: 1 }})).thenResolve();
+      td.when(Drivers.destroy({
+        where: {
+          id: 1
+        }
+      })).thenResolve();
 
       const driversController = new DriversController(Drivers);
-      return driversController.remove({ id: 1 })
+      return driversController.remove({
+          id: 1
+        })
         .then(response => expect(response.statusCode).to.be.eql(204));
 
     });

@@ -7,17 +7,22 @@ describe('# TEST CONTRACT # Routes driver', () => {
   const jwtSecret = app.config.jwtSecret;
 
   const defaultDriver = {
-    id:1,
-    cod:800,
-    name:'test driver',
-    phone:99801147
+    id: 1,
+    cod: 800,
+    name: 'test driver',
+    phone: '99801147',
+    email: 'teste@mail.com',
+    documento: '05088900989',
+    type: 'PHYSICAL'
   }
 
   let token;
 
   beforeEach(done => {
     Users
-      .destroy({where: {}})
+      .destroy({
+        where: {}
+      })
       .then(() => Users.create({
         name: 'pepa',
         email: 'pepa@mail.com',
@@ -25,11 +30,15 @@ describe('# TEST CONTRACT # Routes driver', () => {
       }))
       .then(user => {
         Drivers
-          .destroy({where: {}})
+          .destroy({
+            where: {}
+          })
           .then(() => Drivers.create(defaultDriver))
           .then(() => {
-            token = jwt.encode({id: user.id}, jwtSecret);
-            console.log("Token: ",token);
+            token = jwt.encode({
+              id: user.id
+            }, jwtSecret);
+            console.log("Token: ", token);
             done();
           })
       })
@@ -39,10 +48,13 @@ describe('# TEST CONTRACT # Routes driver', () => {
   describe('Route GET /drivers', () => {
     it('should return a list of drivers', done => {
       const driversList = Joi.array().items(Joi.object().keys({
-        id:Joi.number(),
-        cod:Joi.number(),
-        name:Joi.string(),
-        phone:Joi.number(),
+        id: Joi.number(),
+        cod: Joi.number(),
+        name: Joi.string(),
+        phone: Joi.string(),
+        email: Joi.string(),
+        documento: Joi.string(),
+        type: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
       }));
@@ -51,7 +63,7 @@ describe('# TEST CONTRACT # Routes driver', () => {
         .get('/drivers')
         .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
-          console.log("corpo req: ",res.body);
+          console.log("corpo req: ", res.body);
           joiAssert(res.body, driversList);
           done(err);
         });
@@ -61,10 +73,13 @@ describe('# TEST CONTRACT # Routes driver', () => {
   describe('Route GET /drivers/{id}', () => {
     it('should return a drivers', done => {
       const drivers = Joi.object().keys({
-        id:Joi.number(),
-        cod:Joi.number(),
-        name:Joi.string(),
-        phone:Joi.number(),
+        id: Joi.number(),
+        cod: Joi.number(),
+        name: Joi.string(),
+        phone: Joi.string(),
+        email: Joi.string(),
+        documento: Joi.string(),
+        type: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
       });
@@ -82,16 +97,22 @@ describe('# TEST CONTRACT # Routes driver', () => {
   describe('Route POST /drivers', () => {
     it('should create a new driver', done => {
       const newDriver = {
-        id:2,
-        cod:999,
-        name:'Aristocleide',
-        phone:99658875,
+        id: 2,
+        cod: 999,
+        name: 'Aristocleide',
+        phone: '99801147',
+        email: 'teste_update@mail.com',
+        documento: '05098900989',
+        type: 'PHYSICAL'
       };
       const driver = Joi.object().keys({
-        id:Joi.number(),
-        cod:Joi.number(),
-        name:Joi.string(),
-        phone:Joi.number(),
+        id: Joi.number(),
+        cod: Joi.number(),
+        name: Joi.string(),
+        phone: Joi.string(),
+        email: Joi.string(),
+        documento: Joi.string(),
+        type: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso()
       });
@@ -110,9 +131,12 @@ describe('# TEST CONTRACT # Routes driver', () => {
     it('should update a driver', done => {
       const updatedDriver = {
         id: 1,
-        cod:100,
-        name:'UPDATED Aristocleide',
-        phone:88102256,
+        cod: 100,
+        name: 'UPDATED Aristocleide',
+        phone: '89801147',
+        email: 'teste_updated@mail.com',
+        documento: '05188900989',
+        type: 'PHYSICAL'
       };
       const updatedCount = Joi.array().items(1);
 

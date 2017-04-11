@@ -22,7 +22,28 @@ export default (sequelize, DataType) => {
       }
     },
     phone: {
-      type: DataType.INTEGER,
+      type: DataType.STRING,
+      allowNull: false,
+      validade: {
+        notEmpty: true
+      }
+    },
+    email: {
+      type: DataType.STRING,
+      allowNull: false,
+      validade: {
+        notEmpty: true
+      }
+    },
+    documento: {
+      type: DataType.STRING,
+      allowNull: false,
+      validade: {
+        notEmpty: true
+      }
+    },
+    type: {
+      type: DataType.ENUM('PHYSICAL','LEGAL'),
       allowNull: false,
       validade: {
         notEmpty: true
