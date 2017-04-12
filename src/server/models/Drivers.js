@@ -1,4 +1,3 @@
-import Vehicle from './Vehicles';
 export default (sequelize, DataType) => {
 
   const Drivers = sequelize.define('Drivers', {
@@ -28,6 +27,13 @@ export default (sequelize, DataType) => {
         notEmpty: true
       }
     },
+    endereco: {
+      type: DataType.STRING,
+      allowNull: false,
+      validade: {
+        notEmpty: true
+      }
+    },
     email: {
       type: DataType.STRING,
       allowNull: false,
@@ -43,7 +49,7 @@ export default (sequelize, DataType) => {
       }
     },
     type: {
-      type: DataType.ENUM('PHYSICAL','LEGAL'),
+      type: DataType.ENUM('PHYSICAL', 'LEGAL'),
       allowNull: false,
       validade: {
         notEmpty: true

@@ -1,25 +1,15 @@
-import TiresController from '../controllers/tires';
+import ProductController from '../controllers/products';
 import callback from '../utils/callbackRoutes';
 
 export default (app) => {
 
-  const vehicle = app.datasource.models.Vehicles;
-  const tiresController = new TiresController(app.datasource.models.Tires);
+  const Product = app.datasource.models.Products;
+  const productController = new ProductController(Product);
 
-  app.route('/tiresWithJoin')
+  app.route('/ProductByCodigo/:cod')
     .all(app.auth.authenticate())
     .get((req, res) => {
-      tiresController.listAllWithJoin(vehicle)
-        .then(response => {
-          res.status(response.statusCode);
-          res.json(response.data);
-        });
-    });
-
-  app.route('/tiresByCodigo/:cod')
-    .all(app.auth.authenticate())
-    .get((req, res) => {
-      tiresController.listAllByCod(req.params.cod)
+      productController.listAllByCod(req.params.cod)
         .then(response => {
           res.status(response.statusCode);
           res.json(response.data);
@@ -29,44 +19,34 @@ export default (app) => {
         });
     });
 
-  app.route('/tiresWithJoin/:id')
+
+  app.route('/products')
     .all(app.auth.authenticate())
     .get((req, res) => {
-      tiresController.getByIdWithJoin(req.params, vehicle)
-        .then(response => {
-          res.status(response.statusCode);
-          res.json(response.data);
-        });
-    });
-
-
-  app.route('/tires')
-    .all(app.auth.authenticate())
-    .get((req, res) => {
-      tiresController.listAll()
+      productController.listAll()
         .then(response => callback.defaultResponse(response , req ,res ))
         .catch(error => callback.defaultError(error , req ,res))
     })
     .post((req, res) => {
-      tiresController.create(req.body)
+      productController.create(req.body)
         .then(response => callback.defaultResponse(response , req ,res))
         .catch(error => callback.defaultError(error , req ,res))
     });
 
-  app.route('/tires/:id')
+  app.route('/products/:id')
     .all(app.auth.authenticate())
     .get((req, res) => {
-      tiresController.getById(req.params)
+      productController.getById(req.params)
         .then(response => callback.defaultResponse(response , req ,res))
         .catch(error => callback.defaultError(error , req ,res))
     })
     .put((req, res) => {
-      tiresController.update(req.body, req.params)
+      productController.update(req.body, req.params)
         .then(response => callback.defaultResponse(response , req ,res))
         .catch(error => callback.defaultError(error , req ,res))
     })
     .delete((req, res) => {
-      tiresController.remove(req.params)
+      productController.remove(req.params)
         .then(response => callback.defaultRemove(response , req ,res))
         .catch(error => callback.defaultError(error , req ,res))
     });

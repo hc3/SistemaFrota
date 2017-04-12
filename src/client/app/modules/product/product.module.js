@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('app.tire', []);
+        .module('app.product', []);
 })();

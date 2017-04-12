@@ -8,7 +8,7 @@ export default (app) => {
   const vehicleController = new VehicleController(veiculo);
 
   app.route('/vehiclesJoin')
-    .all(app.auth.authenticate())
+    //.all(app.auth.authenticate())
     .get((req, res) => {
       vehicleController.listAllWithJoin(driver)
         .then(response => {

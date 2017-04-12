@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-sm-12">
+    <navbar></navbar>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <button ui-sref="newProduct" class="btn btn-primary">Novo</button>
+    <div class="table-responsive">
+        <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Editar</th>
+            <th>Visualizar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat="product in vm.listProduct">
+            <td>{{ product.id }}</td>
+            <td><a ui-sref="editproduct({id: product.id})"><span class="glyphicon glyphicon-check"></span></a></td>
+            <td><a ui-sref="viewproduct({id: product.id})"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

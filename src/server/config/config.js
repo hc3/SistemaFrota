@@ -2,6 +2,7 @@ export default {
   database: 'bancoRN',
   username: '',
   password: '',
+  logging: false,
     params: {
       dialect: 'sqlite',
       storage: 'bancoRN.sqlite',

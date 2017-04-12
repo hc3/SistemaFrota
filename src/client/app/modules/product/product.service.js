@@ -3,12 +3,12 @@
 
     angular
         .module('app')
-        .service('TireService', TireService);
+        .service('ProductService', ProductService);
 
-    TireService.$inject = ['$http'];
+    ProductService.$inject = ['$http'];
 
     /* @ngInject */
-    function TireService($http) {
+    function ProductService($http) {
 
       var service = {
         insert: insert,
@@ -24,35 +24,27 @@
       return service;
 
       function insert(data) {
-        return $http.post('/tires',data)
+        return $http.post('/products',data)
       };
 
       function listOne(id) {
-        return $http.get('/tires/'+id, {params: {id:id}})
-      };
-
-      function listOneWithJoin(id) {
-        return $http.get('/tiresWithJoin/'+id, {params: {id:id}})
+        return $http.get('/products/'+id, {params: {id:id}})
       };
 
       function listAll() {
-        return $http.get('/tires')
+        return $http.get('/products')
       };
 
       function listAllByCod(cod) {
-        return $http.get('/tiresByCodigo/'+cod,{params: {cod:cod}})
+        return $http.get('/productsByCodigo/'+cod,{params: {cod:cod}})
       }
 
-      function listAllWithJoin() {
-        return $http.get('/tiresWithJoin')
-      };
-
       function update(data,id) {
-        return $http.put('/tires/'+id, {params: {id:id}})
+        return $http.put('/products/'+id, {params: {id:id}})
       };
 
       function remove(id) {
-        return $http.delete('/tires/'+id, {params:{id:id}})
+        return $http.delete('/products/'+id, {params:{id:id}})
       };
 
     }

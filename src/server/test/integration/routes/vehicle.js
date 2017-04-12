@@ -12,15 +12,23 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
   const defaultDriver = {
     id: 1,
     cod: 800,
-    name: 'ASTROGILDO',
-    phone: 91158875
+    name: 'test driver',
+    phone: '99801147',
+    email: 'teste@mail.com',
+    endereco: 'rua 01 bairro x',
+    documento: '05088900989',
+    type: 'PHYSICAL'
   }
 
   const defaultDriver2 = {
     id: 2,
     cod: 801,
     name: 'NISTRONEZIO',
-    phone: 88586985
+    phone: '99801147',
+    email: 'teste@mail.com',
+    endereco: 'rua 01 bairro x',
+    documento: '05088900989',
+    type: 'PHYSICAL'
   }
 
   const defaultVehicle = {
@@ -28,7 +36,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     placa: 'TXT-8890',
     modelo: 'FORD CARGO 1723',
     marca: 'FORD',
-    eixos: 4,
+    ano: 4,
     km_inicial: 0,
     driver_id: defaultDriver.id
   };
@@ -82,7 +90,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
           expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
           expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
           expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
-          expect(res.body[0].eixos).to.be.eql(defaultVehicle.eixos);
+          expect(res.body[0].ano).to.be.eql(defaultVehicle.ano);
           expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
           expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
           expect(res.body[0].Driver.id).to.be.eql(defaultDriver.id);
@@ -96,16 +104,16 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
 
 
   describe('Route POST /vehicles', () => {
-      const newVehicle = {
-        id: 2,
-        placa: 'TXT-8890',
-        modelo: 'FORD CARGO 1723',
-        marca: 'FORD',
-        eixos: 4,
-        km_inicial: 0,
-        driver_id: 2
-      };
-    it('should create a vehicle', done => callback.defaultPost(done,request,token,newVehicle,ROTA))
+    const newVehicle = {
+      id: 2,
+      placa: 'TXT-8890',
+      modelo: 'FORD CARGO 1723',
+      marca: 'FORD',
+      ano: 4,
+      km_inicial: 0,
+      driver_id: 2
+    };
+    it('should create a vehicle', done => callback.defaultPost(done, request, token, newVehicle, ROTA))
   });
 
   describe('Route GET /vehicles/:id', () => {
@@ -122,7 +130,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
           expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
           expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
           expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
-          expect(res.body[0].eixos).to.be.eql(defaultVehicle.eixos);
+          expect(res.body[0].ano).to.be.eql(defaultVehicle.ano);
           expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
           expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
           done(err);
@@ -131,15 +139,15 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
   });
 
   describe('Route PUT /vehicles/:id', () => {
-      const updateVehicle = {
-        id: 1,
-        placa: 'ALT-8890',
-        modelo: 'UPDATED FORD CARGO 1723',
-        marca: 'UPDATED FORD',
-        eixos: 4,
-        km_inicial: 0,
-        driver_id: 1
-      };
+    const updateVehicle = {
+      id: 1,
+      placa: 'ALT-8890',
+      modelo: 'UPDATED FORD CARGO 1723',
+      marca: 'UPDATED FORD',
+      ano: 4,
+      km_inicial: 0,
+      driver_id: 1
+    };
     it('should update a vehicles', done => callback.defaultPut(done, request, token, updateVehicle, ROTA_ID));
   });
 

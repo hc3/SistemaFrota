@@ -8,7 +8,7 @@
           'ngMask',
           'ui.bootstrap',
           'app.driver',
-          'app.tire',
+          'app.product',
           'app.vehicle',
           'app.login'
         ])
