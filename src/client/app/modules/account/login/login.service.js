@@ -19,12 +19,12 @@
 
         function login(user, callback) {
           $http.post('/token', {email: user.email, password: user.password})
-            .success(function(response) {
+            .then(function(response) {
 
-              if(response.token) {
-                var token = 'JWT ' + response.token;
-                localStorage.currentUser = {email: user.email, token: response.token};
-                $http.defaults.headers.common.Authorization =  response.token;
+              if(response.data.token) {
+                var token = 'JWT ' + response.data.token;
+                localStorage.currentUser = {email: user.email, token: response.data.token};
+                $http.defaults.headers.common.Authorization =  response.data.token;
                 localStorage.setItem('token',token);
 
                 callback(true);

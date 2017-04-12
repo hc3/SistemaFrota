@@ -12,23 +12,29 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
   const defaultDriver = {
     id: 1,
     cod: 800,
-    name: 'test driver',
-    phone: '99801147',
-    email: 'teste@mail.com',
-    endereco: 'rua 01 bairro x',
-    documento: '05088900989',
-    type: 'PHYSICAL'
+      name: 'test driver',
+      phone: '99801147',
+      endereco: 'rua 01 bairro x',
+      bairro: 'bairro 001',
+      cidade: 'cidade 002',
+      estado: 'estado 001',
+      email: 'teste2@mail.com',
+      documento: '05288900989',
+      type: 'PHYSICAL'
   }
 
   const defaultDriver2 = {
     id: 2,
     cod: 801,
-    name: 'NISTRONEZIO',
-    phone: '99801147',
-    email: 'teste@mail.com',
-    endereco: 'rua 01 bairro x',
-    documento: '05088900989',
-    type: 'PHYSICAL'
+      name: 'test driver',
+      phone: '99801147',
+      endereco: 'rua 01 bairro x',
+      bairro: 'bairro 001',
+      cidade: 'cidade 002',
+      estado: 'estado 001',
+      email: 'teste2@mail.com',
+      documento: '05288900989',
+      type: 'PHYSICAL'
   }
 
   const defaultVehicle = {
@@ -80,29 +86,6 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
     it('should return a list of vehicles', done => callback.defaultGet(done, request, token, defaultVehicle, ROTA))
   });
 
-  describe('Route get /vehiclesJoin', () => {
-    it('should return a list of vehicles', done => {
-      request
-        .get('/vehiclesJoin')
-        .set('Authorization', `JWT ${token}`)
-        .end((err, res) => {
-          expect(res.body[0].id).to.be.eql(defaultVehicle.id);
-          expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
-          expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
-          expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
-          expect(res.body[0].ano).to.be.eql(defaultVehicle.ano);
-          expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
-          expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
-          expect(res.body[0].Driver.id).to.be.eql(defaultDriver.id);
-          expect(res.body[0].Driver.cod).to.be.eql(defaultDriver.cod);
-          expect(res.body[0].Driver.name).to.be.eql(defaultDriver.name);
-          expect(res.body[0].Driver.phone).to.be.eql(defaultDriver.phone);
-          done(err);
-        });
-    });
-  });
-
-
   describe('Route POST /vehicles', () => {
     const newVehicle = {
       id: 2,
@@ -119,25 +102,7 @@ describe('# TEST INTEGRATION # Routes vehicles', () => {
   describe('Route GET /vehicles/:id', () => {
     it('should find a one driver', done => callback.defaultGetOne(done, request, token, defaultVehicle, ROTA_ID))
   });
-
-  describe('Route GET /vehicleByPlaca/:placa', () => {
-    it('should find a one driver', done => {
-      request
-        .get('/vehicleByPlaca/TXT-8890')
-        .set('Authorization', `JWT ${token}`)
-        .end((err, res) => {
-          expect(res.body[0].id).to.be.eql(defaultVehicle.id);
-          expect(res.body[0].placa).to.be.eql(defaultVehicle.placa);
-          expect(res.body[0].modelo).to.be.eql(defaultVehicle.modelo);
-          expect(res.body[0].marca).to.be.eql(defaultVehicle.marca);
-          expect(res.body[0].ano).to.be.eql(defaultVehicle.ano);
-          expect(res.body[0].km_inicial).to.be.eql(defaultVehicle.km_inicial);
-          expect(res.body[0].driver_id).to.be.eql(defaultVehicle.driver_id);
-          done(err);
-        });
-    });
-  });
-
+  
   describe('Route PUT /vehicles/:id', () => {
     const updateVehicle = {
       id: 1,

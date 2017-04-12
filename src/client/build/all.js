@@ -1,331 +1,316 @@
 "use strict";
 
-function config(e) {
-  e.interceptors.push("authInterceptor");
+function config(t) {
+  t.interceptors.push("authInterceptor");
 }!function () {
   "use strict";
-  angular.module("app", ["ui.router", "ngStorage", "ngMask", "ui.bootstrap", "app.driver", "app.tire", "app.vehicle", "app.login"]);
+  angular.module("app", ["angularUtils.directives.dirPagination", "ui.router", "ngStorage", "ngMask", "ui.bootstrap", "app.driver", "app.product", "app.vehicle", "app.login"]);
 }(), function () {
   "use strict";
-  function e(e, t) {
-    function r(e) {
-      return localStorage.getItem("token") && (e.headers.Authorization = localStorage.getItem("token")), e;
-    }function i(r) {
-      return 401 !== r.status && 403 !== r.status || t.path("/error/nao-auth"), e.reject(r);
-    }var n = { request: r, responseError: i };return n;
-  }angular.module("app").factory("authInterceptor", e), e.$inject = ["$q", "$location"];
+  function t(t, e) {
+    function r(t) {
+      return localStorage.getItem("token") && (t.headers.Authorization = localStorage.getItem("token")), t;
+    }function n(r) {
+      return 401 !== r.status && 403 !== r.status || e.path("/error/nao-auth"), t.reject(r);
+    }return { request: r, responseError: n };
+  }angular.module("app").factory("authInterceptor", t), t.$inject = ["$q", "$location"];
 }(), angular.module("app").config(config), config.$inject = ["$httpProvider"], function () {
   "use strict";
-  function e() {
-    return { request: function request(e) {
-        return console.log(e.url), e;
+  function t() {
+    return { request: function request(t) {
+        return console.log(t.url), t;
       } };
-  }angular.module("app").factory("timestampInterceptor", e);
+  }angular.module("app").factory("timestampInterceptor", t);
 }(), function () {
   "use strict";
-  function e() {
-    function e(e, t, r, i) {}var r = { restrict: "EA", templateUrl: "app/layout/menu/menu-final.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
-  }function t() {
-    function e() {}var t = this;t.navCollapsed = !0, e();
-  }angular.module("app").directive("menu", e);
+  function t() {
+    function t(t, e, r, n) {}return { restrict: "EA", templateUrl: "app/layout/menu/menu-final.html", scope: {}, link: t, controller: e, controllerAs: "vm", bindToController: !0 };
+  }function e() {
+    this.navCollapsed = !0;
+  }angular.module("app").directive("menu", t);
 }(), function () {
   "use strict";
-  function e() {
-    function e(e, t, r, i) {}var r = { restrict: "EA", templateUrl: "app/layout/navbar/navbar.html", scope: {}, link: e, controller: t, controllerAs: "vm", bindToController: !0 };return r;
-  }function t() {
-    function e() {}e();
-  }angular.module("app").directive("navbar", e);
+  function t() {
+    function t(t, e, r, n) {}return { restrict: "EA", templateUrl: "app/layout/navbar/navbar.html", scope: {}, link: t, controller: e, controllerAs: "vm", bindToController: !0 };
+  }function e() {}angular.module("app").directive("navbar", t);
 }(), $(function () {
   $("#side-menu").metisMenu();
 }), $(function () {
   $(window).bind("load resize", function () {
-    var e = 50,
-        t = this.window.innerWidth > 0 ? this.window.innerWidth : this.screen.width;t < 768 ? ($("div.navbar-collapse").addClass("collapse"), e = 100) : $("div.navbar-collapse").removeClass("collapse");var r = (this.window.innerHeight > 0 ? this.window.innerHeight : this.screen.height) - 1;r -= e, r < 1 && (r = 1), r > e && $("#page-wrapper").css("min-height", r + "px");
-  });for (var e = window.location, t = $("ul.nav a").filter(function () {
-    return this.href == e;
+    var t = 50;(this.window.innerWidth > 0 ? this.window.innerWidth : this.screen.width) < 768 ? ($("div.navbar-collapse").addClass("collapse"), t = 100) : $("div.navbar-collapse").removeClass("collapse");var e = (this.window.innerHeight > 0 ? this.window.innerHeight : this.screen.height) - 1;e -= t, e < 1 && (e = 1), e > t && $("#page-wrapper").css("min-height", e + "px");
+  });for (var t = window.location, e = $("ul.nav a").filter(function () {
+    return this.href == t;
   }).addClass("active").parent();;) {
-    if (!t.is("li")) break;t = t.parent().addClass("in").parent();
+    if (!e.is("li")) break;e = e.parent().addClass("in").parent();
   }
 }), function () {
+  function t(t) {
+    t.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
+  }angular.module("app").config(t), t.$inject = ["$stateProvider"];
+}(), function () {
   "use strict";
-  function e(e, t, r) {
-    function i() {
-      return e.listAll().then(function (e) {
-        return n.listDriver = e.data, n.listDriver;
-      }).catch(function (e) {
-        console.log("Erro ao buscar motoristas: ", e);
+  function t(t, e, r) {
+    var n = this;n.listDriver = [], function () {
+      t.listAll().then(function (t) {
+        return n.listDriver = t.data, n.listDriver;
+      }).catch(function (t) {
+        console.log("Erro ao buscar motoristas: ", t);
       });
-    }var n = this;n.listDriver = [], i();
-  }function t(e, t, r) {
-    function i() {
-      return e.insert(l.driver).then(function (e) {
-        l.messageDriver.error = !1, o(l.driverForm);
-      }).catch(function (e) {
+    }();
+  }function e(t, e, r) {
+    function n() {
+      return t.insert(l.driver).then(function (t) {
+        l.messageDriver.error = !1, i(l.driverForm);
+      }).catch(function (t) {
         l.messageDriver.insertError = "Erro ao cadastrar Motorista";
       });
-    }function n(t) {
-      if (t > 2) return e.listByCodigo(t).then(function (e) {
-        e.data.length > 0 ? l.errorDriver = !0 : l.errorDriver = !1;
-      });
     }function o(e) {
-      e && (l.driver = {}, e.$setPristine(), e.$setUntouched());
-    }var l = this;l.driver = {}, l.messageDriver = {}, l.messageDriver.error = !1, l.errorDriver = !1, l.insert = i, l.buscaCodigoCadastrado = n;
-  }function r(e, t, r) {
-    function i() {
-      return e.listOne(r.id).then(function (e) {
-        return o.driverOne = e.data, o.driverOne;
-      }).catch(function (e) {
-        console.log("erro ao buscar o motorista: ", e);
+      if (e > 2) return t.listByCodigo(e).then(function (t) {
+        t.data.length > 0 ? l.errorDriver = !0 : l.errorDriver = !1;
       });
-    }function n() {
-      return e.remove(r.id).then(function (e) {
-        t.go("listDriver");
-      }).catch(function (e) {
-        console.log("erro ao remover motorista: ", e);
+    }function i(t) {
+      t && (l.driver = {}, t.$setPristine(), t.$setUntouched());
+    }var l = this;l.driver = {}, l.messageDriver = {}, l.messageDriver.error = !1, l.errorDriver = !1, l.insert = n, l.buscaCodigoCadastrado = o;
+  }function r(t, e, r) {
+    function n() {
+      return t.remove(r.id).then(function (t) {
+        e.go("listDriver");
+      }).catch(function (t) {
+        console.log("erro ao remover motorista: ", t);
       });
-    }var o = this;o.driverOne = i(), o.removeOne = n;
-  }function i(e, t, r) {
-    function i() {
-      return e.listOne(r.id).then(function (e) {
-        return o.driver = e.data, o.driver;
-      }).catch(function (e) {
-        console.log("erro ao buscar motorista: ", e);
+    }var o = this;o.driverOne = function () {
+      return t.listOne(r.id).then(function (t) {
+        return o.driverOne = t.data, o.driverOne;
+      }).catch(function (t) {
+        console.log("erro ao buscar o motorista: ", t);
       });
-    }function n() {
-      return e.update(o.driver, r.id).then(function (e) {
-        t.go("listDriver");
-      }).catch(function (e) {
-        console.log("erro ao editar motorista: ", e);
+    }(), o.removeOne = n;
+  }function n(t, e, r) {
+    function n() {
+      return t.update(o.driver, r.id).then(function (t) {
+        e.go("listDriver");
+      }).catch(function (t) {
+        console.log("erro ao editar motorista: ", t);
       });
-    }var o = this;o.driver = i(), o.edit = n;
-  }angular.module("app").controller("DriverControllerList", e).controller("DriverControllerOne", r).controller("DriverControllerNew", t).controller("DriverControllerEdit", i), t.$inject = ["DriverService", "$state", "$stateParams"], e.$inject = ["DriverService", "$state", "$stateParams"], r.$inject = ["DriverService", "$state", "$stateParams"], i.$inject = ["DriverService", "$state", "$stateParams"];
+    }var o = this;o.driver = function () {
+      return t.listOne(r.id).then(function (t) {
+        return o.driver = t.data, o.driver;
+      }).catch(function (t) {
+        console.log("erro ao buscar motorista: ", t);
+      });
+    }(), o.edit = n;
+  }angular.module("app").controller("DriverControllerList", t).controller("DriverControllerOne", r).controller("DriverControllerNew", e).controller("DriverControllerEdit", n), e.$inject = ["DriverService", "$state", "$stateParams"], t.$inject = ["DriverService", "$state", "$stateParams"], r.$inject = ["DriverService", "$state", "$stateParams"], n.$inject = ["DriverService", "$state", "$stateParams"];
 }(), function () {
   "use strict";
   angular.module("app.driver", []);
 }(), function () {
-  function e(e, t, r) {
-    e.state("listDriver", { url: "/drivers", templateUrl: "app/modules/driver/templates/driver_list.html", controller: "DriverControllerList", controllerAs: "vm" }).state("newDriver", { url: "/drivers/new", templateUrl: "app/modules/driver/templates/driver_new.html", controller: "DriverControllerNew", controllerAs: "vm" }).state("editDriver", { url: "/drivers/:id/edit", templateUrl: "app/modules/driver/templates/driver_update.html", controller: "DriverControllerEdit", controllerAs: "vm" }).state("viewDriver", { url: "/drivers/:id/view", templateUrl: "app/modules/driver/templates/driver_view.html", controller: "DriverControllerOne", controllerAs: "vm" }), t.html5Mode(!0);
-  }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider"];
+  function t(t, e, r) {
+    t.state("listDriver", { url: "/drivers", templateUrl: "app/modules/driver/templates/driver_list.html", controller: "DriverControllerList", controllerAs: "vm" }).state("newDriver", { url: "/drivers/new", templateUrl: "app/modules/driver/templates/driver_new.html", controller: "DriverControllerNew", controllerAs: "vm" }).state("editDriver", { url: "/drivers/:id/edit", templateUrl: "app/modules/driver/templates/driver_update.html", controller: "DriverControllerEdit", controllerAs: "vm" }).state("viewDriver", { url: "/drivers/:id/view", templateUrl: "app/modules/driver/templates/driver_view.html", controller: "DriverControllerOne", controllerAs: "vm" }), e.html5Mode(!0);
+  }angular.module("app").config(t), t.$inject = ["$stateProvider", "$locationProvider"];
 }(), function () {
   "use strict";
-  function e(e) {
-    function t(t) {
-      return e.post("/drivers", t);
-    }function r(t) {
-      return e.get("/drivers/" + t, { params: { id: t } });
-    }function i(t) {
-      return e.get("/driversByCodigo/" + t, { params: { cod: t } });
-    }function n() {
-      return e.get("/drivers");
-    }function o(t, r) {
-      return e.put("/drivers/" + r, t, { params: { id: r } });
-    }function l(t) {
-      return e.delete("/drivers/" + t, { params: { id: t } });
-    }var c = { insert: t, listOne: r, listAll: n, listByCodigo: i, update: o, remove: l };return c;
-  }angular.module("app").service("DriverService", e), e.$inject = ["$http"];
-}(), function () {
-  function e(e) {
-    e.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
-  }angular.module("app").config(e), e.$inject = ["$stateProvider"];
+  function t(t) {
+    function e(e) {
+      return t.post("/drivers", e);
+    }function r(e) {
+      return t.get("/drivers/" + e, { params: { id: e } });
+    }function n(e) {
+      return t.get("/driversByCodigo/" + e, { params: { cod: e } });
+    }function o() {
+      return t.get("/drivers");
+    }function i(e, r) {
+      return t.put("/drivers/" + r, e, { params: { id: r } });
+    }function l(e) {
+      return t.delete("/drivers/" + e, { params: { id: e } });
+    }return { insert: e, listOne: r, listAll: o, listByCodigo: n, update: i, remove: l };
+  }angular.module("app").service("DriverService", t), t.$inject = ["$http"];
 }(), function () {
   "use strict";
-  function e(e, t, r) {
-    function i() {
-      return e.listOneWithJoin(r.id).then(function (e) {
-        return o.tireOne = e.data, o.tireOne;
+  function t(t, e, r) {
+    function n() {
+      return t.remove(r.id).then(function (t) {
+        e.go("listProduct");
       });
-    }function n() {
-      return e.remove(r.id).then(function (e) {
-        t.go("listTire");
+    }var o = this;o.productOne = function () {
+      return t.listOne(r.id).then(function (t) {
+        return o.productOne = t.data, o.productOne;
       });
-    }var o = this;o.tireOne = i(), o.removeOne = n;
-  }function t(e, t) {
+    }(), o.removeOne = n;
+  }function e(t, e) {
+    var r = this;r.listProduct = [], function () {
+      t.listAll().then(function (t) {
+        return r.listProduct = t.data, r.listProduct;
+      });
+    }();
+  }function r(t, e) {
     function r() {
-      return e.listAllWithJoin().then(function (e) {
-        return i.listTire = e.data, i.listTire;
+      return i.product.trash = !1, t.insert(i.product).then(function (t) {
+        n(i.productForm);
+      }).catch(function (t) {
+        console.log("Retorno do erro do insert: ", t);
       });
-    }var i = this;i.listTire = [], r();
-  }function r(e, t, r) {
-    function i() {
-      return c.tire.trash = !1, e.insert(c.tire).then(function (e) {
-        o(c.tireForm);
-      }).catch(function (e) {
-        console.log("Retorno do erro do insert: ", e);
-      });
-    }function n() {
-      return t.listAllWithJoin().then(function (e) {
-        return c.listVehicle = e.data, c.listVehicle;
-      });
+    }function n(t) {
+      t && (i.product = {}, listAll(), t.$setPristine(), t.$setUntouched());
     }function o(e) {
-      e && (c.tire = {}, n(), e.$setPristine(), e.$setUntouched());
-    }function l(t) {
-      e.listAllByCod(t).then(function (e) {
-        e.data.length > 0 ? c.errorTire = !0 : c.errorTire = !1;
+      t.listAllByCod(e).then(function (t) {
+        t.data.length > 0 ? i.errorProduct = !0 : i.errorProduct = !1;
       });
-    }var c = this;c.tire = {}, c.listVehicle = n(), c.insert = i, c.errorTire = !1, c.buscaCodigoCadastrado = l, n();
-  }function i(e, t, r, i) {
-    function n() {
-      return e.listOne(i.id).then(function (e) {
-        return a.tire = e.data, a.tire;
+    }var i = this;i.product = {}, i.insert = r, i.errorProduct = !1, i.buscaCodigoCadastrado = o, listAll();
+  }function n(t, e, r) {
+    function n(e) {
+      t.listAllByCod(e).then(function (t) {
+        t.data.length > 0 ? i.errorProduct = !0 : i.errorProduct = !1;
       });
     }function o() {
-      return t.listAllWithJoin().then(function (e) {
-        return a.listVehicle = e.data, a.listVehicle;
+      return t.update(i.product, r.id).then(function (t) {
+        e.go("listProduct");
       });
-    }function l(t) {
-      e.listAllByCod(t).then(function (e) {
-        e.data.length > 0 ? a.errorTire = !0 : a.errorTire = !1;
+    }var i = this;i.product = function () {
+      return t.listOne(r.id).then(function (t) {
+        return i.product = t.data, i.product;
       });
-    }function c() {
-      return e.update(a.tire, i.id).then(function (e) {
-        r.go("listTire");
-      });
-    }var a = this;a.tire = n(), a.edit = c, a.buscaCodigoCadastrado = l, o();
-  }angular.module("app").controller("TireControllerList", t).controller("TireControllerNew", r).controller("TireControllerEdit", i).controller("TireControllerOne", e), e.$inject = ["TireService", "$state", "$stateParams"], t.$inject = ["TireService", "$state"], r.$inject = ["TireService", "VehicleService", "$state"], i.$inject = ["TireService", "VehicleService", "$state", "$stateParams"];
+    }(), i.edit = o, i.buscaCodigoCadastrado = n, listAll();
+  }angular.module("app").controller("ProductControllerList", e).controller("ProductControllerNew", r).controller("ProductControllerEdit", n).controller("ProductControllerOne", t), t.$inject = ["ProductService", "$state", "$stateParams"], e.$inject = ["ProductService", "$state"], r.$inject = ["ProductService", "$state"], n.$inject = ["ProductService", "$state", "$stateParams"];
 }(), function () {
   "use strict";
-  angular.module("app.tire", []);
+  angular.module("app.product", []);
 }(), function () {
-  function e(e, t, r) {
-    e.state("listTire", { url: "/tires", templateUrl: "app/modules/tire/templates/tire_list.html", controller: "TireControllerList", controllerAs: "vm" }).state("newTire", { url: "/tires/new", templateUrl: "app/modules/tire/templates/tire_new.html", controller: "TireControllerNew", controllerAs: "vm" }).state("editTire", { url: "/tires/:id/edit", templateUrl: "app/modules/tire/templates/tire_update.html", controller: "TireControllerEdit", controllerAs: "vm" }).state("viewTire", { url: "/tires/:id/view", templateUrl: "app/modules/tire/templates/tire_view.html", controller: "TireControllerOne", controllerAs: "vm" }), t.html5Mode(!0);
-  }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider"];
+  function t(t, e, r) {
+    t.state("listProduct", { url: "/products", templateUrl: "app/modules/product/templates/product_list.html", controller: "ProductControllerList", controllerAs: "vm" }).state("newProduct", { url: "/products/new", templateUrl: "app/modules/product/templates/product_new.html", controller: "ProductControllerNew", controllerAs: "vm" }).state("editProduct", { url: "/products/:id/edit", templateUrl: "app/modules/product/templates/product_update.html", controller: "ProductControllerEdit", controllerAs: "vm" }).state("viewProduct", { url: "/products/:id/view", templateUrl: "app/modules/product/templates/product_view.html", controller: "ProductControllerOne", controllerAs: "vm" }), e.html5Mode(!0);
+  }angular.module("app").config(t), t.$inject = ["$stateProvider", "$locationProvider"];
 }(), function () {
   "use strict";
-  function e(e) {
-    function t(t) {
-      return e.post("/tires", t);
-    }function r(t) {
-      return e.get("/tires/" + t, { params: { id: t } });
-    }function i(t) {
-      return e.get("/tiresWithJoin/" + t, { params: { id: t } });
+  function t(t) {
+    function e(e) {
+      return t.post("/products", e);
+    }function r(e) {
+      return t.get("/products/" + e, { params: { id: e } });
     }function n() {
-      return e.get("/tires");
-    }function o(t) {
-      return e.get("/tiresByCodigo/" + t, { params: { cod: t } });
-    }function l() {
-      return e.get("/tiresWithJoin");
-    }function c(t, r) {
-      return e.put("/tires/" + r, { params: { id: r } });
-    }function a(t) {
-      return e.delete("/tires/" + t, { params: { id: t } });
-    }var s = { insert: t, listOne: r, listAll: n, listAllWithJoin: l, listOneWithJoin: i, listAllByCod: o, update: c, remove: a };return s;
-  }angular.module("app").service("TireService", e), e.$inject = ["$http"];
+      return t.get("/products");
+    }function o(e) {
+      return t.get("/productsByCodigo/" + e, { params: { cod: e } });
+    }function i(e, r) {
+      return t.put("/products/" + r, { params: { id: r } });
+    }function l(e) {
+      return t.delete("/products/" + e, { params: { id: e } });
+    }return { insert: e, listOne: r, listAll: n, listAllWithJoin: listAllWithJoin, listOneWithJoin: listOneWithJoin, listAllByCod: o, update: i, remove: l };
+  }angular.module("app").service("ProductService", t), t.$inject = ["$http"];
 }(), function () {
   "use strict";
-  function e(e, t, r) {
-    function i() {
-      return e.listOneWithJoin(r.id).then(function (e) {
-        return o.vehicleOne = e.data, o.vehicleOne;
+  function t(t, e, r) {
+    function n() {
+      return t.remove(r.id).then(function (t) {
+        e.go("listVehicle");
       });
-    }function n() {
-      return e.remove(r.id).then(function (e) {
-        t.go("listVehicle");
+    }var o = this;o.vehicleOne = function () {
+      return t.listOneWithJoin(r.id).then(function (t) {
+        return o.vehicleOne = t.data, o.vehicleOne;
       });
-    }var o = this;o.vehicleOne = i(), o.removeOne = n;
-  }function t(e, t) {
-    function r() {
-      return e.listAllWithJoin().then(function (e) {
-        return i.listVehicle = e.data, i.listVehicle;
+    }(), o.removeOne = n;
+  }function e(t, e) {
+    var r = this;r.listVehicle = [], function () {
+      t.listAllWithJoin().then(function (t) {
+        return r.listVehicle = t.data, r.listVehicle;
       });
-    }var i = this;i.listVehicle = [], r();
-  }function r(e, t, r) {
-    function i() {
-      return e.insert(a.vehicle).then(function (e) {
+    }();
+  }function r(t, e, r) {
+    function n() {
+      return t.insert(a.vehicle).then(function (t) {
         c(a.vehicleForm);
-      }).catch(function (e) {
-        console.log("Retorno do erro no insert: ", e), a.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
-      });
-    }function n() {
-      return t.listAll().then(function (e) {
-        return a.listDriver = e.data, a.listDriver;
+      }).catch(function (t) {
+        console.log("Retorno do erro no insert: ", t), a.errorVehicles.insertError = "Erro ao cadastrar Veiculo";
       });
     }function o() {
-      return e.listAll().then(function (e) {
-        return s = e.data;
+      return e.listAll().then(function (t) {
+        return a.listDriver = t.data, a.listDriver;
       });
-    }function l(t) {
-      return 8 == t.length ? e.listAllByPlaca(t).then(function (e) {
-        e.data.length > 0 ? a.errorVehicle = !0 : a.errorVehicle = !1;
+    }function i() {
+      return t.listAll().then(function (t) {
+        return u = t.data;
+      });
+    }function l(e) {
+      return 8 == e.length ? t.listAllByPlaca(e).then(function (t) {
+        t.data.length > 0 ? a.errorVehicle = !0 : a.errorVehicle = !1;
       }) : void 0;
-    }function c(e) {
-      e && (a.vehicle = {}, o(), n(), e.$setPristine(), e.$setUntouched());
+    }function c(t) {
+      t && (a.vehicle = {}, i(), o(), t.$setPristine(), t.$setUntouched());
     }var a = this,
-        s = o();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = i, a.errorVehicle = !1, a.buscaPlacaCadastrada = l, o(), n();
-  }function i(e, t, r, i) {
-    function n() {
-      return e.listOne(i.id).then(function (e) {
-        return a.vehicle = e.data, a.vehicle;
+        u = i();a.vehicle = {}, a.listDriver = [], a.errorVehicles = {}, a.insert = n, a.errorVehicle = !1, a.buscaPlacaCadastrada = l, i(), o();
+  }function n(t, e, r, n) {
+    function o() {
+      return t.listAll().then(function (t) {
+        return c = t.data;
       });
-    }function o() {
-      return t.listAll().then(function (e) {
-        return a.listDriver = e.data, a.listDriver;
-      });
-    }function l() {
-      return e.listAll().then(function (e) {
-        return s = e.data;
-      });
-    }function c() {
-      return e.update(a.vehicle, i.id).then(function (e) {
+    }function i() {
+      return t.update(l.vehicle, n.id).then(function (t) {
         r.go("listVehicle");
       });
-    }var a = this,
-        s = l();a.vehicle = n(), a.listDriver = [], a.edit = c, l(), o();
-  }angular.module("app").controller("VehicleControllerOne", e).controller("VehicleControllerList", t).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", i), e.$inject = ["VehicleService", "$state", "$stateParams"], t.$inject = ["VehicleService", "$state"], r.$inject = ["VehicleService", "DriverService", "$state"], i.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"];
+    }var l = this,
+        c = o();l.vehicle = function () {
+      return t.listOne(n.id).then(function (t) {
+        return l.vehicle = t.data, l.vehicle;
+      });
+    }(), l.listDriver = [], l.edit = i, o(), function () {
+      e.listAll().then(function (t) {
+        return l.listDriver = t.data, l.listDriver;
+      });
+    }();
+  }angular.module("app").controller("VehicleControllerOne", t).controller("VehicleControllerList", e).controller("VehicleControllerNew", r).controller("VehicleControllerEdit", n), t.$inject = ["VehicleService", "$state", "$stateParams"], e.$inject = ["VehicleService", "$state"], r.$inject = ["VehicleService", "DriverService", "$state"], n.$inject = ["VehicleService", "DriverService", "$state", "$stateParams"];
 }(), function () {
   "use strict";
   angular.module("app.vehicle", []);
 }(), function () {
-  function e(e, t) {
-    e.state("listVehicle", { url: "/vehicles", templateUrl: "app/modules/vehicle/templates/vehicle_list.html", controller: "VehicleControllerList", controllerAs: "vm" }).state("newVehicle", { url: "/vehicles/new", templateUrl: "app/modules/vehicle/templates/vehicle_new.html", controller: "VehicleControllerNew", controllerAs: "vm" }).state("editVehicle", { url: "/vehicles/:id/edit", templateUrl: "app/modules/vehicle/templates/vehicle_update.html", controller: "VehicleControllerEdit", controllerAs: "vm" }).state("viewVehicle", { url: "/vehicles/:id/view", templateUrl: "app/modules/vehicle/templates/vehicle_view.html", controller: "VehicleControllerOne", controllerAs: "vm" }), t.html5Mode(!0);
-  }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider"];
+  function t(t, e) {
+    t.state("listVehicle", { url: "/vehicles", templateUrl: "app/modules/vehicle/templates/vehicle_list.html", controller: "VehicleControllerList", controllerAs: "vm" }).state("newVehicle", { url: "/vehicles/new", templateUrl: "app/modules/vehicle/templates/vehicle_new.html", controller: "VehicleControllerNew", controllerAs: "vm" }).state("editVehicle", { url: "/vehicles/:id/edit", templateUrl: "app/modules/vehicle/templates/vehicle_update.html", controller: "VehicleControllerEdit", controllerAs: "vm" }).state("viewVehicle", { url: "/vehicles/:id/view", templateUrl: "app/modules/vehicle/templates/vehicle_view.html", controller: "VehicleControllerOne", controllerAs: "vm" }), e.html5Mode(!0);
+  }angular.module("app").config(t), t.$inject = ["$stateProvider", "$locationProvider"];
 }(), function () {
   "use strict";
-  function e(e) {
-    function t(t) {
-      return e.post("/vehicles", t);
-    }function r(t) {
-      return e.get("/vehicles/" + t, { params: { id: t } });
-    }function i() {
-      return e.get("/vehicles");
+  function t(t) {
+    function e(e) {
+      return t.post("/vehicles", e);
+    }function r(e) {
+      return t.get("/vehicles/" + e, { params: { id: e } });
     }function n() {
-      return e.get("/vehiclesJoin");
-    }function o(t) {
-      return e.get("/vehicleOneJoin/" + t, { params: { id: t } });
-    }function l(t) {
-      return e.get("/vehicleByPlaca/" + t, { params: { placa: t } });
-    }function c(t, r) {
-      return e.put("/vehicles/" + r, t, { params: { id: r } });
-    }function a(t) {
-      return e.delete("/vehicles/" + t, { params: { id: t } });
-    }var s = { insert: t, listOne: r, listAll: i, listAllWithJoin: n, listAllByPlaca: l, listOneWithJoin: o, update: c, remove: a };return s;
-  }angular.module("app").service("VehicleService", e), e.$inject = ["$http"];
+      return t.get("/vehicles");
+    }function o() {
+      return t.get("/vehiclesJoin");
+    }function i(e) {
+      return t.get("/vehicleOneJoin/" + e, { params: { id: e } });
+    }function l(e) {
+      return t.get("/vehicleByPlaca/" + e, { params: { placa: e } });
+    }function c(e, r) {
+      return t.put("/vehicles/" + r, e, { params: { id: r } });
+    }function a(e) {
+      return t.delete("/vehicles/" + e, { params: { id: e } });
+    }return { insert: e, listOne: r, listAll: n, listAllWithJoin: o, listAllByPlaca: l, listOneWithJoin: i, update: c, remove: a };
+  }angular.module("app").service("VehicleService", t), t.$inject = ["$http"];
 }(), function () {
   "use strict";
-  function e(e, t, r) {
-    function i() {
-      n.loading = !0, e.login(n.user, function (e) {
-        e === !0 ? t.path("/drivers") : (n.error = "Usuário ou senha incorretos", n.loading = !1);
+  function t(t, e, r) {
+    function n() {
+      o.loading = !0, t.login(o.user, function (t) {
+        !0 === t ? e.path("/drivers") : (o.error = "Usuário ou senha incorretos", o.loading = !1);
       });
-    }var n = this;n.login = i;
-  }angular.module("app").controller("LoginController", e), e.$inject = ["LoginService", "$location", "$http"];
+    }var o = this;o.login = n;
+  }angular.module("app").controller("LoginController", t), t.$inject = ["LoginService", "$location", "$http"];
 }(), function () {
   "use strict";
   angular.module("app.login", []);
 }(), function () {
-  function e(e, t, r) {
-    r.otherwise("/"), e.state("login", { url: "/", templateUrl: "app/modules/account/login.html", controller: "LoginController", controllerAs: "vm" }), t.html5Mode(!0);
-  }angular.module("app").config(e), e.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
+  function t(t, e, r) {
+    r.otherwise("/"), t.state("login", { url: "/", templateUrl: "app/modules/account/login.html", controller: "LoginController", controllerAs: "vm" }), e.html5Mode(!0);
+  }angular.module("app").config(t), t.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
 }(), function () {
   "use strict";
-  function e(e) {
-    function t(t, r) {
-      e.post("/token", { email: t.email, password: t.password }).success(function (i) {
-        if (i.token) {
-          var n = "JWT " + i.token;localStorage.currentUser = { email: t.email, token: i.token }, e.defaults.headers.common.Authorization = i.token, localStorage.setItem("token", n), r(!0);
+  function t(t) {
+    function e(e, r) {
+      t.post("/token", { email: e.email, password: e.password }).then(function (n) {
+        if (n.data.token) {
+          var o = "JWT " + n.data.token;localStorage.currentUser = { email: e.email, token: n.data.token }, t.defaults.headers.common.Authorization = n.data.token, localStorage.setItem("token", o), r(!0);
         } else r(!1);
       });
     }function r() {
-      delete localStorage.currentUser, e.defaults.headers.common.Authorization = "";
-    }var i = { login: t, logout: r };return i;
-  }angular.module("app").factory("LoginService", e), e.$inject = ["$http"];
+      delete localStorage.currentUser, t.defaults.headers.common.Authorization = "";
+    }return { login: e, logout: r };
+  }angular.module("app").factory("LoginService", t), t.$inject = ["$http"];
 }();

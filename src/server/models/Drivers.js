@@ -34,6 +34,27 @@ export default (sequelize, DataType) => {
         notEmpty: true
       }
     },
+    bairro: {
+      type: DataType.STRING,
+      allowNull: false,
+      validade: {
+        notEmpty: true
+      }
+    },
+    cidade: {
+      type: DataType.STRING,
+      allowNull: false,
+      validade: {
+        notEmpty: true
+      }
+    },
+    estado: {
+      type: DataType.STRING,
+      allowNull: false,
+      validade: {
+        notEmpty: true
+      }
+    },
     email: {
       type: DataType.STRING,
       allowNull: false,
@@ -56,13 +77,13 @@ export default (sequelize, DataType) => {
       }
     }
   }, {
-    classMethods: {
-      associate: function (models) {
-        Drivers.hasMany(models.Vehicles, {
-          foreignKey: 'driver_id'
-        });
+      classMethods: {
+        associate: function (models) {
+          Drivers.hasMany(models.Vehicles, {
+            foreignKey: 'driver_id'
+          });
+        }
       }
-    }
-  });
+    });
   return Drivers;
 }

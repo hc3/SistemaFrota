@@ -14,6 +14,9 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
     phone: '99801147',
     email: 'teste@mail.com',
     endereco: 'rua 01 bairro x',
+    bairro: 'bairro 001',
+    cidade: 'cidade 002',
+    estado: 'estado 001',
     documento: '05088900989',
     type: 'PHYSICAL'
   }
@@ -61,6 +64,9 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
       name: 'test driver',
       phone: '99801147',
       endereco: 'rua 01 bairro x',
+      bairro: 'bairro 001',
+      cidade: 'cidade 002',
+      estado: 'estado 001',
       email: 'teste2@mail.com',
       documento: '05288900989',
       type: 'PHYSICAL'
@@ -79,6 +85,9 @@ describe('# TEST INTEGRATION # Routes drivers', () => {
       name: 'Updated driver',
       phone: '88901147',
       endereco: 'rua 01 bairro x',
+      bairro: 'bairro 001',
+      cidade: 'cidade 002',
+      estado: 'estado 001',
       email: 'teste3@mail.com',
       documento: '05988900989',
       type: 'PHYSICAL'

@@ -3,6 +3,7 @@
 
     angular
         .module('app', [
+          'angularUtils.directives.dirPagination',
           'ui.router',
           'ngStorage',
           'ngMask',
