@@ -25,66 +25,40 @@
     <div class="form-group">
       <label for="" class="col-sm-2 control-label">Código: </label>
       <div class="col-sm-10">
-        <input id="tireOneCod" type="number" class="form-control"
-        data-ng-model="vm.tireOne.cod"
-        data-ng-require="true"
-        data-ng-disabled="true">
+        <input id="productCod" type="number" class="form-control"
+        data-ng-model="vm.productOne.cod"
+        data-ng-disabled="true"
+        required>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-6">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">Código Fornecedor: </label>
+      <div class="col-sm-10">
+        <input id="productCod" type="number" class="form-control"
+        data-ng-model="vm.productOne.cod_fornecedor"
+        data-ng-disabled="true"
+        required>
       </div>
     </div>
   </div>
 
   <div class="col-md-6">
     <div class="form-group">
-      <label for="" class="col-sm-2 control-label">Marca: </label>
+      <label for="" class="col-sm-2 control-label">Descrição: </label>
       <div class="col-sm-10">
-        <input id="tireOneMarca" type="text" class="form-control"
-        data-ng-model="vm.tireOne.marca"
-        data-ng-require="true"
-        data-ng-disabled="true">
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="form-group">
-      <label for="" class="col-sm-2 control-label">Vida: </label>
-      <div class="col-sm-10">
-        <input id="tireOneVida" type="text" class="form-control"
-        data-ng-model="vm.tireOne.vida"
-        data-ng-require="true"
-        data-ng-disabled="true">
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="form-group">
-      <label for="" class="col-sm-2 control-label">Sulco: </label>
-      <div class="col-sm-10">
-        <input id="tireOneSulco" type="text" class="form-control"
-        data-ng-model="vm.tireOne.sulco"
-        data-ng-require="true"
-        data-ng-disabled="true">
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="form-group">
-      <label for="" class="col-sm-2 control-label">Recap: </label>
-      <div class="col-sm-10">
-        <input id="tireOneRecap" type="text" class="form-control"
-        data-ng-model="vm.tireOne.recap"
-        data-ng-require="true"
-        data-ng-disabled="true">
-        </select>
+        <input id="productMarca" type="text" class="form-control"
+        data-ng-model="vm.productOne.descricao" data-ng-disabled="true"
+        required>
       </div>
     </div>
   </div>
 
   <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-          <button ui-sref="listTire" class="btn btn-default">Lista</button>
+          <button ui-sref="listProduct" class="btn btn-default">Lista</button>
           <button data-ng-click="vm.removeOne()" class="btn btn-danger">Remove</button>
       </div>
   </div>

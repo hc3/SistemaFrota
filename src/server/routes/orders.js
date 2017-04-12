@@ -14,7 +14,7 @@ export default (app) => {
                 .catch(error => callback.defaultError(error, req, res))
         })
         .post((req, res) => {
-            orderController.create(req.body)
+            orderController.createOrder(req.body)
                 .then(response => callback.defaultResponse(response, req, res))
                 .catch(error => callback.defaultError(error, req, res))
         })

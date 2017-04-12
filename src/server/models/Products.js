@@ -20,7 +20,7 @@ export default (sequelize, DataType) => {
         notEmpty: true
       }
     },
-    descrição: {
+    descricao: {
       type: DataType.STRING,
       allowNull: false,
       validate: {

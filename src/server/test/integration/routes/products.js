@@ -12,7 +12,7 @@ describe('# TEST INTEGRATION # Routes Products', () => {
     id: 1,
     cod: 990,
     cod_fornecedor: '10900',
-    descrição: 'rebiboca da parafuseta'
+    descricao: 'rebiboca da parafuseta'
   }
 
   const ROTA = '/products';
@@ -54,7 +54,7 @@ describe('# TEST INTEGRATION # Routes Products', () => {
       id: 2,
       cod: 11,
       cod_fornecedor: '10900',
-      descrição: 'rebiboca da parafuseta'
+      descricao: 'rebiboca da parafuseta'
     };
     it('should create a Products', done => callback.defaultPost(done, request, token, createdProduct, ROTA))
   });
@@ -72,7 +72,7 @@ describe('# TEST INTEGRATION # Routes Products', () => {
       id: 2,
       cod: 11,
       cod_fornecedor: '10900',
-      descrição: 'rebiboca da parafuseta'
+      descricao: 'rebiboca da parafuseta'
     };
     it('should update a Products', done => callback.defaultPut(done, request, token, updatedProduct, ROTA_ID));
   });

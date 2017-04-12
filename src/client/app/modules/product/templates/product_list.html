@@ -12,6 +12,9 @@
         <thead>
           <tr>
             <th>#</th>
+            <th>Código</th>
+            <th>Fornecedor</th>
+            <th>Descrição</th>
             <th>Editar</th>
             <th>Visualizar</th>
           </tr>
@@ -19,6 +22,8 @@
         <tbody>
           <tr data-ng-repeat="product in vm.listProduct">
             <td>{{ product.id }}</td>
+            <td>{{ product.cod_fornecedor }}</td>
+            <td>{{ product.descricao }}</td>
             <td><a ui-sref="editproduct({id: product.id})"><span class="glyphicon glyphicon-check"></span></a></td>
             <td><a ui-sref="viewproduct({id: product.id})"><span class="glyphicon glyphicon-eye-open"></span></a></td>
           </tr>

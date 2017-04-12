@@ -19,20 +19,55 @@ export default (sequelize, DataType) => {
             validate: {
                 notEmpty: true
             }
-        }
-    }, {
-        classMethods: {
-            associate: function(models) {
-                Orders.belongsTo(models.Vehicles,{
-                    foreignKey: 'vehicle_id',
-                    targetKey: 'id',
-                    allowNull: true,
-                    unique: true
-                });
-                //Orders.belongsToMany(models.Products);
+        },
+        valor_servico: {
+            type: DataType.DOUBLE,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        valor_produto: {
+            type: DataType.DOUBLE,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        valor_desconto: {
+            type: DataType.DOUBLE,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        valor_total: {
+            type: DataType.DOUBLE,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        comentario: {
+            type: DataType.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
             }
         }
-    });
+    }, {
+            classMethods: {
+                associate: function (models) {
+                    Orders.belongsTo(models.Vehicles, {
+                        foreignKey: 'vehicle_id',
+                        targetKey: 'id',
+                        allowNull: true,
+                        unique: true
+                    });
+                    Orders.hasMany(models.Products, { as : 'Prodcuts'});
+                }
+            }
+        });
 
     return Orders;
 }
