@@ -64,7 +64,7 @@ export default (sequelize, DataType) => {
                         allowNull: true,
                         unique: true
                     });
-                    Orders.hasMany(models.Products, { as : 'Prodcuts'});
+                    Orders.hasMany(models.Products, {foreignKeyConstraint: true});
                 }
             }
         });
