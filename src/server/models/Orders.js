@@ -56,18 +56,24 @@ export default (sequelize, DataType) => {
             }
         }
     }, {
-            classMethods: {
-                associate: function (models) {
-                    Orders.belongsTo(models.Vehicles, {
-                        foreignKey: 'vehicle_id',
-                        targetKey: 'id',
-                        allowNull: true,
-                        unique: true
-                    });
-                    Orders.hasMany(models.Products, {foreignKeyConstraint: true});
-                }
+        classMethods: {
+            associate: function (models) {
+                Orders.belongsTo(models.Vehicles, {
+                    foreignKey: 'vehicle_id',
+                    targetKey: 'id',
+                    allowNull: true,
+                    unique: true
+                });
+                Orders.hasMany(models.Products, {
+                    joinTable: 'order_products',
+                    foreignKey: 'order_id',
+                    constraints: false,
+                    allowNull: true,
+                    defaultValue: null
+                });
             }
-        });
+        }
+    });
 
     return Orders;
 }

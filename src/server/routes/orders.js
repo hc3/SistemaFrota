@@ -4,12 +4,15 @@ import callback from '../utils/callbackRoutes';
 export default (app) => {
 
     const Order = app.datasource.models.Orders;
+    const Vehicle = app.datasource.models.Vehicles;
+    const Product = app.datasource.models.Order_Products;
+
     const orderController = new OrderController(Order);
 
     app.route('/orders')
-        .all(app.auth.authenticate())
+        //.all(app.auth.authenticate())
         .get((req, res) => {
-            orderController.listAll()
+            orderController.listWithJoin(Vehicle, Product)
                 .then(response => callback.defaultResponse(response, req, res))
                 .catch(error => callback.defaultError(error, req, res))
         })
