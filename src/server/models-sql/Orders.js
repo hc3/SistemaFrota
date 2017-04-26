@@ -64,7 +64,11 @@ export default (sequelize, DataType) => {
                         allowNull: true,
                         unique: true
                     });
-                    Orders.hasMany(models.Products, {foreignKeyConstraint: true});
+                    Orders.belongsToMany(models.Products, {
+                        as: 'products',
+                        foreignKey: 'order_id',
+                        constraints: false
+                    });
                 }
             }
         });

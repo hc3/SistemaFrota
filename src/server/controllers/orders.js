@@ -16,11 +16,19 @@ class OrdersController extends AbstractController {
                 .then(() => console.log('salved'));
             //console.log(this.Order);
         });
-        */
-        Object.keys(this.Order).forEach(function(name) {
-            console.log(name);
+        const myOrder = this.Order;
+
+        Object.keys(this.Order.associations).forEach(function (key) {
+            console.log("Key: ",key);
+            const association = {};
+            if (myOrder.associations[key].hasOwnProperty('options')) {
+                association[key] = myOrder.associations[key].options;
+                console.log("Association: ",association);
+            }
         })
-        console.log('associate: ',this.Order.getProducts());
+        */
+        //console.log(this.Order.getItens());
+        //console.log('associate: ',this.Order.getProducts());
         //this.Order.addProducts(data.products);
         return this.Order.create(data)
             .then(result => callback.defaultResponse(result, httpStatus.CREATED))
