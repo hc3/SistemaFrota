@@ -170,8 +170,9 @@ describe('# TEST INTEGRATION # Routes Orders', () => {
         };
         it('should update a Orders', done => callback.defaultPut(done, request, token, updatedOrder, ROTA_ID));
     });
-
+/*
     describe('Route DELETE /Orders/:id', () => {
         it('should delete a Orders', done => callback.defaultGetOne(done, request, token, defaultOrder, ROTA_ID))
     });
+    */
 })

@@ -71,7 +71,7 @@ export default (sequelize, DataType) => {
                     });
                 }
             }
-        });
-
+        })
+        
     return Orders;
 }

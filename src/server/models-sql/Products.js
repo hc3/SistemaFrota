@@ -27,6 +27,18 @@ export default (sequelize, DataType) => {
         notEmpty: true
       }
     }
+  }, {
+    classMethods: {
+      associate: function (models) {
+        Product.hasMany(models.Orders, {
+          joinTable: 'order_products',
+          foreignKey: 'product_id',
+          constraints: false, 
+          allowNull:true, 
+          defaultValue:null
+        });
+      }
+    }
   });
   return Product;
 }
