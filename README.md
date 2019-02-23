@@ -7,12 +7,14 @@
 ``` bash
 # Instala todas as dependências do package.json
 npm install
+bower install
 
 # Roda todos os testes [ INTEGRATION / CONTRACT / UNIT ]
 npm run test
 
 # Inicia a aplicação
 gulp
+
 ```
 
 esse código foi baseado na série aulas do [Waldemar](https://github.com/waldemarnt/building-testable-nodejs-api), se vocês não conhecem vale MUITO a pena assistir.
