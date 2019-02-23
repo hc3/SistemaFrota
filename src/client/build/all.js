@@ -28,11 +28,6 @@ function config(t) {
   }function e() {
     this.navCollapsed = !0;
   }angular.module("app").directive("menu", t);
-}(), function () {
-  "use strict";
-  function t() {
-    function t(t, e, r, n) {}return { restrict: "EA", templateUrl: "app/layout/navbar/navbar.html", scope: {}, link: t, controller: e, controllerAs: "vm", bindToController: !0 };
-  }function e() {}angular.module("app").directive("navbar", t);
 }(), $(function () {
   $("#side-menu").metisMenu();
 }), $(function () {
@@ -44,9 +39,10 @@ function config(t) {
     if (!e.is("li")) break;e = e.parent().addClass("in").parent();
   }
 }), function () {
-  function t(t) {
-    t.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
-  }angular.module("app").config(t), t.$inject = ["$stateProvider"];
+  "use strict";
+  function t() {
+    function t(t, e, r, n) {}return { restrict: "EA", templateUrl: "app/layout/navbar/navbar.html", scope: {}, link: t, controller: e, controllerAs: "vm", bindToController: !0 };
+  }function e() {}angular.module("app").directive("navbar", t);
 }(), function () {
   "use strict";
   function t(t, e, r) {
@@ -124,6 +120,10 @@ function config(t) {
       return t.delete("/drivers/" + e, { params: { id: e } });
     }return { insert: e, listOne: r, listAll: o, listByCodigo: n, update: i, remove: l };
   }angular.module("app").service("DriverService", t), t.$inject = ["$http"];
+}(), function () {
+  function t(t) {
+    t.state("erro401", { url: "/error/nao-auth", templateUrl: "app/modules/erros/templates/401.html" });
+  }angular.module("app").config(t), t.$inject = ["$stateProvider"];
 }(), function () {
   "use strict";
   function t(t, e, r) {
